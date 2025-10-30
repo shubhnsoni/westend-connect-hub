@@ -1,7 +1,7 @@
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import wecaLogo from "@/assets/weca-logo.png";
+import treeIcon from "@/assets/ad-logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,12 +11,20 @@ const Header = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo Section */}
-          <a href="/" className="flex items-center">
+          <a href="/" className="flex items-center gap-3">
             <img 
-              src={wecaLogo} 
-              alt="West End Civic Association" 
-              className="h-16 w-auto object-contain"
+              src={treeIcon} 
+              alt="WECA Logo" 
+              className="h-14 w-14 object-contain"
             />
+            <div className="flex flex-col">
+              <span className="text-2xl sm:text-3xl font-cormorant font-medium text-primary leading-none">
+                west end
+              </span>
+              <span className="text-xs sm:text-sm font-sans font-semibold text-primary uppercase tracking-widest leading-none mt-0.5">
+                civic association
+              </span>
+            </div>
           </a>
 
           {/* Desktop Navigation */}
