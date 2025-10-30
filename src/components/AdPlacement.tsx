@@ -8,10 +8,10 @@ interface AdPlacementProps {
 
 const AdPlacement = ({ size = "medium", className = "" }: AdPlacementProps) => {
   const sizeClasses = {
-    small: "h-32",
-    medium: "h-48",
-    large: "h-64",
-    banner: "h-40",
+    small: "h-32 w-full",
+    medium: "h-48 w-full",
+    large: "h-64 w-full",
+    banner: "h-32 sm:h-40 w-full",
   };
 
   return (

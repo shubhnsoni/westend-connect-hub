@@ -28,31 +28,29 @@ const Hero = () => {
           
           {/* Headline */}
           <div className="text-center text-white mb-10 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-5 leading-tight">
-              Welcome to the
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 leading-tight">
+              Welcome to the West End
             </h1>
-            <h2 className="text-5xl sm:text-6xl lg:text-7xl font-cormorant font-bold mb-6 text-secondary leading-tight">
-              West End
-            </h2>
-            <p className="text-lg sm:text-xl text-white/95 max-w-2xl mx-auto leading-relaxed font-light">
+            <div className="w-24 h-1 bg-secondary mx-auto mb-6"></div>
+            <p className="text-base sm:text-lg lg:text-xl text-white/95 max-w-2xl mx-auto leading-relaxed font-light">
               Building a connected, informed, and thriving community in Rockville's historic West End neighborhood
             </p>
           </div>
 
           {/* Meeting Badge */}
           <div className="text-center mb-10 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            <div className="inline-flex items-center gap-2.5 bg-secondary/20 backdrop-blur-md px-6 py-3.5 rounded-full border border-secondary/40 shadow-xl">
-              <Calendar className="w-5 h-5 text-secondary" />
-              <span className="text-white font-semibold">Next Meeting: Thursday, October 9th @ 7 PM</span>
+            <div className="inline-flex flex-col sm:flex-row items-center gap-2.5 bg-secondary/20 backdrop-blur-md px-5 sm:px-6 py-3 sm:py-3.5 rounded-full border border-secondary/40 shadow-xl">
+              <Calendar className="w-5 h-5 text-secondary flex-shrink-0" />
+              <span className="text-white font-semibold text-sm sm:text-base text-center">Next Meeting: Thursday, October 9th @ 7 PM</span>
             </div>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-14 animate-scale-in" style={{ animationDelay: "0.3s" }}>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mb-12 sm:mb-14 px-4 animate-scale-in" style={{ animationDelay: "0.3s" }}>
             <Button 
               variant="secondary" 
               size="lg" 
-              className="text-base px-10 py-6 font-semibold shadow-xl hover:shadow-2xl transition-all" 
+              className="w-full sm:w-auto text-sm sm:text-base px-8 sm:px-10 py-5 sm:py-6 font-semibold shadow-xl hover:shadow-2xl transition-all" 
               asChild
             >
               <a href="#meetings">View Meeting Details</a>
@@ -60,7 +58,7 @@ const Hero = () => {
             <Button 
               variant="outline" 
               size="lg" 
-              className="text-base px-10 py-6 bg-white/10 border-2 border-white/40 text-white hover:bg-white hover:text-primary backdrop-blur-md font-semibold shadow-xl" 
+              className="w-full sm:w-auto text-sm sm:text-base px-8 sm:px-10 py-5 sm:py-6 bg-white/10 border-2 border-white/40 text-white hover:bg-white hover:text-primary backdrop-blur-md font-semibold shadow-xl" 
               asChild
             >
               <a href="#newsletter">Join Our Newsletter</a>
