@@ -18,7 +18,7 @@ const Header = () => {
               className="h-14 w-14 object-contain"
             />
             <div className="flex flex-col">
-              <span className="text-2xl sm:text-3xl font-cormorant font-medium text-primary leading-none">
+              <span className="text-2xl sm:text-3xl font-cormorant font-bold text-primary leading-none">
                 west end
               </span>
               <span className="text-xs sm:text-sm font-sans font-semibold text-primary uppercase tracking-widest leading-none mt-0.5">
