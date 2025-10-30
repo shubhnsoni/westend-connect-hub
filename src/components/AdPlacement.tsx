@@ -15,7 +15,7 @@ const AdPlacement = ({ size = "medium", className = "" }: AdPlacementProps) => {
   };
 
   return (
-    <Card className={`${sizeClasses[size]} ${className} border-2 border-dashed border-muted-foreground/30 bg-muted/20 hover:bg-muted/40 transition-all duration-300 flex flex-col items-center justify-center gap-3 p-6`}>
+    <Card className={`${sizeClasses[size]} ${className} border border-dashed border-muted-foreground/30 bg-muted/20 hover:bg-muted/40 transition-all duration-300 flex flex-col items-center justify-center gap-3 p-6 rounded-lg`}>
       <img 
         src={adLogo} 
         alt="Ad placement" 
