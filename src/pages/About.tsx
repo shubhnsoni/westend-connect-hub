@@ -4,8 +4,6 @@ import TopAdBanner from "@/components/TopAdBanner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { MapPin, Users, Home, BookOpen, ScrollText } from "lucide-react";
-import boundariesMap from "@/assets/west-end-boundaries-map.jpg";
-import aerialView from "@/assets/west-end-aerial-view.jpg";
 
 const About = () => {
   return (
@@ -137,42 +135,6 @@ const About = () => {
                   <p>
                     The start of the new century, through the mid-1900s, brought a variety of residential styles. Bungalows, Craftsman, Colonial Revival, and Cape Cod styles were commonly constructed. The gradual development of the area gives the West End its eclectic mix of architectural styles ranging from distinctive Victorians to modern split-level houses. The result of this patchwork development pattern and variety of architectural styles is a unique neighborhood reflecting the evolution of small towns in America beginning in the late 1800s and continuing into the 21st century.
                   </p>
-                </CardContent>
-              </Card>
-            </div>
-          </section>
-
-          {/* Boundaries Section */}
-          <section>
-            <div className="flex items-center gap-3 mb-6">
-              <MapPin className="w-6 h-6 text-primary" />
-              <h2 className="text-3xl font-bold text-foreground">West End Boundaries</h2>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Street Map</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <img 
-                    src={boundariesMap} 
-                    alt="West End street boundaries map" 
-                    className="w-full h-auto rounded-lg"
-                  />
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardHeader>
-                  <CardTitle>Aerial View</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <img 
-                    src={aerialView} 
-                    alt="West End aerial view" 
-                    className="w-full h-auto rounded-lg"
-                  />
                 </CardContent>
               </Card>
             </div>
