@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Home, FileText, Map } from "lucide-react";
+import AdPlacement from "@/components/AdPlacement";
 
 const About = () => {
   return (
@@ -67,6 +68,11 @@ const About = () => {
                 </a>
               </div>
             </Card>
+          </div>
+
+          {/* Ad Placement */}
+          <div className="mt-12 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+            <AdPlacement size="banner" />
           </div>
         </div>
       </div>

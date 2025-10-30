@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AlertCircle, TrendingUp } from "lucide-react";
+import AdPlacement from "@/components/AdPlacement";
 
 const Announcements = () => {
   return (
@@ -55,6 +56,11 @@ const Announcements = () => {
                 </div>
               </div>
             </Card>
+
+            {/* Ad Placement */}
+            <div className="mt-6 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+              <AdPlacement size="medium" />
+            </div>
           </div>
         </div>
       </div>

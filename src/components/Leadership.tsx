@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Mail } from "lucide-react";
+import AdPlacement from "@/components/AdPlacement";
 
 const leaders = [
   { name: "Ajay Khetarpal", role: "President", email: "westendcapresident@gmail.com" },
@@ -50,6 +51,11 @@ const Leadership = () => {
                 </div>
               </Card>
             ))}
+          </div>
+
+          {/* Ad Placement */}
+          <div className="mt-12 max-w-4xl mx-auto">
+            <AdPlacement size="banner" />
           </div>
         </div>
       </div>

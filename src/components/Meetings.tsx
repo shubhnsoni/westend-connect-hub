@@ -1,6 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Video } from "lucide-react";
+import AdPlacement from "@/components/AdPlacement";
 
 const Meetings = () => {
   return (
@@ -71,6 +72,11 @@ const Meetings = () => {
               </div>
             </div>
           </Card>
+
+          {/* Ad Placement */}
+          <div className="mt-8">
+            <AdPlacement size="medium" />
+          </div>
         </div>
       </div>
     </section>
