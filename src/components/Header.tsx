@@ -35,6 +35,9 @@ const Header = () => {
             <a href="/events" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
               Events
             </a>
+            <a href="/resources" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
+              Resources
+            </a>
             <a href="/#announcements" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
               Announcements
             </a>
@@ -64,6 +67,9 @@ const Header = () => {
               </a>
               <a href="/events" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors">
                 Events
+              </a>
+              <a href="/resources" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors">
+                Resources
               </a>
               <a href="/#announcements" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors">
                 Announcements
