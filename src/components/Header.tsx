@@ -1,10 +1,15 @@
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import treeIcon from "@/assets/ad-logo.png";
+import NewsletterDialog from "@/components/NewsletterDialog";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
@@ -38,15 +43,15 @@ const Header = () => {
             <a href="/resources" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
               Resources
             </a>
-            <a href="/#announcements" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
-              Announcements
-            </a>
-            <a href="/#contact" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
-              Contact
-            </a>
-            <Button variant="hero" size="sm" asChild className="ml-2">
-              <a href="/#newsletter">Join Newsletter</a>
-            </Button>
+            {isHomePage ? (
+              <Button variant="hero" size="sm" asChild className="ml-2">
+                <a href="#newsletter">Join Newsletter</a>
+              </Button>
+            ) : (
+              <Button variant="hero" size="sm" onClick={() => setIsNewsletterOpen(true)} className="ml-2">
+                Join Newsletter
+              </Button>
+            )}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -71,19 +76,21 @@ const Header = () => {
               <a href="/resources" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors">
                 Resources
               </a>
-              <a href="/#announcements" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors">
-                Announcements
-              </a>
-              <a href="/#contact" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors">
-                Contact
-              </a>
-              <Button variant="hero" size="sm" asChild className="mx-4">
-                <a href="/#newsletter">Join Newsletter</a>
-              </Button>
+              {isHomePage ? (
+                <Button variant="hero" size="sm" asChild className="mx-4">
+                  <a href="#newsletter">Join Newsletter</a>
+                </Button>
+              ) : (
+                <Button variant="hero" size="sm" onClick={() => setIsNewsletterOpen(true)} className="mx-4">
+                  Join Newsletter
+                </Button>
+              )}
             </nav>
           </div>
         )}
       </div>
+
+      <NewsletterDialog open={isNewsletterOpen} onOpenChange={setIsNewsletterOpen} />
     </header>
   );
 };

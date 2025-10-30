@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import TopAdBanner from "@/components/TopAdBanner";
 import Footer from "@/components/Footer";
@@ -5,8 +6,10 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Clock, Video, Info, PartyPopper } from "lucide-react";
 import AdPlacement from "@/components/AdPlacement";
+import NewsletterDialog from "@/components/NewsletterDialog";
 
 const Events = () => {
+  const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
   return (
     <div className="min-h-screen">
       <Header />
@@ -214,13 +217,14 @@ const Events = () => {
             <p className="text-xl mb-8 text-primary-foreground/90">
               Know about upcoming meetings and newsletters
             </p>
-            <Button variant="secondary" size="lg" asChild>
-              <a href="/#newsletter">Subscribe to Newsletter</a>
+            <Button variant="secondary" size="lg" onClick={() => setIsNewsletterOpen(true)}>
+              Subscribe to Newsletter
             </Button>
           </div>
         </section>
       </main>
 
+      <NewsletterDialog open={isNewsletterOpen} onOpenChange={setIsNewsletterOpen} />
       <Footer />
     </div>
   );

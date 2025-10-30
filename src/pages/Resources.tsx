@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TopAdBanner from "@/components/TopAdBanner";
@@ -6,8 +7,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { FileText, Download, Newspaper, Calendar, FolderOpen, Info } from "lucide-react";
+import NewsletterDialog from "@/components/NewsletterDialog";
 
 const Resources = () => {
+  const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
+
   const meetingMinutes = {
     2025: ["May 8", "April 10", "March 13", "February 13", "January 9"],
     2024: ["November 14", "October 10", "September 12", "May 9", "April 11", "March 14"],
@@ -156,12 +160,13 @@ const Resources = () => {
           <p className="text-lg text-primary-foreground/90 mb-8">
             Join our newsletter to stay informed about WECA events and community updates
           </p>
-          <Button variant="secondary" size="lg" asChild>
-            <a href="/#newsletter">Join Newsletter</a>
+          <Button variant="secondary" size="lg" onClick={() => setIsNewsletterOpen(true)}>
+            Join Newsletter
           </Button>
         </div>
       </section>
 
+      <NewsletterDialog open={isNewsletterOpen} onOpenChange={setIsNewsletterOpen} />
       <Footer />
     </div>
   );
