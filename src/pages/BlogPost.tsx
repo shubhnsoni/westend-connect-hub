@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Calendar, MapPin, Users } from "lucide-react";
+import halloweenParadeImage from "@/assets/halloween-doggie-parade.jpg";
 
 const BlogPost = () => {
   const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
@@ -200,6 +201,17 @@ const BlogPost = () => {
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
+              </section>
+
+              {/* Halloween Doggie Parade */}
+              <section className="mb-8">
+                <Card className="overflow-hidden border-2 border-orange-200 dark:border-orange-800">
+                  <img 
+                    src={halloweenParadeImage} 
+                    alt="Village-Wide Halloween Doggie Parade - Saturday, October 25, 3:00-5:00 PM at Welsh Park, 355 Martins Lane" 
+                    className="w-full h-auto"
+                  />
+                </Card>
               </section>
 
               {/* Woodley Gardens Pool */}
