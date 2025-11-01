@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TopAdBanner from "@/components/TopAdBanner";
@@ -14,6 +15,7 @@ const Blog = () => {
 
   // Newsletter posts (main blog content)
   const newsletterPosts = [
+    { id: "october-2025-update", title: "WECA October 2025 Update", date: "2025-10-15", category: "Newsletter", description: "Meeting recap, Woodley Gardens Pool update, King Farm Master Plan proposal, and important community announcements.", link: "/blog/october-2025-update" },
     { id: "spring-2025", title: "Spring 2025 Newsletter", date: "2025-04-01", category: "Newsletter", description: "Latest updates on community events, spring general membership meeting details, and annual election of officers information." },
     { id: "fall-2024", title: "Fall 2024 Newsletter", date: "2024-10-01", category: "Newsletter", description: "Fall community updates, meeting schedules, and important announcements for West End residents." },
     { id: "cn-2024", title: "Community News 2024", date: "2024-08-01", category: "Community News", description: "Special edition covering important community developments and neighborhood initiatives." },
@@ -90,13 +92,19 @@ const Blog = () => {
                         </CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <a
-                          href="#"
-                          className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
-                        >
-                          Read More
-                          <ArrowRight className="w-4 h-4" />
-                        </a>
+                        {post.link ? (
+                          <Link
+                            to={post.link}
+                            className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
+                          >
+                            Read More
+                            <ArrowRight className="w-4 h-4" />
+                          </Link>
+                        ) : (
+                          <span className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                            Coming Soon
+                          </span>
+                        )}
                       </CardContent>
                     </Card>
                   ))}
