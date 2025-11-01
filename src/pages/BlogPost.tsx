@@ -82,10 +82,11 @@ const BlogPost = () => {
                       Welcome & Ice Breaker
                     </AccordionTrigger>
                     <AccordionContent>
-                      <p>
-                        The meeting began with a warm welcome and a short ice breaker, giving neighbors a chance to introduce themselves 
-                        and connect with one another. This created a friendly and engaging atmosphere to start the evening.
-                      </p>
+                      <ul className="list-disc list-inside space-y-2 ml-4">
+                        <li>The meeting began with a warm welcome and a short ice breaker</li>
+                        <li>Neighbors had a chance to introduce themselves and connect with one another</li>
+                        <li>This created a friendly and engaging atmosphere to start the evening</li>
+                      </ul>
                     </AccordionContent>
                   </AccordionItem>
 
@@ -94,9 +95,10 @@ const BlogPost = () => {
                       Introduction of Officers
                     </AccordionTrigger>
                     <AccordionContent>
-                      <p>
-                        The current WECA officers were introduced, reaffirming the team's commitment to neighborhood service and collaboration.
-                      </p>
+                      <ul className="list-disc list-inside space-y-2 ml-4">
+                        <li>The current WECA officers were introduced</li>
+                        <li>The team reaffirmed their commitment to neighborhood service and collaboration</li>
+                      </ul>
                     </AccordionContent>
                   </AccordionItem>
 
@@ -140,10 +142,11 @@ const BlogPost = () => {
                       Public Safety Report
                     </AccordionTrigger>
                     <AccordionContent>
-                      <p>
-                        Lt. Matney provided the public safety update. He addressed neighborhood concerns, shared recent statistics, and 
-                        emphasized ongoing cooperation between residents and the Rockville Police Department to maintain safety in the West End.
-                      </p>
+                      <ul className="list-disc list-inside space-y-2 ml-4">
+                        <li>Lt. Matney provided the public safety update</li>
+                        <li>He addressed neighborhood concerns and shared recent statistics</li>
+                        <li>Emphasized ongoing cooperation between residents and the Rockville Police Department to maintain safety in the West End</li>
+                      </ul>
                     </AccordionContent>
                   </AccordionItem>
 
@@ -170,10 +173,10 @@ const BlogPost = () => {
                       Priorities & Action Plan
                     </AccordionTrigger>
                     <AccordionContent>
-                      <p>
-                        The leadership team outlined the top priorities moving forward, along with a proposed action plan. Residents were 
-                        encouraged to stay involved as WECA works toward practical, community-driven solutions.
-                      </p>
+                      <ul className="list-disc list-inside space-y-2 ml-4">
+                        <li>The leadership team outlined the top priorities moving forward, along with a proposed action plan</li>
+                        <li>Residents were encouraged to stay involved as WECA works toward practical, community-driven solutions</li>
+                      </ul>
                     </AccordionContent>
                   </AccordionItem>
 
@@ -182,10 +185,10 @@ const BlogPost = () => {
                       Minutes & Record keeping
                     </AccordionTrigger>
                     <AccordionContent>
-                      <p>
-                        The group discussed how meeting minutes will be recorded and approved in the future which at the moment is 
-                        comparatively the same as before.
-                      </p>
+                      <ul className="list-disc list-inside space-y-2 ml-4">
+                        <li>The group discussed how meeting minutes will be recorded and approved in the future</li>
+                        <li>The process at the moment is comparatively the same as before</li>
+                      </ul>
                     </AccordionContent>
                   </AccordionItem>
 
@@ -194,10 +197,11 @@ const BlogPost = () => {
                       Open Forum
                     </AccordionTrigger>
                     <AccordionContent>
-                      <p>
-                        The meeting closed with an open forum, giving residents the opportunity to share additional questions, concerns, 
-                        and ideas. This exchange reinforced the value of active participation and collective problem-solving.
-                      </p>
+                      <ul className="list-disc list-inside space-y-2 ml-4">
+                        <li>The meeting closed with an open forum</li>
+                        <li>Residents had the opportunity to share additional questions, concerns, and ideas</li>
+                        <li>This exchange reinforced the value of active participation and collective problem-solving</li>
+                      </ul>
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
