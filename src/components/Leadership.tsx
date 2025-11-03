@@ -7,7 +7,6 @@ const leaders = [
   { name: "Darlene Pierro", role: "Vice President", email: "westendca.vp@gmail.com" },
   { name: "Louise Lovell", role: "Treasurer", email: "westendca.treasurer@gmail.com" },
   { name: "Kelly Kalepe", role: "Recording Secretary", email: "westendca.recordingsecretary@gmail.com" },
-  { name: "Anika Halota", role: "VP of Outreach", email: "westendoutreach@gmail.com" },
   { name: "Duane Rollins", role: "Corresponding Secretary", email: "" },
 ];
 
