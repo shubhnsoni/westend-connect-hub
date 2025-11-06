@@ -3,8 +3,8 @@ import { ArrowRight } from "lucide-react";
 
 const AboutWECA = () => {
   return (
-    <section className="py-16 bg-muted/30">
-      <div className="container mx-auto px-4 max-w-4xl">
+    <section className="py-20 bg-background relative">
+      <div className="container mx-auto px-4 max-w-5xl">
         <div className="text-center animate-fade-in">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6">
             Who We Are
