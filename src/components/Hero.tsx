@@ -28,12 +28,12 @@ const Hero = () => {
           
           {/* Headline */}
           <div className="text-center text-white mb-10 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-3 leading-tight">
-              Welcome to the West End
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+              Preserving the Heritage.<br />Shaping the Future.
             </h1>
             <div className="w-24 h-1 bg-secondary mx-auto mb-6"></div>
-            <p className="text-base sm:text-lg lg:text-xl text-white/95 max-w-2xl mx-auto leading-relaxed font-light">
-              Building a connected, informed, and thriving community in Rockville's historic West End neighborhood
+            <p className="text-base sm:text-lg lg:text-xl text-white/95 max-w-3xl mx-auto leading-relaxed font-light">
+              The West End Civic Association (WECA) is dedicated to celebrating our history, empowering our residents, and building a stronger, more connected neighborhood for all.
             </p>
           </div>
 
@@ -53,7 +53,7 @@ const Hero = () => {
               className="w-full sm:w-auto text-sm sm:text-base px-8 sm:px-10 py-5 sm:py-6 font-semibold shadow-xl hover:shadow-2xl transition-all" 
               asChild
             >
-              <a href="#meetings">View Meeting Details</a>
+              <a href="#meetings">Upcoming Meetings</a>
             </Button>
             <Button 
               variant="outline" 
@@ -61,7 +61,15 @@ const Hero = () => {
               className="w-full sm:w-auto text-sm sm:text-base px-8 sm:px-10 py-5 sm:py-6 bg-white/10 border-2 border-white/40 text-white hover:bg-white hover:text-primary backdrop-blur-md font-semibold shadow-xl" 
               asChild
             >
-              <a href="#newsletter">Join Our Newsletter</a>
+              <a href="#about">Join WECA</a>
+            </Button>
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="w-full sm:w-auto text-sm sm:text-base px-8 sm:px-10 py-5 sm:py-6 bg-white/10 border-2 border-white/40 text-white hover:bg-white hover:text-primary backdrop-blur-md font-semibold shadow-xl" 
+              asChild
+            >
+              <a href="#contact">Get Involved</a>
             </Button>
           </div>
 
