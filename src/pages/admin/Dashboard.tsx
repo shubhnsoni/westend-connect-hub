@@ -35,6 +35,21 @@ export default function Dashboard() {
     };
 
     fetchStats();
+
+    // Subscribe to real-time updates
+    const channel = supabase
+      .channel('dashboard-stats')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'blog_posts' }, fetchStats)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'events' }, fetchStats)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'meetings' }, fetchStats)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'feedback' }, fetchStats)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'newsletter_subscribers' }, fetchStats)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'announcements' }, fetchStats)
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const statCards = [

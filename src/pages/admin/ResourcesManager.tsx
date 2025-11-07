@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { useToast } from '@/hooks/use-toast';
 import { FileText, Link2, Plus, Pencil, Trash2, Download } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { FileUpload } from '@/components/FileUpload';
 
 interface Resource {
   id: string;
@@ -193,11 +194,14 @@ export default function ResourcesManager() {
                 </Select>
               </div>
               <div>
-                <label className="text-sm font-medium">File URL</label>
-                <Input
-                  value={formData.file_url}
-                  onChange={(e) => setFormData({ ...formData, file_url: e.target.value })}
-                  placeholder="https://..."
+                <label className="text-sm font-medium">Resource File</label>
+                <FileUpload
+                  bucket="resources"
+                  accept="application/pdf,.doc,.docx"
+                  maxSize={10}
+                  currentUrl={formData.file_url}
+                  onUploadComplete={(url) => setFormData({ ...formData, file_url: url })}
+                  label="Upload Document"
                 />
               </div>
               <div>

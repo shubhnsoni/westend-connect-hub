@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { useToast } from '@/hooks/use-toast';
 import { Image, Plus, Pencil, Trash2, FileType } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { FileUpload } from '@/components/FileUpload';
 
 interface MediaItem {
   id: string;
@@ -179,15 +180,14 @@ export default function MediaLibraryManager() {
                   required
                 />
               </div>
-              <div>
-                <label className="text-sm font-medium">File URL</label>
-                <Input
-                  value={formData.file_url}
-                  onChange={(e) => setFormData({ ...formData, file_url: e.target.value })}
-                  placeholder="https://..."
-                  required
-                />
-              </div>
+              <FileUpload
+                bucket="media-library"
+                accept="image/*,video/*"
+                maxSize={20}
+                currentUrl={formData.file_url}
+                onUploadComplete={(url) => setFormData({ ...formData, file_url: url })}
+                label="Upload Media File"
+              />
               <div>
                 <label className="text-sm font-medium">File Type</label>
                 <Input

@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import { Pencil, Trash2, Plus } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { FileUpload } from '@/components/FileUpload';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -245,15 +246,14 @@ export default function BlogManager() {
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="featured_image">Featured Image URL</Label>
-                <Input
-                  id="featured_image"
-                  value={formData.featured_image_url}
-                  onChange={(e) => setFormData({ ...formData, featured_image_url: e.target.value })}
-                  placeholder="https://..."
-                />
-              </div>
+              <FileUpload
+                bucket="blog-images"
+                accept="image/*"
+                maxSize={5}
+                currentUrl={formData.featured_image_url}
+                onUploadComplete={(url) => setFormData({ ...formData, featured_image_url: url })}
+                label="Featured Image"
+              />
 
               <div className="space-y-2">
                 <Label htmlFor="status">Status</Label>

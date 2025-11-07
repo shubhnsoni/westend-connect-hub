@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { useToast } from '@/hooks/use-toast';
 import { Calendar, MapPin, FileText, Plus, Pencil, Trash2 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { FileUpload } from '@/components/FileUpload';
 
 interface Meeting {
   id: string;
@@ -210,19 +211,25 @@ export default function MeetingsManager() {
                 </Select>
               </div>
               <div>
-                <label className="text-sm font-medium">Agenda URL</label>
-                <Input
-                  value={formData.agenda_url}
-                  onChange={(e) => setFormData({ ...formData, agenda_url: e.target.value })}
-                  placeholder="https://..."
+                <label className="text-sm font-medium">Agenda</label>
+                <FileUpload
+                  bucket="meeting-documents"
+                  accept="application/pdf"
+                  maxSize={10}
+                  currentUrl={formData.agenda_url}
+                  onUploadComplete={(url) => setFormData({ ...formData, agenda_url: url })}
+                  label="Upload Agenda"
                 />
               </div>
               <div>
-                <label className="text-sm font-medium">Minutes URL</label>
-                <Input
-                  value={formData.minutes_url}
-                  onChange={(e) => setFormData({ ...formData, minutes_url: e.target.value })}
-                  placeholder="https://..."
+                <label className="text-sm font-medium">Minutes</label>
+                <FileUpload
+                  bucket="meeting-documents"
+                  accept="application/pdf"
+                  maxSize={10}
+                  currentUrl={formData.minutes_url}
+                  onUploadComplete={(url) => setFormData({ ...formData, minutes_url: url })}
+                  label="Upload Minutes"
                 />
               </div>
               <div className="flex gap-2">

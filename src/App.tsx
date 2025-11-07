@@ -25,6 +25,8 @@ import AnnouncementsManager from "./pages/admin/AnnouncementsManager";
 import MediaLibraryManager from "./pages/admin/MediaLibraryManager";
 import FeedbackViewer from "./pages/admin/FeedbackViewer";
 import NewsletterViewer from "./pages/admin/NewsletterViewer";
+import UserManagement from "./pages/admin/UserManagement";
+import Settings from "./pages/admin/Settings";
 
 const queryClient = new QueryClient();
 
@@ -74,6 +76,8 @@ const App = () => (
             <Route path="media" element={<MediaLibraryManager />} />
             <Route path="feedback" element={<FeedbackViewer />} />
             <Route path="newsletter" element={<NewsletterViewer />} />
+            <Route path="users" element={<UserManagement />} />
+            <Route path="settings" element={<Settings />} />
           </Route>
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useToast } from '@/hooks/use-toast';
 import { Pencil, Trash2, Plus } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { FileUpload } from '@/components/FileUpload';
 import { format } from 'date-fns';
 
 interface Event {
@@ -251,15 +252,14 @@ export default function EventsManager() {
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="image_url">Image URL</Label>
-                <Input
-                  id="image_url"
-                  value={formData.image_url}
-                  onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                  placeholder="https://..."
-                />
-              </div>
+              <FileUpload
+                bucket="event-images"
+                accept="image/*"
+                maxSize={5}
+                currentUrl={formData.image_url}
+                onUploadComplete={(url) => setFormData({ ...formData, image_url: url })}
+                label="Event Image"
+              />
 
               <div className="space-y-2">
                 <Label htmlFor="registration_url">Registration URL</Label>
