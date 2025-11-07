@@ -48,7 +48,9 @@ const GetInvolved = () => {
       />
       <div className="min-h-screen flex flex-col">
         <Header />
-        <Breadcrumb />
+        <div className="pt-20">
+          <Breadcrumb />
+        </div>
 
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-primary/10 via-background to-muted/20 py-16">

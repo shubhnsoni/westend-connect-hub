@@ -39,7 +39,9 @@ const Resources = () => {
         description="Access WECA meeting minutes, newsletters, and community resources. Stay informed about West End neighborhood updates."
       />
       <Header />
-      <TopAdBanner />
+      <div className="pt-20">
+        <TopAdBanner />
+      </div>
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-primary-foreground py-20">

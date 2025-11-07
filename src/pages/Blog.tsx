@@ -75,8 +75,10 @@ const Blog = () => {
       />
       <div className="min-h-screen flex flex-col">
         <Header />
-        <Breadcrumb />
-        <TopAdBanner />
+        <div className="pt-20">
+          <Breadcrumb />
+          <TopAdBanner />
+        </div>
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary/10 via-background to-muted/20 border-b">

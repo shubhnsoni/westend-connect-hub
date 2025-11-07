@@ -18,7 +18,9 @@ const Events = () => {
         description="Join us at WECA monthly meetings and community events. Stay connected with your West End neighborhood."
       />
       <Header />
-      <TopAdBanner />
+      <div className="pt-20">
+        <TopAdBanner />
+      </div>
       
       <main className="bg-background">
         {/* Hero Section */}
