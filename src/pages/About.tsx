@@ -141,9 +141,9 @@ const About = () => {
 
       {/* Story Section with Background */}
       <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-muted-foreground/95 to-muted-foreground/90" />
+        <div className="absolute inset-0 bg-gradient-to-br from-foreground/95 to-foreground/90" />
         <div 
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-30"
           style={{
             backgroundImage: `url(${heroImage})`,
             backgroundSize: 'cover',
@@ -152,8 +152,8 @@ const About = () => {
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="text-sm text-background font-semibold mb-4 uppercase tracking-wide">OUR STORY</div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-background mb-6">
+            <div className="text-sm text-primary-foreground/80 font-semibold mb-4 uppercase tracking-wide">OUR STORY</div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground mb-6">
               Here's How the <span className="text-primary">West End</span> Got Started
             </h2>
           </div>
