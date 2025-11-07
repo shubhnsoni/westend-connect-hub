@@ -15,9 +15,9 @@ const SocialFeed = () => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="bg-card border-2 rounded-lg p-8 text-center">
-            <div className="flex justify-center gap-4 mb-6">
-              <Button variant="outline" size="lg" asChild>
+          <div className="bg-card border-2 rounded-lg p-4 sm:p-8 text-center">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
+              <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
                 <a 
                   href="https://www.facebook.com/groups/westendca/" 
                   target="_blank" 
@@ -28,7 +28,7 @@ const SocialFeed = () => {
                   Follow on Facebook
                 </a>
               </Button>
-              <Button variant="outline" size="lg" asChild>
+              <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
                 <a 
                   href="#" 
                   target="_blank" 
