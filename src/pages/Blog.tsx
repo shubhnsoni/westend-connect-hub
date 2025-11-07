@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TopAdBanner from "@/components/TopAdBanner";
+import Breadcrumb from "@/components/Breadcrumb";
+import SEO from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -61,9 +63,16 @@ const Blog = () => {
   });
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <TopAdBanner />
+    <>
+      <SEO
+        title="News & Insights - WECA Blog"
+        description="Stay informed with the latest newsletters, meeting updates, and community news from the West End Civic Association."
+        keywords="WECA news, newsletters, community updates, meeting minutes, West End blog"
+      />
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <Breadcrumb />
+        <TopAdBanner />
 
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary/10 via-background to-muted/20 border-b">
@@ -294,9 +303,10 @@ const Blog = () => {
         </div>
       </main>
 
-      <NewsletterDialog open={isNewsletterOpen} onOpenChange={setIsNewsletterOpen} />
-      <Footer />
-    </div>
+        <NewsletterDialog open={isNewsletterOpen} onOpenChange={setIsNewsletterOpen} />
+        <Footer />
+      </div>
+    </>
   );
 };
 

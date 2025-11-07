@@ -13,13 +13,16 @@ import Announcements from "@/components/Announcements";
 import Leadership from "@/components/Leadership";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <TopAdBanner />
-      <AnnouncementBar />
+    <>
+      <SEO />
+      <div className="min-h-screen bg-background">
+        <Header />
+        <TopAdBanner />
+        <AnnouncementBar />
       
       <main className="relative">
         {/* Hero - Full impact introduction */}
@@ -65,7 +68,8 @@ const Index = () => {
       </main>
       
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 
