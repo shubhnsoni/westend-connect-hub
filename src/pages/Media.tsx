@@ -102,8 +102,80 @@ const Media = () => {
                 </Button>
               </CardContent>
             </Card>
+
+            {/* Featured Content Section */}
+            <section className="mt-16">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+                  Recent Highlights
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Explore memorable moments from our community
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <Card className="overflow-hidden group hover:shadow-xl transition-all">
+                  <div className="aspect-video bg-muted relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 to-transparent" />
+                    <Camera className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 text-primary-foreground/50" />
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="font-bold text-lg mb-2">Community Events</h3>
+                    <p className="text-sm text-muted-foreground mb-4">Photos from SpringFest, Halloween Parade, and more</p>
+                    <Button variant="outline" size="sm" className="w-full" asChild>
+                      <Link to="/media/photos">View Gallery</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                <Card className="overflow-hidden group hover:shadow-xl transition-all">
+                  <div className="aspect-video bg-muted relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 to-transparent" />
+                    <Video className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 text-primary-foreground/50" />
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="font-bold text-lg mb-2">Neighborhood Tours</h3>
+                    <p className="text-sm text-muted-foreground mb-4">Virtual tours of historic landmarks and homes</p>
+                    <Button variant="outline" size="sm" className="w-full" asChild>
+                      <Link to="/media/videos">Watch Videos</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                <Card className="overflow-hidden group hover:shadow-xl transition-all">
+                  <div className="aspect-video bg-muted relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 to-transparent" />
+                    <Share2 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 text-primary-foreground/50" />
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="font-bold text-lg mb-2">Social Updates</h3>
+                    <p className="text-sm text-muted-foreground mb-4">Follow our latest posts and community news</p>
+                    <Button variant="outline" size="sm" className="w-full" asChild>
+                      <Link to="/media/social">View Feed</Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
           </div>
         </main>
+
+        {/* Newsletter CTA */}
+        <section className="py-24 bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-primary-foreground">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Stay Updated</h2>
+            <p className="text-xl mb-8 text-primary-foreground/90">
+              Subscribe to receive updates about new photos, videos, and community content
+            </p>
+            <Button variant="secondary" size="lg" className="rounded-full px-8 text-base shadow-lg" asChild>
+              <a href="/contact">
+                Join Our Newsletter
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </a>
+            </Button>
+          </div>
+        </section>
 
         <Footer />
       </div>

@@ -105,13 +105,29 @@ const GetInvolved = () => {
                     <Link to="/contact">Contact Us</Link>
                   </Button>
                   <Button size="lg" variant="outline" asChild>
-                    <Link to="/about/board">Meet the Board</Link>
+                    <Link to="/about">Learn More About WECA</Link>
                   </Button>
                 </div>
               </CardContent>
             </Card>
           </div>
         </main>
+
+        {/* Newsletter Section */}
+        <section className="py-24 bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-primary-foreground">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl text-center">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Stay Connected</h2>
+            <p className="text-xl mb-8 text-primary-foreground/90">
+              Subscribe to our newsletter for updates on volunteer opportunities and community events
+            </p>
+            <Button variant="secondary" size="lg" className="rounded-full px-8 text-base shadow-lg" asChild>
+              <a href="/contact">
+                Subscribe to Newsletter
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </a>
+            </Button>
+          </div>
+        </section>
 
         <Footer />
       </div>
