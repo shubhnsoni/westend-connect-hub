@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import treeIcon from "@/assets/ad-logo.png";
 import NewsletterDialog from "@/components/NewsletterDialog";
+import { GlobalSearch } from "@/components/GlobalSearch";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,6 +35,7 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
+            <GlobalSearch />
             <a href="/about" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
               About
             </a>
