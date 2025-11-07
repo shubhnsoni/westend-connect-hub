@@ -4,7 +4,7 @@ import SEO from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MapPin, Users, Home, BookOpen, ScrollText, Heart, Shield, Handshake, Building2, ArrowRight } from "lucide-react";
+import { MapPin, Users, Home, BookOpen, ScrollText, Heart, Shield, Handshake, Building2, ArrowRight, FileText } from "lucide-react";
 import heroImage from "@/assets/hero-neighborhood.jpg";
 
 const About = () => {
@@ -84,49 +84,53 @@ const About = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="relative border-2 hover:border-primary/50 transition-all duration-300 group">
-              <CardContent className="pt-6">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <Heart className="w-6 h-6 text-primary" />
+            <Card className="relative border-2 hover:border-primary transition-all duration-300 group hover:shadow-xl overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-full -z-0" />
+              <CardContent className="pt-8 pb-6 relative z-10">
+                <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <Heart className="w-7 h-7 text-primary-foreground" />
                 </div>
-                <h3 className="font-bold text-lg mb-2">Community-Focused</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-bold text-lg mb-3">Community-Focused</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   All-volunteer, resident-led organization dedicated to neighborhood welfare and connection.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="relative border-2 hover:border-primary/50 transition-all duration-300 group">
-              <CardContent className="pt-6">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <Handshake className="w-6 h-6 text-primary" />
+            <Card className="relative border-2 hover:border-primary transition-all duration-300 group hover:shadow-xl overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-full -z-0" />
+              <CardContent className="pt-8 pb-6 relative z-10">
+                <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <Handshake className="w-7 h-7 text-primary-foreground" />
                 </div>
-                <h3 className="font-bold text-lg mb-2">Collaborative</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-bold text-lg mb-3">Collaborative</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   Working together with residents, city officials, and stakeholders for community betterment.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="relative border-2 hover:border-primary/50 transition-all duration-300 group">
-              <CardContent className="pt-6">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <Shield className="w-6 h-6 text-primary" />
+            <Card className="relative border-2 hover:border-primary transition-all duration-300 group hover:shadow-xl overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-full -z-0" />
+              <CardContent className="pt-8 pb-6 relative z-10">
+                <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <Shield className="w-7 h-7 text-primary-foreground" />
                 </div>
-                <h3 className="font-bold text-lg mb-2">Heritage Preservation</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-bold text-lg mb-3">Heritage Preservation</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   Protecting and celebrating the rich historical legacy of our diverse neighborhood.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="relative border-2 hover:border-primary/50 transition-all duration-300 group">
-              <CardContent className="pt-6">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <Building2 className="w-6 h-6 text-primary" />
+            <Card className="relative border-2 hover:border-primary transition-all duration-300 group hover:shadow-xl overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-primary/5 rounded-bl-full -z-0" />
+              <CardContent className="pt-8 pb-6 relative z-10">
+                <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg">
+                  <Building2 className="w-7 h-7 text-primary-foreground" />
                 </div>
-                <h3 className="font-bold text-lg mb-2">Thoughtful Development</h3>
-                <p className="text-sm text-muted-foreground">
+                <h3 className="font-bold text-lg mb-3">Thoughtful Development</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   Advocating for responsible growth that respects neighborhood character and quality of life.
                 </p>
               </CardContent>
@@ -136,32 +140,76 @@ const About = () => {
       </section>
 
       {/* Story Section with Background */}
-      <section className="relative py-32 bg-muted">
-        <div className="absolute inset-0 bg-gradient-to-br from-foreground/90 to-foreground/80" />
+      <section className="relative py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-muted-foreground/95 to-muted-foreground/90" />
+        <div 
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `url(${heroImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="text-sm text-primary-foreground/80 font-semibold mb-4 uppercase tracking-wide">OUR STORY</div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground mb-6">
-              Here's How the <span className="text-primary">West End</span> Began
+            <div className="text-sm text-background font-semibold mb-4 uppercase tracking-wide">OUR STORY</div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-background mb-6">
+              Here's How the <span className="text-primary">West End</span> Got Started
             </h2>
           </div>
 
-          <Card className="max-w-md bg-background/95 backdrop-blur">
-            <CardHeader>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-primary font-semibold">01</span>
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Home className="w-4 h-4 text-primary" />
+          <div className="grid md:grid-cols-3 gap-6">
+            <Card className="bg-background/98 backdrop-blur border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <CardHeader>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-sm text-primary font-bold">01</span>
+                  <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
+                    <Home className="w-6 h-6 text-primary-foreground" />
+                  </div>
                 </div>
-              </div>
-              <CardTitle>The Beginning</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Parts of the West End were among the areas first settled in Rockville. The neighborhood encompasses part of the 1784 "Williamsburgh" tract surveyed by William Prather Williams. The Beall family settled here in the late 1770s, with their homestead built in 1815.
-              </p>
-            </CardContent>
-          </Card>
+                <CardTitle className="text-xl">The Beginning</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Parts of the West End were among the areas first settled in Rockville. The Beall family settled here in the late 1770s, with their homestead built in 1815.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-background/98 backdrop-blur border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 md:mt-8">
+              <CardHeader>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-sm text-primary font-bold">02</span>
+                  <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
+                    <Users className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                </div>
+                <CardTitle className="text-xl">Community Growth</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  The B&O Railroad arrived in 1873, spurring growth and attracting Washington residents to Rockville's healthy climate as a summer resort destination.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-background/98 backdrop-blur border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+              <CardHeader>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-sm text-primary font-bold">03</span>
+                  <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
+                    <Building2 className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                </div>
+                <CardTitle className="text-xl">Modern Era</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  WECA was founded in 1970 to preserve the neighborhood's heritage while advocating for thoughtful development and community welfare.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
 
@@ -349,184 +397,367 @@ const About = () => {
           </div>
 
           <Tabs defaultValue="charter" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-8">
-              <TabsTrigger value="charter">Charter</TabsTrigger>
-              <TabsTrigger value="bylaws">By-Laws</TabsTrigger>
+            <TabsList className="inline-flex h-auto w-full justify-center gap-4 bg-transparent p-0 mb-10">
+              <TabsTrigger 
+                value="charter" 
+                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground bg-background border-2 border-border data-[state=active]:border-primary px-8 py-4 rounded-lg font-semibold text-base hover:border-primary/50 transition-all"
+              >
+                <ScrollText className="w-5 h-5 mr-2" />
+                Charter
+              </TabsTrigger>
+              <TabsTrigger 
+                value="bylaws"
+                className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground bg-background border-2 border-border data-[state=active]:border-primary px-8 py-4 rounded-lg font-semibold text-base hover:border-primary/50 transition-all"
+              >
+                <FileText className="w-5 h-5 mr-2" />
+                By-Laws
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="charter">
-              <Card>
-                <CardContent className="pt-6 space-y-6 text-foreground">
-                  <p className="leading-relaxed">
-                    The residents of that part of the city of Rockville, Montgomery County, Maryland, known as the West End, do hereby establish and adopt this Charter pertaining to the organization and operation of a non-profit civic association which will concern itself with those problems and interests which properly are and should be the subject of the community as a whole.
-                  </p>
+              <Card className="border-2 shadow-lg">
+                <CardContent className="pt-8 pb-8 space-y-8 text-foreground">
+                  <div className="bg-muted/50 p-6 rounded-lg border-l-4 border-primary">
+                    <p className="leading-relaxed text-base">
+                      The residents of that part of the city of Rockville, Montgomery County, Maryland, known as the West End, do hereby establish and adopt this Charter pertaining to the organization and operation of a non-profit civic association which will concern itself with those problems and interests which properly are and should be the subject of the community as a whole.
+                    </p>
+                  </div>
 
                   {/* Article I - Name */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE I - Name</h4>
-                    <p>The name of this organization shall be the West End Civic Association and shall hereinafter be referred to as the Association.</p>
+                  <div className="bg-background p-6 rounded-lg border-2 border-border">
+                    <div className="flex items-start gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span className="text-primary font-bold">I</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-xl mb-3 text-foreground">Name</h4>
+                        <p className="text-muted-foreground">The name of this organization shall be the West End Civic Association and shall hereinafter be referred to as the Association.</p>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Article II - Membership */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE II - Membership</h4>
-                    <p className="mb-3">Membership in this Association shall include all adult residents (18 years of age and over) of the West End area of the City of Rockville, as defined by the attached map.</p>
-                    
-                    <div className="pl-4">
-                      <p className="font-semibold mb-2">Section 1. Boundaries</p>
-                      <p className="text-sm leading-relaxed">
-                        The geographical areas shown in the attached map encompassed by the Association are defined to include: West End Park, Beall Subdivision, Rockville Heights, Roxboro, Martins Lane Complex, Monument Triangle, Rose Hill Falls, Rose Hill, Court House Walk.
-                      </p>
+                  <div className="bg-background p-6 rounded-lg border-2 border-border">
+                    <div className="flex items-start gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span className="text-primary font-bold">II</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-xl mb-3 text-foreground">Membership</h4>
+                        <p className="mb-4 text-muted-foreground">Membership in this Association shall include all adult residents (18 years of age and over) of the West End area of the City of Rockville, as defined by the attached map.</p>
+                        
+                        <div className="bg-muted/30 p-4 rounded-md">
+                          <p className="font-semibold mb-2 text-foreground">Section 1. Boundaries</p>
+                          <p className="text-sm leading-relaxed text-muted-foreground">
+                            The geographical areas shown in the attached map encompassed by the Association are defined to include: West End Park, Beall Subdivision, Rockville Heights, Roxboro, Martins Lane Complex, Monument Triangle, Rose Hill Falls, Rose Hill, Court House Walk.
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
                   {/* Article III - Purpose */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE III - Purpose</h4>
-                    <p className="mb-2">The purposes for which this Association is formed are:</p>
-                    <ul className="list-disc pl-6 space-y-1">
-                      <li>To promote, foster and protect the interests of the community known as the West End and its environs, as well as the City of Rockville as a whole.</li>
-                      <li>To forward, promote and preserve the general welfare, character, and appearance of the community and to improve by any and all lawful and proper means its status and condition.</li>
-                      <li>To promote cooperative activities and friendly spirit within the community.</li>
-                    </ul>
-                  </div>
-
-                  {/* Article IV - Nature */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE IV - Nature</h4>
-                    <p>The operations carried out by the Association shall NOT be for profit and no part of the assets of the organization shall inure to the benefit of any member or individual.</p>
-                  </div>
-
-                  {/* Article V - Organization */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE V - Organization</h4>
-                    <p className="mb-3">The affairs of this Association shall be managed by an Executive Board.</p>
-                    
-                    <div className="space-y-3 pl-4">
-                      <div>
-                        <p className="font-semibold mb-1">Section 1. Membership</p>
-                        <p className="text-sm">The Executive Board shall be comprised of the six elected officers of the Association, who will serve for a term of one year (June 1 to May 31), together with appointed Block Captains and appointed chairs of standing or special committees and the most current past president.</p>
+                  <div className="bg-background p-6 rounded-lg border-2 border-border">
+                    <div className="flex items-start gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span className="text-primary font-bold">III</span>
                       </div>
-                      
-                      <div>
-                        <p className="font-semibold mb-1">Section 2. Duties</p>
-                        <p className="text-sm mb-2">There shall be vested in the Executive Board a general power of supervision over the affairs of the Association.</p>
-                      </div>
-                      
-                      <div>
-                        <p className="font-semibold mb-1">Section 3. Officers and their duties</p>
-                        <p className="text-sm mb-2">The officers of this Association shall consist of a president, a vice president, a second vice president, a recording secretary, a corresponding secretary, and a treasurer.</p>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-xl mb-3 text-foreground">Purpose</h4>
+                        <p className="mb-3 text-muted-foreground">The purposes for which this Association is formed are:</p>
+                        <ul className="space-y-2">
+                          <li className="flex gap-2">
+                            <span className="text-primary mt-1">•</span>
+                            <span className="text-muted-foreground">To promote, foster and protect the interests of the community known as the West End and its environs, as well as the City of Rockville as a whole.</span>
+                          </li>
+                          <li className="flex gap-2">
+                            <span className="text-primary mt-1">•</span>
+                            <span className="text-muted-foreground">To forward, promote and preserve the general welfare, character, and appearance of the community and to improve by any and all lawful and proper means its status and condition.</span>
+                          </li>
+                          <li className="flex gap-2">
+                            <span className="text-primary mt-1">•</span>
+                            <span className="text-muted-foreground">To promote cooperative activities and friendly spirit within the community.</span>
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>
 
-                  {/* Additional Articles */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE VI - Block Captains</h4>
-                    <p className="text-sm">For the purposes of representation in the Association, the community shall be divided into block areas as determined by the Executive Board with each block area represented by a Block Captain.</p>
+                  {/* Article IV - Nature */}
+                  <div className="bg-background p-6 rounded-lg border-2 border-border">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span className="text-primary font-bold">IV</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-xl mb-3 text-foreground">Nature</h4>
+                        <p className="text-muted-foreground">The operations carried out by the Association shall NOT be for profit and no part of the assets of the organization shall inure to the benefit of any member or individual.</p>
+                      </div>
+                    </div>
                   </div>
 
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE VII - Standing and Special Committee</h4>
-                    <p className="text-sm">Standing and special committees of the Association will be established by the Executive Board as needed.</p>
+                  {/* Article V - Organization */}
+                  <div className="bg-background p-6 rounded-lg border-2 border-border">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span className="text-primary font-bold">V</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-xl mb-3 text-foreground">Organization</h4>
+                        <p className="mb-4 text-muted-foreground">The affairs of this Association shall be managed by an Executive Board.</p>
+                        
+                        <div className="space-y-3">
+                          <div className="bg-muted/30 p-4 rounded-md">
+                            <p className="font-semibold mb-2 text-foreground">Section 1. Membership</p>
+                            <p className="text-sm text-muted-foreground">The Executive Board shall be comprised of the six elected officers of the Association, who will serve for a term of one year (June 1 to May 31), together with appointed Block Captains and appointed chairs of standing or special committees and the most current past president.</p>
+                          </div>
+                          
+                          <div className="bg-muted/30 p-4 rounded-md">
+                            <p className="font-semibold mb-2 text-foreground">Section 2. Duties</p>
+                            <p className="text-sm text-muted-foreground">There shall be vested in the Executive Board a general power of supervision over the affairs of the Association.</p>
+                          </div>
+                          
+                          <div className="bg-muted/30 p-4 rounded-md">
+                            <p className="font-semibold mb-2 text-foreground">Section 3. Officers and their duties</p>
+                            <p className="text-sm text-muted-foreground">The officers of this Association shall consist of a president, a vice president, a second vice president, a recording secretary, a corresponding secretary, and a treasurer.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE VIII - Amendments</h4>
-                    <p className="text-sm">A proposed amendment to the Charter may be submitted to the general membership by a petition signed by 25 members or by a majority vote of the Executive Board. A two-thirds vote of members present is required to adopt amendments.</p>
-                  </div>
+                  {/* Remaining Articles Grid */}
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="bg-background p-6 rounded-lg border-2 border-border">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <span className="text-primary font-bold">VI</span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-lg mb-2 text-foreground">Block Captains</h4>
+                          <p className="text-sm text-muted-foreground">For the purposes of representation in the Association, the community shall be divided into block areas as determined by the Executive Board with each block area represented by a Block Captain.</p>
+                        </div>
+                      </div>
+                    </div>
 
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE IX - Adoption of Charter</h4>
-                    <p className="text-sm">This Charter shall be effective when adopted by a two-thirds vote of the members of the Association at a meeting scheduled for the adoption of the Charter.</p>
+                    <div className="bg-background p-6 rounded-lg border-2 border-border">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <span className="text-primary font-bold">VII</span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-lg mb-2 text-foreground">Standing and Special Committee</h4>
+                          <p className="text-sm text-muted-foreground">Standing and special committees of the Association will be established by the Executive Board as needed.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-background p-6 rounded-lg border-2 border-border">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <span className="text-primary font-bold">VIII</span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-lg mb-2 text-foreground">Amendments</h4>
+                          <p className="text-sm text-muted-foreground">A proposed amendment to the Charter may be submitted to the general membership by a petition signed by 25 members or by a majority vote of the Executive Board. A two-thirds vote of members present is required to adopt amendments.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-background p-6 rounded-lg border-2 border-border">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <span className="text-primary font-bold">IX</span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-lg mb-2 text-foreground">Adoption of Charter</h4>
+                          <p className="text-sm text-muted-foreground">This Charter shall be effective when adopted by a two-thirds vote of the members of the Association at a meeting scheduled for the adoption of the Charter.</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
             </TabsContent>
 
             <TabsContent value="bylaws">
-              <Card>
-                <CardContent className="pt-6 space-y-6 text-foreground">
+              <Card className="border-2 shadow-lg">
+                <CardContent className="pt-8 pb-8 space-y-8 text-foreground">
                   {/* Article I */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE I - Membership</h4>
-                    <p>Any resident of the Association area who is over eighteen (18) years of age is a member of the Association by virtue of residence.</p>
-                  </div>
-
-                  {/* Article II - Meetings */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE II - Meetings</h4>
-                    
-                    <div className="space-y-3 pl-4 text-sm">
-                      <div>
-                        <p className="font-semibold mb-1">Section 1. Executive Board</p>
-                        <ul className="list-disc pl-6 space-y-1">
-                          <li>The Executive Board shall conduct regular meetings at least once each quarter of the year.</li>
-                          <li>Special Executive Board meetings may be called by the President or by nine (9) members of the Executive Board.</li>
-                          <li>Each member of the Executive Board present at a meeting shall be entitled to one vote. No proxy votes shall be permitted.</li>
-                          <li>A quorum shall consist of at least nine (9) members of the Executive Board, at least two of whom must be elected officers.</li>
-                          <li>All Executive Board meetings shall be open for general membership attendance.</li>
-                        </ul>
+                  <div className="bg-background p-6 rounded-lg border-2 border-border">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span className="text-primary font-bold">I</span>
                       </div>
-                      
-                      <div>
-                        <p className="font-semibold mb-1">Section 2. General Association</p>
-                        <p>General Meetings shall be advertised to all members of the Association and shall be held no less than twice during the period from September through May of each calendar year.</p>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-xl mb-3 text-foreground">Membership</h4>
+                        <p className="text-muted-foreground">Any resident of the Association area who is over eighteen (18) years of age is a member of the Association by virtue of residence.</p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Article III - Voting */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE III - Voting</h4>
-                    <p className="text-sm">Each member of the Association present at a duly convened meeting shall have one vote. No proxy votes will be permitted.</p>
+                  {/* Article II - Meetings */}
+                  <div className="bg-background p-6 rounded-lg border-2 border-border">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <span className="text-primary font-bold">II</span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-xl mb-4 text-foreground">Meetings</h4>
+                        
+                        <div className="space-y-4">
+                          <div className="bg-muted/30 p-4 rounded-md">
+                            <p className="font-semibold mb-2 text-foreground">Section 1. Executive Board</p>
+                            <ul className="space-y-2 text-sm">
+                              <li className="flex gap-2">
+                                <span className="text-primary mt-1">•</span>
+                                <span className="text-muted-foreground">The Executive Board shall conduct regular meetings at least once each quarter of the year.</span>
+                              </li>
+                              <li className="flex gap-2">
+                                <span className="text-primary mt-1">•</span>
+                                <span className="text-muted-foreground">Special Executive Board meetings may be called by the President or by nine (9) members of the Executive Board.</span>
+                              </li>
+                              <li className="flex gap-2">
+                                <span className="text-primary mt-1">•</span>
+                                <span className="text-muted-foreground">Each member of the Executive Board present at a meeting shall be entitled to one vote. No proxy votes shall be permitted.</span>
+                              </li>
+                              <li className="flex gap-2">
+                                <span className="text-primary mt-1">•</span>
+                                <span className="text-muted-foreground">A quorum shall consist of at least nine (9) members of the Executive Board, at least two of whom must be elected officers.</span>
+                              </li>
+                              <li className="flex gap-2">
+                                <span className="text-primary mt-1">•</span>
+                                <span className="text-muted-foreground">All Executive Board meetings shall be open for general membership attendance.</span>
+                              </li>
+                            </ul>
+                          </div>
+                          
+                          <div className="bg-muted/30 p-4 rounded-md">
+                            <p className="font-semibold mb-2 text-foreground">Section 2. General Association</p>
+                            <p className="text-sm text-muted-foreground">General Meetings shall be advertised to all members of the Association and shall be held no less than twice during the period from September through May of each calendar year.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Article IV - Election */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE IV - Election</h4>
-                    <p className="text-sm mb-2">Key election provisions:</p>
-                    <ul className="list-disc pl-6 text-sm space-y-1">
-                      <li>A nominating committee shall be appointed by the President in March.</li>
-                      <li>Officers shall be elected annually at the last meeting in May.</li>
-                      <li>Any member of the Association shall be eligible for election to any office.</li>
-                      <li>No person may serve as president for more than four (4) consecutive years.</li>
-                    </ul>
-                  </div>
+                  {/* Remaining Articles in Grid */}
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="bg-background p-6 rounded-lg border-2 border-border">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <span className="text-primary font-bold">III</span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-lg mb-2 text-foreground">Voting</h4>
+                          <p className="text-sm text-muted-foreground">Each member of the Association present at a duly convened meeting shall have one vote. No proxy votes will be permitted.</p>
+                        </div>
+                      </div>
+                    </div>
 
-                  {/* Article V - Block Captains */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE V - Duties of Block Captains</h4>
-                    <p className="text-sm mb-2">Block Captains are responsible for:</p>
-                    <ul className="list-disc pl-6 text-sm space-y-1">
-                      <li>Dissemination of the semi-annual WECA newsletter and other information to their assigned block area.</li>
-                      <li>Providing a channel for membership to express opinions to the Executive Board.</li>
-                      <li>When directed, seeking signatures to petitions endorsed by the Executive Board.</li>
-                    </ul>
-                  </div>
+                    <div className="bg-background p-6 rounded-lg border-2 border-border">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <span className="text-primary font-bold">IV</span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-lg mb-2 text-foreground">Election</h4>
+                          <p className="text-sm mb-2 text-muted-foreground">Key election provisions:</p>
+                          <ul className="space-y-1 text-sm">
+                            <li className="flex gap-2">
+                              <span className="text-primary">•</span>
+                              <span className="text-muted-foreground">A nominating committee shall be appointed by the President in March.</span>
+                            </li>
+                            <li className="flex gap-2">
+                              <span className="text-primary">•</span>
+                              <span className="text-muted-foreground">Officers shall be elected annually at the last meeting in May.</span>
+                            </li>
+                            <li className="flex gap-2">
+                              <span className="text-primary">•</span>
+                              <span className="text-muted-foreground">Any member of the Association shall be eligible for election to any office.</span>
+                            </li>
+                            <li className="flex gap-2">
+                              <span className="text-primary">•</span>
+                              <span className="text-muted-foreground">No person may serve as president for more than four (4) consecutive years.</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
 
-                  {/* Article VI - Representation */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE VI - Association Representation</h4>
-                    <p className="text-sm">No person shall represent the Association unless duly authorized by the President, the Executive Board, by the By-Laws, or by resolution of the members.</p>
-                  </div>
+                    <div className="bg-background p-6 rounded-lg border-2 border-border">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <span className="text-primary font-bold">V</span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-lg mb-2 text-foreground">Duties of Block Captains</h4>
+                          <p className="text-sm mb-2 text-muted-foreground">Block Captains are responsible for:</p>
+                          <ul className="space-y-1 text-sm">
+                            <li className="flex gap-2">
+                              <span className="text-primary">•</span>
+                              <span className="text-muted-foreground">Dissemination of the semi-annual WECA newsletter and other information to their assigned block area.</span>
+                            </li>
+                            <li className="flex gap-2">
+                              <span className="text-primary">•</span>
+                              <span className="text-muted-foreground">Providing a channel for membership to express opinions to the Executive Board.</span>
+                            </li>
+                            <li className="flex gap-2">
+                              <span className="text-primary">•</span>
+                              <span className="text-muted-foreground">When directed, seeking signatures to petitions endorsed by the Executive Board.</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
 
-                  {/* Article VII - Finance */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE VII - Accounts and Finance</h4>
-                    <p className="text-sm">The President may authorize routine expenditures. The Executive Board may authorize expenditures for approved projects. No expenditure may exceed funds in the treasury.</p>
-                  </div>
+                    <div className="bg-background p-6 rounded-lg border-2 border-border">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <span className="text-primary font-bold">VI</span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-lg mb-2 text-foreground">Association Representation</h4>
+                          <p className="text-sm text-muted-foreground">No person shall represent the Association unless duly authorized by the President, the Executive Board, by the By-Laws, or by resolution of the members.</p>
+                        </div>
+                      </div>
+                    </div>
 
-                  {/* Article VIII - Removal */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE VIII - Removal from Office</h4>
-                    <p className="text-sm">Any officer or member of the Executive Board may be removed by a two-thirds vote of the general membership at a meeting called for that purpose.</p>
-                  </div>
+                    <div className="bg-background p-6 rounded-lg border-2 border-border">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <span className="text-primary font-bold">VII</span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-lg mb-2 text-foreground">Accounts and Finance</h4>
+                          <p className="text-sm text-muted-foreground">The President may authorize routine expenditures. The Executive Board may authorize expenditures for approved projects. No expenditure may exceed funds in the treasury.</p>
+                        </div>
+                      </div>
+                    </div>
 
-                  {/* Article IX - Amendments */}
-                  <div>
-                    <h4 className="font-bold text-lg mb-2">ARTICLE IX - Amendments</h4>
-                    <p className="text-sm">These By-Laws may be amended by a two-thirds vote of the members present at a meeting.</p>
+                    <div className="bg-background p-6 rounded-lg border-2 border-border">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <span className="text-primary font-bold">VIII</span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-lg mb-2 text-foreground">Removal from Office</h4>
+                          <p className="text-sm text-muted-foreground">Any officer or member of the Executive Board may be removed by a two-thirds vote of the general membership at a meeting called for that purpose.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-background p-6 rounded-lg border-2 border-border md:col-span-2">
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                          <span className="text-primary font-bold">IX</span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-bold text-lg mb-2 text-foreground">Amendments</h4>
+                          <p className="text-sm text-muted-foreground">These By-Laws may be amended by a two-thirds vote of the members present at a meeting.</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
