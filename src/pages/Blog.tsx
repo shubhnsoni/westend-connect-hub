@@ -13,6 +13,10 @@ import { Separator } from "@/components/ui/separator";
 import { Newspaper, Calendar, FileText, ArrowRight, Search, Tag, Clock } from "lucide-react";
 import NewsletterDialog from "@/components/NewsletterDialog";
 import halloweenImage from "@/assets/halloween-doggie-parade.jpg";
+import springfestImage from "@/assets/springfest.jpg";
+import historicHomesImage from "@/assets/historic-homes.jpg";
+import boardMembersImage from "@/assets/board-members.jpg";
+import heroNeighborhoodImage from "@/assets/hero-neighborhood.jpg";
 
 const Blog = () => {
   const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
@@ -22,28 +26,16 @@ const Blog = () => {
   // Newsletter posts (main blog content)
   const newsletterPosts = [
     { id: "october-2025-update", title: "WECA October 2025 Update", date: "2025-10-15", category: "Newsletter", description: "Meeting recap, Woodley Gardens Pool update, King Farm Master Plan proposal, and important community announcements.", link: "/blog/october-2025-update", image: halloweenImage, author: "WECA Board", readTime: "5 min read" },
-    { id: "spring-2025", title: "Spring 2025 Newsletter", date: "2025-04-01", category: "Newsletter", description: "Latest updates on community events, spring general membership meeting details, and annual election of officers information.", image: halloweenImage, author: "WECA Board", readTime: "4 min read" },
-    { id: "fall-2024", title: "Fall 2024 Newsletter", date: "2024-10-01", category: "Newsletter", description: "Fall community updates, meeting schedules, and important announcements for West End residents.", image: halloweenImage, author: "WECA Board", readTime: "6 min read" },
-    { id: "cn-2024", title: "Community News 2024", date: "2024-08-01", category: "Community News", description: "Special edition covering important community developments and neighborhood initiatives.", image: halloweenImage, author: "WECA Communications", readTime: "7 min read" },
-    { id: "es-2024", title: "Special Edition 2024", date: "2024-06-01", category: "Special Edition", description: "In-depth coverage of West End community projects and future planning initiatives.", image: halloweenImage, author: "WECA Board", readTime: "10 min read" },
-    { id: "spring-2024", title: "Spring 2024 Newsletter", date: "2024-04-01", category: "Newsletter", description: "Spring updates including meeting information and community engagement opportunities.", image: halloweenImage, author: "WECA Board", readTime: "5 min read" },
-    { id: "fall-2023", title: "Fall 2023 Newsletter", date: "2023-10-01", category: "Newsletter", description: "Fall season updates and preparations for upcoming community meetings.", image: halloweenImage, author: "WECA Board", readTime: "4 min read" },
-    { id: "spring-2023", title: "Spring 2023 Newsletter", date: "2023-04-01", category: "Newsletter", description: "Spring meeting announcements and officer election information for the community.", image: halloweenImage, author: "WECA Board", readTime: "5 min read" },
-    { id: "fall-2022", title: "Fall 2022 Newsletter", date: "2022-10-01", category: "Newsletter", description: "Community updates and fall meeting schedule for West End residents.", image: halloweenImage, author: "WECA Board", readTime: "4 min read" },
+    { id: "spring-2025", title: "Spring 2025 Newsletter", date: "2025-04-01", category: "Newsletter", description: "Latest updates on community events, spring general membership meeting details, and annual election of officers information.", image: springfestImage, author: "WECA Board", readTime: "4 min read" },
+    { id: "fall-2024", title: "Fall 2024 Newsletter", date: "2024-10-01", category: "Newsletter", description: "Fall community updates, meeting schedules, and important announcements for West End residents.", image: heroNeighborhoodImage, author: "WECA Board", readTime: "6 min read" },
+    { id: "cn-2024", title: "Community News 2024", date: "2024-08-01", category: "Community News", description: "Special edition covering important community developments and neighborhood initiatives.", image: boardMembersImage, author: "WECA Communications", readTime: "7 min read" },
+    { id: "es-2024", title: "Special Edition 2024", date: "2024-06-01", category: "Special Edition", description: "In-depth coverage of West End community projects and future planning initiatives.", image: historicHomesImage, author: "WECA Board", readTime: "10 min read" },
+    { id: "spring-2024", title: "Spring 2024 Newsletter", date: "2024-04-01", category: "Newsletter", description: "Spring updates including meeting information and community engagement opportunities.", image: springfestImage, author: "WECA Board", readTime: "5 min read" },
+    { id: "fall-2023", title: "Fall 2023 Newsletter", date: "2023-10-01", category: "Newsletter", description: "Fall season updates and preparations for upcoming community meetings.", image: heroNeighborhoodImage, author: "WECA Board", readTime: "4 min read" },
+    { id: "spring-2023", title: "Spring 2023 Newsletter", date: "2023-04-01", category: "Newsletter", description: "Spring meeting announcements and officer election information for the community.", image: boardMembersImage, author: "WECA Board", readTime: "5 min read" },
+    { id: "fall-2022", title: "Fall 2022 Newsletter", date: "2022-10-01", category: "Newsletter", description: "Community updates and fall meeting schedule for West End residents.", image: historicHomesImage, author: "WECA Board", readTime: "4 min read" },
     { id: "spring-2022", title: "Spring 2022 Newsletter", date: "2022-04-01", category: "Newsletter", description: "Spring updates and annual meeting information for the West End community.", image: halloweenImage, author: "WECA Board", readTime: "6 min read" },
   ];
-
-  // Categories
-  const categories = [
-    { name: "All Posts", count: newsletterPosts.length },
-    { name: "Newsletter", count: newsletterPosts.filter(p => p.category === "Newsletter").length },
-    { name: "Community News", count: newsletterPosts.filter(p => p.category === "Community News").length },
-    { name: "Special Edition", count: newsletterPosts.filter(p => p.category === "Special Edition").length },
-    { name: "Meeting Minutes", count: 12 },
-  ];
-
-  // Tags
-  const tags = ["Community Events", "Development", "Parks", "Safety", "Meetings", "Planning", "Volunteer", "History"];
 
   // Recent meeting updates
   const recentMeetings = [
@@ -52,6 +44,18 @@ const Blog = () => {
     { date: "March 13, 2025", title: "March 2025 Meeting" },
     { date: "February 13, 2025", title: "February 2025 Meeting" },
   ];
+
+  // Categories
+  const categories = [
+    { name: "All Posts", count: newsletterPosts.length },
+    { name: "Newsletter", count: newsletterPosts.filter(p => p.category === "Newsletter").length },
+    { name: "Community News", count: newsletterPosts.filter(p => p.category === "Community News").length },
+    { name: "Special Edition", count: newsletterPosts.filter(p => p.category === "Special Edition").length },
+    { name: "Meeting Minutes", count: recentMeetings.length },
+  ];
+
+  // Tags
+  const tags = ["Community Events", "Development", "Parks", "Safety", "Meetings", "Planning", "Volunteer", "History"];
 
   // Filter posts
   const filteredPosts = newsletterPosts.filter(post => {
