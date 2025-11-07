@@ -141,9 +141,9 @@ const About = () => {
 
       {/* Story Section with Background */}
       <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-foreground/95 to-foreground/90" />
+        <div className="absolute inset-0 bg-gradient-to-br from-foreground/98 to-foreground/95" />
         <div 
-          className="absolute inset-0 opacity-30"
+          className="absolute inset-0 opacity-20"
           style={{
             backgroundImage: `url(${heroImage})`,
             backgroundSize: 'cover',
@@ -152,14 +152,14 @@ const About = () => {
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="text-sm text-primary-foreground/80 font-semibold mb-4 uppercase tracking-wide">OUR STORY</div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground mb-6">
+            <div className="text-sm text-background font-bold mb-4 uppercase tracking-wide bg-primary px-4 py-2 rounded-full inline-block">OUR STORY</div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-background mb-6">
               Here's How the <span className="text-primary">West End</span> Got Started
             </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <Card className="bg-background/98 backdrop-blur border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+            <Card className="bg-background border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
               <CardHeader>
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-sm text-primary font-bold">01</span>
@@ -176,7 +176,7 @@ const About = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-background/98 backdrop-blur border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 md:mt-8">
+            <Card className="bg-background border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 md:mt-8">
               <CardHeader>
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-sm text-primary font-bold">02</span>
@@ -193,7 +193,7 @@ const About = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-background/98 backdrop-blur border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+            <Card className="bg-background border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
               <CardHeader>
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-sm text-primary font-bold">03</span>

@@ -1,6 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calendar, MapPin, Clock } from "lucide-react";
+import { Calendar, MapPin, Clock, FileText } from "lucide-react";
+
+const pastMeetings = [
+  { date: "September 12, 2024", title: "September Meeting Minutes" },
+  { date: "May 9, 2024", title: "May Meeting Minutes" },
+  { date: "April 11, 2024", title: "April Meeting Minutes" },
+];
 
 const Meetings = () => {
   return (
@@ -15,7 +21,7 @@ const Meetings = () => {
         </p>
       </div>
 
-      <Card className="border-2 hover:border-primary/50 transition-all">
+      <Card className="border-2 hover:border-primary/50 transition-all mb-6">
         <CardContent className="p-6">
           <div className="space-y-4">
             <div>
@@ -43,6 +49,36 @@ const Meetings = () => {
               <a href="/events">View All Meetings</a>
             </Button>
           </div>
+        </CardContent>
+      </Card>
+
+      {/* Past Meetings Section */}
+      <Card className="border-2">
+        <CardContent className="p-6">
+          <h4 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+            <FileText className="w-5 h-5 text-primary" />
+            Past Meetings
+          </h4>
+          <div className="space-y-3">
+            {pastMeetings.map((meeting, index) => (
+              <a
+                key={index}
+                href="/resources"
+                className="flex items-center justify-between p-3 rounded-lg hover:bg-muted transition-colors group"
+              >
+                <div>
+                  <p className="font-medium text-foreground text-sm group-hover:text-primary transition-colors">
+                    {meeting.title}
+                  </p>
+                  <p className="text-xs text-muted-foreground">{meeting.date}</p>
+                </div>
+                <FileText className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+              </a>
+            ))}
+          </div>
+          <Button variant="outline" className="w-full mt-4" asChild>
+            <a href="/resources">See All Minutes</a>
+          </Button>
         </CardContent>
       </Card>
     </div>
