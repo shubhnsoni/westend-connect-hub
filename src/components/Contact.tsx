@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, MapPin, MessageSquare } from "lucide-react";
+import FeedbackDialog from "@/components/FeedbackDialog";
 
 const Contact = () => {
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
   return (
     <div id="contact" className="container mx-auto px-4">
       <div className="max-w-5xl mx-auto">
@@ -65,12 +68,12 @@ const Contact = () => {
               <p className="text-sm text-muted-foreground mb-3">
                 Share your ideas and concerns
               </p>
-              <a 
-                href="#contact"
+              <button 
+                onClick={() => setIsFeedbackOpen(true)}
                 className="text-primary hover:text-primary/80 transition-colors text-sm font-medium"
               >
                 Submit Feedback →
-              </a>
+              </button>
             </CardContent>
           </Card>
         </div>
@@ -95,6 +98,11 @@ const Contact = () => {
           </Card>
         </div>
       </div>
+      
+      <FeedbackDialog 
+        open={isFeedbackOpen} 
+        onOpenChange={setIsFeedbackOpen} 
+      />
     </div>
   );
 };
