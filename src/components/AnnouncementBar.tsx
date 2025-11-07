@@ -30,7 +30,7 @@ const AnnouncementBar = () => {
   const Icon = current.icon;
 
   return (
-    <div className="bg-secondary text-secondary-foreground py-3 px-4 sticky top-0 z-40 shadow-sm">
+    <div className="bg-secondary text-secondary-foreground py-3 px-4 sticky top-20 z-40 shadow-sm">
       <div className="container mx-auto flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 flex-1 min-w-0">
           <Icon className="w-5 h-5 flex-shrink-0" />

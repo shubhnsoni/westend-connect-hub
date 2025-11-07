@@ -21,8 +21,10 @@ const Index = () => {
       <SEO />
       <div className="min-h-screen bg-background">
         <Header />
-        <AnnouncementBar />
-        <TopAdBanner />
+        <div className="pt-20">
+          <AnnouncementBar />
+          <TopAdBanner />
+        </div>
       
       <main className="relative">
         {/* Hero - Full impact introduction */}
