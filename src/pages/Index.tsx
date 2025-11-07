@@ -37,12 +37,18 @@ const Index = () => {
         {/* Timely Information - What's happening */}
         <section className="bg-muted/20 py-24">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
               <UpcomingEvents />
-              <div className="space-y-10">
-                <Meetings />
-                <Announcements />
-              </div>
+              <Meetings />
+            </div>
+          </div>
+        </section>
+        
+        {/* Announcements Section */}
+        <section className="py-24 bg-background">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto">
+              <Announcements />
             </div>
           </div>
         </section>
