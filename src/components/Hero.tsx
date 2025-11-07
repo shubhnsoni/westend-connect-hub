@@ -16,7 +16,7 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 py-20 max-w-7xl">
+      <div className="container relative z-10 px-4 sm:px-6 lg:px-8 py-16 sm:py-20 pb-24 sm:pb-32 max-w-7xl">
         <div className="max-w-4xl mx-auto">
           {/* Badge */}
           <div className="text-center mb-8 animate-fade-in-up">
