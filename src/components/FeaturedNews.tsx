@@ -1,35 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Calendar } from "lucide-react";
-import springfestImage from "@/assets/springfest.jpg";
-import boardMembersImage from "@/assets/board-members.jpg";
-import historicHomesImage from "@/assets/historic-homes.jpg";
-
-const newsItems = [
-  {
-    title: "Rockville West End SpringFest 2025 – A Huge Success!",
-    description: "Community members gathered for our annual SpringFest celebration with food, music, and family activities.",
-    date: "October 28, 2024",
-    image: springfestImage,
-    slug: "springfest-2025"
-  },
-  {
-    title: "Meet Your New WECA Board Members",
-    description: "Get to know the dedicated volunteers leading our community association into the future.",
-    date: "October 15, 2024",
-    image: boardMembersImage,
-    slug: "new-board-members"
-  },
-  {
-    title: "How We're Preserving Rockville's Historic Character",
-    description: "Learn about WECA's initiatives to maintain the unique charm and heritage of our neighborhood.",
-    date: "October 1, 2024",
-    image: historicHomesImage,
-    slug: "preserving-character"
-  }
-];
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const FeaturedNews = () => {
+  const { data: blogPosts = [] } = useQuery({
+    queryKey: ['featured-blog-posts'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select('*')
+        .eq('status', 'published')
+        .order('published_at', { ascending: false })
+        .limit(3);
+      
+      if (error) throw error;
+      return data || [];
+    },
+  });
+
   return (
     <section className="py-24 bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,33 +36,35 @@ const FeaturedNews = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto mb-12">
-          {newsItems.map((item, index) => (
+          {blogPosts.map((post, index) => (
             <a 
-              key={index} 
-              href={`/blog/${item.slug}`}
+              key={post.id} 
+              href={`/blog/${post.slug}`}
               className="group animate-fade-in"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <Card className="h-full overflow-hidden border-0 hover:border-primary transition-all duration-300 hover:shadow-2xl shadow-lg rounded-2xl">
-                <div className="aspect-video overflow-hidden">
-                  <img 
-                    src={item.image} 
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                </div>
+                {post.featured_image_url && (
+                  <div className="aspect-video overflow-hidden">
+                    <img 
+                      src={post.featured_image_url} 
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                  </div>
+                )}
                 <CardHeader className="p-6">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
                     <Calendar className="w-4 h-4" />
-                    <span>{item.date}</span>
+                    <span>{new Date(post.published_at || post.created_at).toLocaleDateString()}</span>
                   </div>
                   <CardTitle className="text-xl leading-tight group-hover:text-primary transition-colors">
-                    {item.title}
+                    {post.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="px-6 pb-6">
-                  <CardDescription className="text-muted-foreground leading-relaxed">
-                    {item.description}
+                  <CardDescription className="text-muted-foreground leading-relaxed line-clamp-3">
+                    {post.excerpt || post.content.substring(0, 150) + '...'}
                   </CardDescription>
                 </CardContent>
               </Card>

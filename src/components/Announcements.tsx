@@ -1,29 +1,26 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Megaphone } from "lucide-react";
-
-const announcements = [
-  {
-    title: "Listening Session Highlights",
-    date: "October 1, 2024",
-    category: "Community",
-    description: "Thanks to everyone who packed our Listening Session (25+ neighbors!). Keep the momentum going: take our quick survey and choose the top 3 priorities for WECA."
-  },
-  {
-    title: "Meeting Location Change",
-    date: "September 28, 2024",
-    category: "Important",
-    description: "Please note: Our monthly meetings have moved to Rockville Memorial Library. See the meeting section for details."
-  },
-  {
-    title: "Neighborhood Tree Planting Initiative",
-    date: "September 15, 2024",
-    category: "Environment",
-    description: "Join us for a community tree planting event along Beall Avenue. Help make our neighborhood greener!"
-  }
-];
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const Announcements = () => {
+  const { data: announcements = [] } = useQuery({
+    queryKey: ['active-announcements'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('announcements')
+        .select('*')
+        .eq('is_active', true)
+        .or(`expires_at.is.null,expires_at.gte.${new Date().toISOString()}`)
+        .order('created_at', { ascending: false })
+        .limit(3);
+      
+      if (error) throw error;
+      return data || [];
+    },
+  });
+
   return (
     <div id="announcements" className="animate-fade-in">
       <div className="mb-6">
@@ -37,27 +34,38 @@ const Announcements = () => {
       </div>
 
       <div className="space-y-4">
-        {announcements.map((announcement, index) => (
-          <Card key={index} className="border-l-4 border-l-secondary hover:shadow-md transition-shadow">
-            <CardHeader className="pb-3">
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <CardTitle className="text-lg mb-1">{announcement.title}</CardTitle>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="w-4 h-4" />
-                    <span>{announcement.date}</span>
+        {announcements.length > 0 ? (
+          announcements.map((announcement) => (
+            <Card key={announcement.id} className="border-l-4 border-l-secondary hover:shadow-md transition-shadow">
+              <CardHeader className="pb-3">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <CardTitle className="text-lg mb-1">{announcement.title}</CardTitle>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Calendar className="w-4 h-4" />
+                      <span>{new Date(announcement.created_at).toLocaleDateString()}</span>
+                    </div>
                   </div>
+                  <Badge 
+                    variant={announcement.priority === 'urgent' ? 'destructive' : 'secondary'} 
+                    className="flex-shrink-0"
+                  >
+                    {announcement.priority}
+                  </Badge>
                 </div>
-                <Badge variant="secondary" className="flex-shrink-0">
-                  {announcement.category}
-                </Badge>
-              </div>
-            </CardHeader>
-            <CardContent className="pt-0">
-              <p className="text-muted-foreground text-sm">{announcement.description}</p>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <p className="text-muted-foreground text-sm">{announcement.content}</p>
+              </CardContent>
+            </Card>
+          ))
+        ) : (
+          <Card className="border-2">
+            <CardContent className="p-6">
+              <p className="text-muted-foreground text-center">No active announcements</p>
             </CardContent>
           </Card>
-        ))}
+        )}
       </div>
     </div>
   );

@@ -1,32 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Clock, MapPin, ArrowRight } from "lucide-react";
-
-const events = [
-  {
-    date: "Nov 15",
-    title: "WECA Monthly Meeting",
-    time: "7:00 PM",
-    location: "City Hall",
-    description: "Join us for our regular community meeting to discuss neighborhood matters."
-  },
-  {
-    date: "Nov 23",
-    title: "Neighborhood Tree Planting",
-    time: "10:00 AM",
-    location: "Beall Avenue",
-    description: "Help beautify our neighborhood by planting trees along Beall Avenue."
-  },
-  {
-    date: "Dec 5",
-    title: "Holiday Lighting Walk",
-    time: "6:00 PM",
-    location: "Welsh Park",
-    description: "Celebrate the season with a festive walk through the neighborhood."
-  }
-];
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const UpcomingEvents = () => {
+  const { data: events = [] } = useQuery({
+    queryKey: ['upcoming-events'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('events')
+        .select('*')
+        .gte('start_date', new Date().toISOString())
+        .order('start_date', { ascending: true })
+        .limit(3);
+      
+      if (error) throw error;
+      return data || [];
+    },
+  });
+
   return (
     <div className="animate-fade-in h-full flex flex-col">
       <div className="mb-8">
@@ -39,43 +32,53 @@ const UpcomingEvents = () => {
       </div>
 
       <div className="space-y-4 mb-8 flex-1">
-        {events.map((event, index) => (
-          <Card 
-            key={index} 
-            className="hover:shadow-lg transition-shadow duration-300 hover-scale border-l-4 border-l-primary"
-          >
-            <CardContent className="p-5">
-              <div className="flex items-start gap-4">
-                <div className="bg-primary text-primary-foreground rounded-lg p-2.5 text-center min-w-[56px]">
-                  <div className="text-xl font-bold leading-none mb-0.5">
-                    {event.date.split(' ')[1]}
-                  </div>
-                  <div className="text-[10px] uppercase font-medium">
-                    {event.date.split(' ')[0]}
-                  </div>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <h3 className="text-base font-bold text-foreground mb-2">
-                    {event.title}
-                  </h3>
-                  <div className="space-y-1 text-xs text-muted-foreground mb-2">
-                    <div className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5" />
-                      <span>{event.time}</span>
+        {events.map((event, index) => {
+          const eventDate = new Date(event.start_date);
+          const dateStr = eventDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+          const timeStr = eventDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+          
+          return (
+            <Card 
+              key={event.id} 
+              className="hover:shadow-lg transition-shadow duration-300 hover-scale border-l-4 border-l-primary"
+            >
+              <CardContent className="p-5">
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary text-primary-foreground rounded-lg p-2.5 text-center min-w-[56px]">
+                    <div className="text-xl font-bold leading-none mb-0.5">
+                      {dateStr.split(' ')[1]}
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5" />
-                      <span>{event.location}</span>
+                    <div className="text-[10px] uppercase font-medium">
+                      {dateStr.split(' ')[0]}
                     </div>
                   </div>
-                  <p className="text-sm text-muted-foreground line-clamp-2">
-                    {event.description}
-                  </p>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base font-bold text-foreground mb-2">
+                      {event.title}
+                    </h3>
+                    <div className="space-y-1 text-xs text-muted-foreground mb-2">
+                      <div className="flex items-center gap-1.5">
+                        <Clock className="w-3.5 h-3.5" />
+                        <span>{timeStr}</span>
+                      </div>
+                      {event.location && (
+                        <div className="flex items-center gap-1.5">
+                          <MapPin className="w-3.5 h-3.5" />
+                          <span>{event.location}</span>
+                        </div>
+                      )}
+                    </div>
+                    {event.description && (
+                      <p className="text-sm text-muted-foreground line-clamp-2">
+                        {event.description}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
 
       <div className="mt-auto">

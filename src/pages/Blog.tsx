@@ -12,58 +12,52 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Newspaper, Calendar, FileText, ArrowRight, Search, Tag, Clock } from "lucide-react";
 import NewsletterDialog from "@/components/NewsletterDialog";
-import halloweenImage from "@/assets/halloween-doggie-parade.jpg";
-import springfestImage from "@/assets/springfest.jpg";
-import historicHomesImage from "@/assets/historic-homes.jpg";
-import boardMembersImage from "@/assets/board-members.jpg";
-import heroNeighborhoodImage from "@/assets/hero-neighborhood.jpg";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 const Blog = () => {
   const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Newsletter posts (main blog content)
-  const newsletterPosts = [
-    { id: "october-2025-update", title: "WECA October 2025 Update", date: "2025-10-15", category: "Newsletter", description: "Meeting recap, Woodley Gardens Pool update, King Farm Master Plan proposal, and important community announcements.", link: "/blog/october-2025-update", image: halloweenImage, author: "WECA Board", readTime: "5 min read" },
-    { id: "spring-2025", title: "Spring 2025 Newsletter", date: "2025-04-01", category: "Newsletter", description: "Latest updates on community events, spring general membership meeting details, and annual election of officers information.", image: springfestImage, author: "WECA Board", readTime: "4 min read" },
-    { id: "fall-2024", title: "Fall 2024 Newsletter", date: "2024-10-01", category: "Newsletter", description: "Fall community updates, meeting schedules, and important announcements for West End residents.", image: heroNeighborhoodImage, author: "WECA Board", readTime: "6 min read" },
-    { id: "cn-2024", title: "Community News 2024", date: "2024-08-01", category: "Community News", description: "Special edition covering important community developments and neighborhood initiatives.", image: boardMembersImage, author: "WECA Communications", readTime: "7 min read" },
-    { id: "es-2024", title: "Special Edition 2024", date: "2024-06-01", category: "Special Edition", description: "In-depth coverage of West End community projects and future planning initiatives.", image: historicHomesImage, author: "WECA Board", readTime: "10 min read" },
-    { id: "spring-2024", title: "Spring 2024 Newsletter", date: "2024-04-01", category: "Newsletter", description: "Spring updates including meeting information and community engagement opportunities.", image: springfestImage, author: "WECA Board", readTime: "5 min read" },
-    { id: "fall-2023", title: "Fall 2023 Newsletter", date: "2023-10-01", category: "Newsletter", description: "Fall season updates and preparations for upcoming community meetings.", image: heroNeighborhoodImage, author: "WECA Board", readTime: "4 min read" },
-    { id: "spring-2023", title: "Spring 2023 Newsletter", date: "2023-04-01", category: "Newsletter", description: "Spring meeting announcements and officer election information for the community.", image: boardMembersImage, author: "WECA Board", readTime: "5 min read" },
-    { id: "fall-2022", title: "Fall 2022 Newsletter", date: "2022-10-01", category: "Newsletter", description: "Community updates and fall meeting schedule for West End residents.", image: historicHomesImage, author: "WECA Board", readTime: "4 min read" },
-    { id: "spring-2022", title: "Spring 2022 Newsletter", date: "2022-04-01", category: "Newsletter", description: "Spring updates and annual meeting information for the West End community.", image: halloweenImage, author: "WECA Board", readTime: "6 min read" },
-  ];
+  const { data: blogPosts = [] } = useQuery({
+    queryKey: ['blog-posts'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select('*')
+        .eq('status', 'published')
+        .order('published_at', { ascending: false });
+      
+      if (error) throw error;
+      return data || [];
+    },
+  });
 
-  // Recent meeting updates
-  const recentMeetings = [
-    { date: "May 8, 2025", title: "May 2025 General Meeting" },
-    { date: "April 10, 2025", title: "April 2025 Meeting" },
-    { date: "March 13, 2025", title: "March 2025 Meeting" },
-    { date: "February 13, 2025", title: "February 2025 Meeting" },
-  ];
+  const { data: recentMeetings = [] } = useQuery({
+    queryKey: ['recent-meetings-blog'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('meetings')
+        .select('*')
+        .order('date', { ascending: false })
+        .limit(4);
+      
+      if (error) throw error;
+      return data || [];
+    },
+  });
 
-  // Categories
-  const categories = [
-    { name: "All Posts", count: newsletterPosts.length },
-    { name: "Newsletter", count: newsletterPosts.filter(p => p.category === "Newsletter").length },
-    { name: "Community News", count: newsletterPosts.filter(p => p.category === "Community News").length },
-    { name: "Special Edition", count: newsletterPosts.filter(p => p.category === "Special Edition").length },
-    { name: "Meeting Minutes", count: recentMeetings.length },
-  ];
-
-  // Tags
-  const tags = ["Community Events", "Development", "Parks", "Safety", "Meetings", "Planning", "Volunteer", "History"];
+  // Get unique tags
+  const allTags = Array.from(new Set(blogPosts.flatMap(post => post.tags || [])));
 
   // Filter posts
-  const filteredPosts = newsletterPosts.filter(post => {
-    const matchesCategory = !selectedCategory || selectedCategory === "All Posts" || post.category === selectedCategory;
+  const filteredPosts = blogPosts.filter(post => {
     const matchesSearch = !searchQuery || 
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      post.description.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
+      (post.excerpt && post.excerpt.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      post.content.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesSearch;
   });
 
   return (
@@ -105,69 +99,68 @@ const Blog = () => {
             {/* Main Content Column */}
             <div className="lg:col-span-2 space-y-6">
               {/* Posts List */}
-              {filteredPosts.map((post) => (
-                <Card key={post.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
-                  <div className="grid md:grid-cols-3 gap-0">
-                    {/* Featured Image */}
-                    <div className="md:col-span-1 relative overflow-hidden aspect-video md:aspect-square">
-                      <img 
-                        src={post.image} 
-                        alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                      <Badge className="absolute top-3 left-3 bg-primary text-primary-foreground">
-                        {post.category}
-                      </Badge>
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="md:col-span-2 p-6">
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          {post.readTime}
-                        </span>
-                        <span>By {post.author}</span>
-                      </div>
+              {filteredPosts.length > 0 ? (
+                filteredPosts.map((post) => (
+                  <Card key={post.id} className="group hover:shadow-lg transition-all duration-300 overflow-hidden">
+                    <div className="grid md:grid-cols-3 gap-0">
+                      {/* Featured Image */}
+                      {post.featured_image_url && (
+                        <div className="md:col-span-1 relative overflow-hidden aspect-video md:aspect-square">
+                          <img 
+                            src={post.featured_image_url} 
+                            alt={post.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                      )}
                       
-                      <h2 className="text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
-                        {post.title}
-                      </h2>
-                      
-                      <p className="text-muted-foreground mb-4 line-clamp-3">
-                        {post.description}
-                      </p>
-                      
-                      {post.link ? (
+                      {/* Content */}
+                      <div className={`${post.featured_image_url ? 'md:col-span-2' : 'md:col-span-3'} p-6`}>
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                          <span className="flex items-center gap-1">
+                            <Calendar className="w-4 h-4" />
+                            {new Date(post.published_at || post.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-4 h-4" />
+                            {Math.ceil(post.content.length / 1000)} min read
+                          </span>
+                        </div>
+                        
+                        <h2 className="text-2xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+                          {post.title}
+                        </h2>
+                        
+                        <p className="text-muted-foreground mb-4 line-clamp-3">
+                          {post.excerpt || post.content.substring(0, 200) + '...'}
+                        </p>
+
+                        {post.tags && post.tags.length > 0 && (
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            {post.tags.slice(0, 3).map((tag) => (
+                              <Badge key={tag} variant="outline" className="text-xs">
+                                {tag}
+                              </Badge>
+                            ))}
+                          </div>
+                        )}
+                        
                         <Link
-                          to={post.link}
+                          to={`/blog/${post.slug}`}
                           className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all"
                         >
                           Read Full Article
                           <ArrowRight className="w-4 h-4" />
                         </Link>
-                      ) : (
-                        <span className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                          Coming Soon
-                        </span>
-                      )}
+                      </div>
                     </div>
-                  </div>
+                  </Card>
+                ))
+              ) : (
+                <Card className="p-8 text-center">
+                  <p className="text-muted-foreground">No posts found matching your search.</p>
                 </Card>
-              ))}
-
-              {/* Pagination */}
-              <div className="flex justify-center gap-2 pt-8">
-                <Button variant="outline" size="sm" disabled>Previous</Button>
-                <Button variant="default" size="sm">1</Button>
-                <Button variant="outline" size="sm">2</Button>
-                <Button variant="outline" size="sm">3</Button>
-                <Button variant="outline" size="sm">Next</Button>
-              </div>
+              )}
             </div>
 
             {/* Sidebar */}
@@ -190,46 +183,21 @@ const Blog = () => {
                 </CardContent>
               </Card>
 
-              {/* Categories */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Categories</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-2">
-                  {categories.map((cat) => (
-                    <button
-                      key={cat.name}
-                      onClick={() => setSelectedCategory(cat.name)}
-                      className={`w-full flex items-center justify-between p-3 rounded-lg text-left transition-colors ${
-                        selectedCategory === cat.name || (!selectedCategory && cat.name === "All Posts")
-                          ? 'bg-primary text-primary-foreground'
-                          : 'hover:bg-muted'
-                      }`}
-                    >
-                      <span className="font-medium">{cat.name}</span>
-                      <Badge variant={selectedCategory === cat.name || (!selectedCategory && cat.name === "All Posts") ? "secondary" : "outline"} className="text-xs">
-                        {cat.count}
-                      </Badge>
-                    </button>
-                  ))}
-                </CardContent>
-              </Card>
-
               {/* Recent Posts */}
               <Card>
                 <CardHeader>
                   <CardTitle className="text-lg">Recent Posts</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {newsletterPosts.slice(0, 4).map((post) => (
+                  {blogPosts.slice(0, 4).map((post) => (
                     <div key={post.id}>
-                      <Link to={post.link || "#"} className="group">
+                      <Link to={`/blog/${post.slug}`} className="group">
                         <h4 className="font-semibold text-sm text-foreground group-hover:text-primary transition-colors line-clamp-2 mb-1">
                           {post.title}
                         </h4>
                         <p className="text-xs text-muted-foreground flex items-center gap-1">
                           <Calendar className="w-3 h-3" />
-                          {new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                          {new Date(post.published_at || post.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                         </p>
                       </Link>
                       <Separator className="mt-4" />
@@ -239,55 +207,59 @@ const Blog = () => {
               </Card>
 
               {/* Tags */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    <Tag className="w-4 h-4" />
-                    Popular Tags
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {tags.map((tag) => (
-                      <Badge 
-                        key={tag} 
-                        variant="outline" 
-                        className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+              {allTags.length > 0 && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <Tag className="w-4 h-4" />
+                      Popular Tags
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {allTags.slice(0, 10).map((tag) => (
+                        <Badge 
+                          key={tag} 
+                          variant="outline" 
+                          className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
 
               {/* Recent Meetings */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    <FileText className="w-4 h-4" />
-                    Recent Meetings
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  {recentMeetings.map((meeting, index) => (
-                    <div key={index}>
-                      <a href="/resources" className="group block">
-                        <p className="font-medium text-sm text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                          {meeting.title}
-                        </p>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          {meeting.date}
-                        </p>
-                      </a>
-                      {index < recentMeetings.length - 1 && <Separator className="mt-3" />}
-                    </div>
-                  ))}
-                  <Button variant="outline" size="sm" className="w-full mt-2" asChild>
-                    <a href="/resources">View All Minutes</a>
-                  </Button>
-                </CardContent>
-              </Card>
+              {recentMeetings.length > 0 && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <FileText className="w-4 h-4" />
+                      Recent Meetings
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    {recentMeetings.map((meeting, index) => (
+                      <div key={meeting.id}>
+                        <a href={meeting.minutes_url || "/resources"} className="group block" target={meeting.minutes_url ? "_blank" : undefined} rel={meeting.minutes_url ? "noopener noreferrer" : undefined}>
+                          <p className="font-medium text-sm text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                            {meeting.title}
+                          </p>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            {new Date(meeting.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                          </p>
+                        </a>
+                        {index < recentMeetings.length - 1 && <Separator className="mt-3" />}
+                      </div>
+                    ))}
+                    <Button variant="outline" size="sm" className="w-full mt-2" asChild>
+                      <a href="/resources">View All Minutes</a>
+                    </Button>
+                  </CardContent>
+                </Card>
+              )}
 
               {/* Newsletter CTA */}
               <Card className="bg-gradient-to-br from-primary/10 to-primary/5 border-primary/20">
