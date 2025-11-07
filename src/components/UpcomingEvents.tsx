@@ -28,7 +28,7 @@ const events = [
 
 const UpcomingEvents = () => {
   return (
-    <div className="animate-fade-in">
+    <div className="animate-fade-in h-full flex flex-col">
       <div className="mb-8">
         <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
           What's Happening Next
@@ -38,7 +38,7 @@ const UpcomingEvents = () => {
         </p>
       </div>
 
-      <div className="space-y-4 mb-8">
+      <div className="space-y-4 mb-8 flex-1">
         {events.map((event, index) => (
           <Card 
             key={index} 
@@ -78,7 +78,7 @@ const UpcomingEvents = () => {
         ))}
       </div>
 
-      <div className="mt-6">
+      <div className="mt-auto">
         <Button variant="outline" size="default" className="w-full" asChild>
           <a href="/events" className="group">
             See Full Calendar

@@ -30,7 +30,7 @@ const links = [
 
 const QuickLinks = () => {
   return (
-    <section className="py-20 bg-gradient-to-b from-muted/30 to-background relative -mt-20 z-10">
+    <section className="py-20 bg-background relative -mt-20 z-10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {links.map((link, index) => {

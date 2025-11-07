@@ -1,5 +1,5 @@
 import { Calendar, Home, Leaf } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 
 const announcements = [
@@ -23,6 +23,15 @@ const announcements = [
 const AnnouncementBar = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+
+  // Auto-scroll through announcements every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % announcements.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   if (!isVisible) return null;
 
