@@ -3,6 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Events from "./pages/Events";
@@ -12,6 +14,13 @@ import Resources from "./pages/Resources";
 import GetInvolved from "./pages/GetInvolved";
 import Media from "./pages/Media";
 import NotFound from "./pages/NotFound";
+import Login from "./pages/admin/Login";
+import AdminLayout from "./pages/admin/AdminLayout";
+import Dashboard from "./pages/admin/Dashboard";
+import BlogManager from "./pages/admin/BlogManager";
+import EventsManager from "./pages/admin/EventsManager";
+import FeedbackViewer from "./pages/admin/FeedbackViewer";
+import NewsletterViewer from "./pages/admin/NewsletterViewer";
 
 const queryClient = new QueryClient();
 
@@ -21,7 +30,8 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
+        <AuthProvider>
+          <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/about/neighborhood" element={<About />} />
@@ -47,9 +57,21 @@ const App = () => (
           <Route path="/media/photos" element={<Media />} />
           <Route path="/media/videos" element={<Media />} />
           <Route path="/media/social" element={<Media />} />
+          
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<Login />} />
+          <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+            <Route index element={<Dashboard />} />
+            <Route path="blog" element={<BlogManager />} />
+            <Route path="events" element={<EventsManager />} />
+            <Route path="feedback" element={<FeedbackViewer />} />
+            <Route path="newsletter" element={<NewsletterViewer />} />
+          </Route>
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
-        </Routes>
+          </Routes>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
