@@ -21,8 +21,8 @@ const Index = () => {
       <SEO />
       <div className="min-h-screen bg-background">
         <Header />
-        <TopAdBanner />
         <AnnouncementBar />
+        <TopAdBanner />
       
       <main className="relative">
         {/* Hero - Full impact introduction */}
@@ -35,11 +35,11 @@ const Index = () => {
         <AboutWECA />
         
         {/* Timely Information - What's happening */}
-        <section className="bg-muted/20 py-20">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+        <section className="bg-muted/20 py-24">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-7xl mx-auto">
               <UpcomingEvents />
-              <div className="space-y-8">
+              <div className="space-y-10">
                 <Meetings />
                 <Announcements />
               </div>
@@ -54,7 +54,7 @@ const Index = () => {
         <WhyWestEnd />
         
         {/* Leadership - Meet the team */}
-        <section className="py-20 bg-gradient-to-b from-background to-muted/30">
+        <section className="py-24 bg-gradient-to-b from-background to-muted/30">
           <Leadership />
         </section>
         
@@ -62,7 +62,7 @@ const Index = () => {
         <SocialFeed />
         
         {/* Contact - Get in touch */}
-        <section className="py-20 bg-primary/5">
+        <section className="py-24 bg-primary/5">
           <Contact />
         </section>
       </main>

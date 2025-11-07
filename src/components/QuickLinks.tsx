@@ -30,27 +30,27 @@ const links = [
 
 const QuickLinks = () => {
   return (
-    <section className="py-16 bg-gradient-to-b from-primary/5 to-background relative -mt-12">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+    <section className="py-20 bg-gradient-to-b from-muted/30 to-background relative -mt-20 z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {links.map((link, index) => {
             const Icon = link.icon;
             return (
               <a 
                 key={index} 
                 href={link.href}
-                className="group animate-fade-in hover-scale"
+                className="group animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <Card className="h-full border-2 hover:border-primary transition-all duration-300 hover:shadow-lg">
-                  <CardContent className="p-6 text-center">
-                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-                      <Icon className="w-8 h-8 text-primary" />
+                <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-background rounded-2xl overflow-hidden">
+                  <CardContent className="p-8 text-center">
+                    <div className="w-20 h-20 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform shadow-md">
+                      <Icon className="w-9 h-9 text-primary-foreground" />
                     </div>
-                    <h3 className="text-lg font-bold text-foreground mb-2">
+                    <h3 className="text-xl font-bold text-foreground mb-3">
                       {link.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-sm text-muted-foreground leading-relaxed">
                       {link.description}
                     </p>
                   </CardContent>
