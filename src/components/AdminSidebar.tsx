@@ -39,7 +39,6 @@ const menuItems = [
   { title: 'Feedback', url: '/admin/feedback', icon: MessageSquare },
   { title: 'Newsletter', url: '/admin/newsletter', icon: Mail },
   { title: 'Media Library', url: '/admin/media', icon: Image },
-  { title: 'Settings', url: '/admin/settings', icon: Settings },
 ];
 
 export function AdminSidebar() {

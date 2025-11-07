@@ -19,6 +19,10 @@ import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import BlogManager from "./pages/admin/BlogManager";
 import EventsManager from "./pages/admin/EventsManager";
+import MeetingsManager from "./pages/admin/MeetingsManager";
+import ResourcesManager from "./pages/admin/ResourcesManager";
+import AnnouncementsManager from "./pages/admin/AnnouncementsManager";
+import MediaLibraryManager from "./pages/admin/MediaLibraryManager";
 import FeedbackViewer from "./pages/admin/FeedbackViewer";
 import NewsletterViewer from "./pages/admin/NewsletterViewer";
 
@@ -64,6 +68,10 @@ const App = () => (
             <Route index element={<Dashboard />} />
             <Route path="blog" element={<BlogManager />} />
             <Route path="events" element={<EventsManager />} />
+            <Route path="meetings" element={<MeetingsManager />} />
+            <Route path="resources" element={<ResourcesManager />} />
+            <Route path="announcements" element={<AnnouncementsManager />} />
+            <Route path="media" element={<MediaLibraryManager />} />
             <Route path="feedback" element={<FeedbackViewer />} />
             <Route path="newsletter" element={<NewsletterViewer />} />
           </Route>
