@@ -11,11 +11,22 @@ interface NewsletterDialogProps {
 }
 
 const NewsletterDialog = ({ open, onOpenChange }: NewsletterDialogProps) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!firstName.trim() || !lastName.trim()) {
+      toast({
+        title: "Missing Information",
+        description: "Please enter your first and last name.",
+        variant: "destructive",
+      });
+      return;
+    }
     
     if (!email || !email.includes("@")) {
       toast({
@@ -31,6 +42,8 @@ const NewsletterDialog = ({ open, onOpenChange }: NewsletterDialogProps) => {
       description: "Thank you for subscribing to our newsletter!",
     });
     
+    setFirstName("");
+    setLastName("");
     setEmail("");
     onOpenChange(false);
   };
@@ -49,10 +62,32 @@ const NewsletterDialog = ({ open, onOpenChange }: NewsletterDialogProps) => {
         </DialogHeader>
         
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <Input
+                type="text"
+                placeholder="First name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="w-full"
+                required
+              />
+            </div>
+            <div>
+              <Input
+                type="text"
+                placeholder="Last name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className="w-full"
+                required
+              />
+            </div>
+          </div>
           <div>
             <Input
               type="email"
-              placeholder="Enter your email address"
+              placeholder="Email address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full"

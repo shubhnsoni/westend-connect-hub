@@ -1,22 +1,11 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Mail } from "lucide-react";
 import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import NewsletterDialog from "@/components/NewsletterDialog";
 
 const Newsletter = () => {
-  const [email, setEmail] = useState("");
-  const { toast } = useToast();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Thank you for subscribing!",
-      description: "You'll receive news and updates about the West End neighborhood.",
-    });
-    setEmail("");
-  };
+  const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
 
   return (
     <section id="newsletter" className="py-20 bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-primary-foreground">
@@ -33,25 +22,22 @@ const Newsletter = () => {
           </div>
 
           <Card className="p-8 shadow-2xl animate-scale-in bg-primary-foreground text-foreground border-none">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Input
-                  type="email"
-                  placeholder="Enter your email address"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="flex-1 h-12 text-base"
-                />
-                <Button type="submit" variant="hero" size="lg" className="sm:w-auto w-full">
-                  Join Newsletter
-                </Button>
-              </div>
-              <p className="text-sm text-muted-foreground text-center">
+            <div className="text-center space-y-4">
+              <Button 
+                variant="hero" 
+                size="lg" 
+                className="w-full sm:w-auto px-12"
+                onClick={() => setIsNewsletterOpen(true)}
+              >
+                Join Newsletter
+              </Button>
+              <p className="text-sm text-muted-foreground">
                 We respect your privacy. Unsubscribe at any time.
               </p>
-            </form>
+            </div>
           </Card>
+          
+          <NewsletterDialog open={isNewsletterOpen} onOpenChange={setIsNewsletterOpen} />
 
           <div className="mt-12 text-center animate-fade-in">
             <p className="text-primary-foreground/90 mb-4">

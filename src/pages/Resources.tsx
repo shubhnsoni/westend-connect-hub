@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TopAdBanner from "@/components/TopAdBanner";
 import SEO from "@/components/SEO";
-import SidebarAds from "@/components/SidebarAds";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -13,7 +12,7 @@ import NewsletterDialog from "@/components/NewsletterDialog";
 const Resources = () => {
   const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
 
-  const meetingMinutes = {
+  const meetingMinutes: Record<number, string[]> = {
     2025: ["May 8", "April 10", "March 13", "February 13", "January 9"],
     2024: ["November 14", "October 10", "September 12", "May 9", "April 11", "March 14"],
     2023: ["November 09", "October 19", "September 14", "May 11", "April 13", "March 9", "February 9", "January 10"],
@@ -21,13 +20,17 @@ const Resources = () => {
     2021: ["November 11", "October 14", "September 9", "May 27", "April 22", "March 25", "February 25", "January 28"],
   };
 
-  const newsletters = {
+  const newsletters: Record<number, string[]> = {
     2025: ["Spring", "Fall"],
     2024: ["Spring", "Fall", "CN", "ES"],
     2023: ["Spring", "Fall"],
     2022: ["Spring", "Fall"],
     2021: ["Spring", "Fall"],
   };
+  
+  // Get years in reverse order (most recent first)
+  const sortedMeetingYears = Object.keys(meetingMinutes).sort((a, b) => Number(b) - Number(a));
+  const sortedNewsletterYears = Object.keys(newsletters).sort((a, b) => Number(b) - Number(a));
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -57,23 +60,23 @@ const Resources = () => {
       {/* Main Content */}
       <main className="flex-1 py-24 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
-            {/* Main Content Column */}
-            <div className="lg:col-span-3 space-y-16">
-              {/* Work in Progress Notice */}
-              <Card className="border-primary/20 bg-primary/5 rounded-2xl shadow-lg">
-                <CardContent className="pt-6">
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
-                      <Info className="w-5 h-5 text-primary-foreground" />
-                    </div>
-                    <p className="text-foreground text-lg">
-                      We're working on populating recent resources! Check back soon for the latest updates.
-                    </p>
+          <div className="space-y-16">
+            {/* Work in Progress Notice */}
+            <Card className="border-primary/20 bg-primary/5 rounded-2xl shadow-lg">
+              <CardContent className="pt-6">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+                    <Info className="w-5 h-5 text-primary-foreground" />
                   </div>
-                </CardContent>
-              </Card>
+                  <p className="text-foreground text-lg">
+                    We're working on populating recent resources! Check back soon for the latest updates.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
 
+            {/* Two Column Layout for Minutes and Newsletters */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Meeting Minutes Section */}
               <section>
                 <div className="mb-8 text-center lg:text-left">
@@ -88,8 +91,11 @@ const Resources = () => {
                 </div>
 
                 <Accordion type="single" collapsible className="space-y-4">
-                  {Object.entries(meetingMinutes).map(([year, dates]) => (
-                    <AccordionItem key={year} value={year} className="border-2 rounded-2xl px-6 bg-background shadow-sm hover:shadow-md transition-shadow">
+                  {sortedMeetingYears.map((yearStr) => {
+                    const year = Number(yearStr);
+                    const dates = meetingMinutes[year];
+                    return (
+                    <AccordionItem key={yearStr} value={yearStr} className="border-2 rounded-2xl px-6 bg-background shadow-sm hover:shadow-md transition-shadow">
                       <AccordionTrigger className="hover:no-underline py-5">
                         <div className="flex items-center gap-3">
                           <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
@@ -116,7 +122,8 @@ const Resources = () => {
                         </div>
                       </AccordionContent>
                     </AccordionItem>
-                  ))}
+                  );
+                  })}
                 </Accordion>
               </section>
 
@@ -134,8 +141,11 @@ const Resources = () => {
                 </div>
 
                 <div className="space-y-6">
-                  {Object.entries(newsletters).map(([year, issues]) => (
-                    <Card key={year} className="shadow-lg border-2 rounded-2xl overflow-hidden">
+                  {sortedNewsletterYears.map((yearStr) => {
+                    const year = Number(yearStr);
+                    const issues = newsletters[year];
+                    return (
+                    <Card key={yearStr} className="shadow-lg border-2 rounded-2xl overflow-hidden">
                       <CardHeader className="bg-muted/30 border-b-2">
                         <CardTitle className="flex items-center gap-3 text-2xl">
                           <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
@@ -159,13 +169,11 @@ const Resources = () => {
                         </div>
                       </CardContent>
                     </Card>
-                  ))}
+                  );
+                  })}
                 </div>
               </section>
             </div>
-
-            {/* Sidebar Ads */}
-            <SidebarAds />
           </div>
         </div>
       </main>

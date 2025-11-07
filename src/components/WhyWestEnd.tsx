@@ -1,14 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Home, Trees, Users, Heart, ArrowRight } from "lucide-react";
+import historicHomesImage from "@/assets/historic-homes.jpg";
 import heroImage from "@/assets/hero-neighborhood.jpg";
+import springfestImage from "@/assets/springfest.jpg";
+import halloweenParadeImage from "@/assets/halloween-doggie-parade.jpg";
 
 const features = [
   {
     icon: Home,
     title: "Historic Charm",
     description: "Beautiful heritage homes and architecture dating back to the 1700s",
-    image: heroImage
+    image: historicHomesImage
   },
   {
     icon: Trees,
@@ -26,7 +29,7 @@ const features = [
     icon: Heart,
     title: "Welcoming Community",
     description: "Friendly neighbors and vibrant festivals year-round",
-    image: heroImage
+    image: springfestImage
   }
 ];
 

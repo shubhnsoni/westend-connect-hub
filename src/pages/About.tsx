@@ -141,30 +141,28 @@ const About = () => {
 
       {/* Story Section with Background */}
       <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-foreground/98 to-foreground/95" />
-        <div 
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: `url(${heroImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          }}
-        />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/95 to-primary/90" />
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:24px_24px]" />
+        </div>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-primary-foreground/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-primary-foreground/5 rounded-full blur-3xl" />
+        
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="text-sm text-background font-bold mb-4 uppercase tracking-wide bg-primary px-4 py-2 rounded-full inline-block">OUR STORY</div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-background mb-6">
-              Here's How the <span className="text-primary">West End</span> Got Started
+            <div className="text-sm text-primary-foreground font-bold mb-4 uppercase tracking-wide bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 px-4 py-2 rounded-full inline-block">OUR STORY</div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground mb-6">
+              Here's How the <span className="text-secondary">West End</span> Got Started
             </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <Card className="bg-background border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+            <Card className="bg-primary-foreground/95 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
               <CardHeader>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm text-primary font-bold">01</span>
-                  <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-                    <Home className="w-6 h-6 text-primary-foreground" />
+                  <span className="text-sm text-secondary font-bold">01</span>
+                  <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
+                    <Home className="w-6 h-6 text-secondary-foreground" />
                   </div>
                 </div>
                 <CardTitle className="text-xl">The Beginning</CardTitle>
@@ -176,12 +174,12 @@ const About = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-background border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 md:mt-8">
+            <Card className="bg-primary-foreground/95 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 md:mt-8">
               <CardHeader>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm text-primary font-bold">02</span>
-                  <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-                    <Users className="w-6 h-6 text-primary-foreground" />
+                  <span className="text-sm text-secondary font-bold">02</span>
+                  <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
+                    <Users className="w-6 h-6 text-secondary-foreground" />
                   </div>
                 </div>
                 <CardTitle className="text-xl">Community Growth</CardTitle>
@@ -193,12 +191,12 @@ const About = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-background border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+            <Card className="bg-primary-foreground/95 backdrop-blur-sm border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
               <CardHeader>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm text-primary font-bold">03</span>
-                  <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center">
-                    <Building2 className="w-6 h-6 text-primary-foreground" />
+                  <span className="text-sm text-secondary font-bold">03</span>
+                  <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
+                    <Building2 className="w-6 h-6 text-secondary-foreground" />
                   </div>
                 </div>
                 <CardTitle className="text-xl">Modern Era</CardTitle>

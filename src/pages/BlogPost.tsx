@@ -2,7 +2,6 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TopAdBanner from "@/components/TopAdBanner";
-import SidebarAds from "@/components/SidebarAds";
 import NewsletterDialog from "@/components/NewsletterDialog";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -18,15 +17,9 @@ const BlogPost = () => {
       <Header />
       <TopAdBanner />
       <main className="flex-grow">
-        <div className="container mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Sidebar Ads */}
-            <aside className="lg:col-span-3 space-y-6">
-              <SidebarAds />
-            </aside>
-
-            {/* Main Content */}
-            <article className="lg:col-span-9">
+        <div className="container mx-auto px-4 py-12 max-w-5xl">
+          {/* Main Content */}
+          <article>
               <div className="mb-8">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
                   <Calendar className="h-4 w-4" />
@@ -360,7 +353,6 @@ const BlogPost = () => {
                 </Card>
               </section>
             </article>
-          </div>
         </div>
       </main>
       <Footer />
