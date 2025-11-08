@@ -13,6 +13,15 @@ interface Resource {
   date: string;
 }
 
+interface Event {
+  title: string;
+  description: string;
+  start_date: string;
+  end_date?: string;
+  location: string;
+  image_url?: string;
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders });
@@ -96,6 +105,11 @@ Deno.serve(async (req) => {
       { title: 'Fall 2018 Newsletter', description: 'WECA semi-annual newsletter', category: 'Newsletter', url: 'https://www.westendrockvillemd.org/_files/ugd/d9bd4e_3586cf9aeaa54d49ad6b5b65c8a3df2d.pdf', date: '2018-09-01' },
     ];
 
+    const events: Event[] = [
+      { title: 'Halloween Doggie Parade', description: 'Annual Halloween costume parade for dogs and their owners', start_date: '2025-10-31T14:00:00', location: 'West End Park', image_url: '/images/halloween-doggie-parade-2025.jpg' },
+      { title: 'SpringFest 2025', description: 'Community spring festival with activities, food, and entertainment', start_date: '2025-05-17T10:00:00', end_date: '2025-05-17T16:00:00', location: 'West End Park' },
+    ];
+
     const allResources = [...meetings, ...newsletters];
     
     // Clear existing resources
@@ -103,6 +117,9 @@ Deno.serve(async (req) => {
     
     // Clear existing meetings
     await supabase.from('meetings').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+
+    // Clear existing events
+    await supabase.from('events').delete().neq('id', '00000000-0000-0000-0000-000000000000');
 
     const results = [];
 
@@ -176,6 +193,32 @@ Deno.serve(async (req) => {
       } catch (error) {
         console.error(`Error processing ${resource.title}:`, error);
         results.push({ title: resource.title, status: 'failed', error: String(error) });
+      }
+    }
+
+    // Process events
+    for (const event of events) {
+      try {
+        const { error: insertError } = await supabase.from('events').insert({
+          title: event.title,
+          description: event.description,
+          start_date: event.start_date,
+          end_date: event.end_date,
+          location: event.location,
+          image_url: event.image_url,
+          status: 'upcoming',
+          created_by: uploadedBy,
+        });
+
+        if (insertError) {
+          console.error(`Failed to insert event ${event.title}:`, insertError);
+          results.push({ title: event.title, status: 'failed', error: insertError.message, type: 'event' });
+        } else {
+          results.push({ title: event.title, status: 'success', type: 'event' });
+        }
+      } catch (error) {
+        console.error(`Error processing event ${event.title}:`, error);
+        results.push({ title: event.title, status: 'failed', error: String(error), type: 'event' });
       }
     }
 

@@ -60,9 +60,9 @@ export function AdminSidebar() {
 
   return (
     <Sidebar className={open ? 'w-64' : 'w-16'} collapsible="icon">
-      <SidebarContent>
+      <SidebarContent className="bg-card">
         <SidebarGroup>
-          <SidebarGroupLabel className="px-2">
+          <SidebarGroupLabel className="px-2 text-foreground font-bold">
             {open ? 'WECA Admin' : 'WA'}
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -70,7 +70,7 @@ export function AdminSidebar() {
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild isActive={isActive(item.url, item.end)}>
-                    <NavLink to={item.url}>
+                    <NavLink to={item.url} className="text-foreground hover:text-primary">
                       <item.icon className="h-4 w-4" />
                       {open && <span>{item.title}</span>}
                     </NavLink>
@@ -82,17 +82,17 @@ export function AdminSidebar() {
         </SidebarGroup>
       </SidebarContent>
       
-      <SidebarFooter>
+      <SidebarFooter className="bg-card border-t border-border">
         {open && user && (
-          <div className="px-4 py-2 text-sm text-muted-foreground border-t">
-            <p className="truncate">{user.email}</p>
+          <div className="px-4 py-2 text-sm text-foreground">
+            <p className="truncate font-medium">{user.email}</p>
           </div>
         )}
         <div className="p-2">
           <Button
             variant="ghost"
             size={open ? 'default' : 'icon'}
-            className="w-full justify-start"
+            className="w-full justify-start text-foreground hover:text-primary hover:bg-muted"
             onClick={signOut}
           >
             <LogOut className="h-4 w-4" />

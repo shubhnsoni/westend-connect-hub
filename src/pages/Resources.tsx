@@ -52,11 +52,10 @@ const Resources = () => {
     queryKey: ['newsletters'],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from('blog_posts')
+        .from('resources')
         .select('*')
-        .contains('tags', ['Newsletter'])
-        .eq('status', 'published')
-        .order('published_at', { ascending: false });
+        .eq('category', 'Newsletter')
+        .order('created_at', { ascending: false });
       
       if (error) throw error;
       return data || [];
@@ -73,7 +72,7 @@ const Resources = () => {
 
   // Group newsletters by year
   const newslettersByYear = newsletters.reduce((acc, newsletter) => {
-    const year = new Date(newsletter.published_at || newsletter.created_at).getFullYear();
+    const year = new Date(newsletter.created_at).getFullYear();
     if (!acc[year]) acc[year] = [];
     acc[year].push(newsletter);
     return acc;
@@ -202,49 +201,51 @@ const Resources = () => {
                 </div>
 
                 {sortedNewsletterYears.length > 0 ? (
-                  <div className="space-y-6">
+                  <Accordion type="single" collapsible className="space-y-4">
                     {sortedNewsletterYears.map((yearStr) => {
                       const year = Number(yearStr);
                       const yearNewsletters = newslettersByYear[year];
                       return (
-                        <Card key={yearStr} className="shadow-lg border-2 rounded-2xl overflow-hidden">
-                          <CardHeader className="bg-muted/30 border-b-2">
-                            <CardTitle className="flex items-center gap-3 text-2xl">
+                        <AccordionItem key={yearStr} value={yearStr} className="border-2 rounded-2xl px-6 bg-background shadow-sm hover:shadow-md transition-shadow">
+                          <AccordionTrigger className="hover:no-underline py-5">
+                            <div className="flex items-center gap-3">
                               <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
                                 <Calendar className="w-5 h-5 text-primary-foreground" />
                               </div>
-                              {year}
-                            </CardTitle>
-                          </CardHeader>
-                          <CardContent className="p-6">
-                            <div className="space-y-3">
+                              <span className="text-2xl font-bold text-foreground">{year}</span>
+                              <span className="text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full">
+                                {yearNewsletters.length} newsletters
+                              </span>
+                            </div>
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 pb-4">
                               {yearNewsletters.map((newsletter) => (
-                                <a
+                                <button
                                   key={newsletter.id}
-                                  href={`/blog/${newsletter.slug}`}
-                                  className="flex items-center justify-between p-4 rounded-xl border-2 bg-background hover:bg-muted hover:border-primary transition-all group"
+                                  onClick={() => newsletter.file_url && openPdfViewer(newsletter.file_url, newsletter.title)}
+                                  disabled={!newsletter.file_url}
+                                  className="flex items-center justify-between p-5 rounded-xl border-2 bg-background hover:bg-muted hover:border-primary transition-all group shadow-sm disabled:opacity-50 disabled:cursor-not-allowed text-left w-full"
                                 >
-                                  <div className="flex items-center gap-3">
-                                    <Newspaper className="w-6 h-6 text-primary" />
-                                    <div>
-                                      <p className="font-bold text-sm text-foreground">{newsletter.title}</p>
-                                      <p className="text-xs text-muted-foreground">
-                                        {new Date(newsletter.published_at || newsletter.created_at).toLocaleDateString('en-US', { 
-                                          month: 'long', 
-                                          day: 'numeric' 
-                                        })}
-                                      </p>
-                                    </div>
+                                  <div className="flex-1 min-w-0">
+                                    <p className="font-semibold text-foreground text-sm line-clamp-2">{newsletter.title}</p>
+                                    <p className="text-xs text-muted-foreground mt-1">
+                                      {new Date(newsletter.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                                    </p>
                                   </div>
-                                  <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
-                                </a>
+                                  {newsletter.file_url ? (
+                                    <Newspaper className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all ml-2 flex-shrink-0" />
+                                  ) : (
+                                    <span className="text-xs text-muted-foreground ml-2 flex-shrink-0">Soon</span>
+                                  )}
+                                </button>
                               ))}
                             </div>
-                          </CardContent>
-                        </Card>
+                          </AccordionContent>
+                        </AccordionItem>
                       );
                     })}
-                  </div>
+                  </Accordion>
                 ) : (
                   <Card className="p-8 text-center">
                     <p className="text-muted-foreground">No newsletters available yet</p>
