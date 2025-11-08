@@ -71,9 +71,20 @@ const Resources = () => {
     return acc;
   }, {} as Record<number, typeof meetings>);
 
-  // Group newsletters by year
+  // Extract year from newsletter title (e.g., "Fall 2018 Newsletter" -> 2018)
+  const extractYearFromTitle = (title: string): number => {
+    const match = title.match(/\b(20\d{2})\b/);
+    return match ? parseInt(match[1]) : new Date().getFullYear();
+  };
+
+  // Extract season from newsletter title
+  const extractSeasonFromTitle = (title: string): 'Spring' | 'Fall' => {
+    return title.toLowerCase().includes('spring') ? 'Spring' : 'Fall';
+  };
+
+  // Group newsletters by year (parsed from title)
   const newslettersByYear = newsletters.reduce((acc, newsletter) => {
-    const year = new Date(newsletter.created_at).getFullYear();
+    const year = extractYearFromTitle(newsletter.title);
     if (!acc[year]) acc[year] = [];
     acc[year].push(newsletter);
     return acc;
@@ -82,10 +93,12 @@ const Resources = () => {
   const sortedMeetingYears = Object.keys(meetingsByYear).sort((a, b) => Number(b) - Number(a));
   const sortedNewsletterYears = Object.keys(newslettersByYear).sort((a, b) => Number(b) - Number(a));
 
-  // Group resources by category
+  // Group resources by category (exclude Newsletters - they have their own section)
   const resourcesByCategory = resources.reduce((acc, resource) => {
-    if (!acc[resource.category]) acc[resource.category] = [];
-    acc[resource.category].push(resource);
+    if (resource.category !== 'Newsletter') {
+      if (!acc[resource.category]) acc[resource.category] = [];
+      acc[resource.category].push(resource);
+    }
     return acc;
   }, {} as Record<string, typeof resources>);
 
@@ -196,8 +209,8 @@ const Resources = () => {
                     <span className="text-primary">NEWSLETTERS</span>
                   </div>
                   <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">Newsletters</h2>
-                  <p className="text-muted-foreground text-lg">
-                    WECA newsletters are published twice per year
+                  <p className="text-muted-foreground text-lg mb-6">
+                    WECA newsletters are published twice per year: (1) Spring, prior to the spring general membership meeting and annual election of officers; (2) Fall, prior to the fall general membership meeting.
                   </p>
                 </div>
 
@@ -206,6 +219,9 @@ const Resources = () => {
                     {sortedNewsletterYears.map((yearStr) => {
                       const year = Number(yearStr);
                       const yearNewsletters = newslettersByYear[year];
+                      const springNewsletters = yearNewsletters.filter(n => extractSeasonFromTitle(n.title) === 'Spring');
+                      const fallNewsletters = yearNewsletters.filter(n => extractSeasonFromTitle(n.title) === 'Fall');
+                      
                       return (
                         <AccordionItem key={yearStr} value={yearStr} className="border-2 rounded-2xl px-6 bg-background shadow-sm hover:shadow-md transition-shadow">
                           <AccordionTrigger className="hover:no-underline py-5">
@@ -220,27 +236,62 @@ const Resources = () => {
                             </div>
                           </AccordionTrigger>
                           <AccordionContent>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 pb-4">
-                              {yearNewsletters.map((newsletter) => (
-                                <button
-                                  key={newsletter.id}
-                                  onClick={() => newsletter.file_url && openPdfViewer(newsletter.file_url, newsletter.title)}
-                                  disabled={!newsletter.file_url}
-                                  className="flex items-center justify-between p-5 rounded-xl border-2 bg-background hover:bg-muted hover:border-primary transition-all group shadow-sm disabled:opacity-50 disabled:cursor-not-allowed text-left w-full"
-                                >
-                                  <div className="flex-1 min-w-0">
-                                    <p className="font-semibold text-foreground text-sm line-clamp-2">{newsletter.title}</p>
-                                    <p className="text-xs text-muted-foreground mt-1">
-                                      {new Date(newsletter.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                                    </p>
+                            <div className="pt-2 pb-4 space-y-4">
+                              {springNewsletters.length > 0 && (
+                                <div>
+                                  <div className="flex items-center gap-2 mb-3 text-sm font-medium text-primary">
+                                    <Sun className="w-4 h-4" />
+                                    <span>Spring</span>
                                   </div>
-                                  {newsletter.file_url ? (
-                                    <Newspaper className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all ml-2 flex-shrink-0" />
-                                  ) : (
-                                    <span className="text-xs text-muted-foreground ml-2 flex-shrink-0">Soon</span>
-                                  )}
-                                </button>
-                              ))}
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    {springNewsletters.map((newsletter) => (
+                                      <button
+                                        key={newsletter.id}
+                                        onClick={() => newsletter.file_url && openPdfViewer(newsletter.file_url, newsletter.title)}
+                                        disabled={!newsletter.file_url}
+                                        className="flex items-center justify-between p-5 rounded-xl border-2 bg-background hover:bg-muted hover:border-primary transition-all group shadow-sm disabled:opacity-50 disabled:cursor-not-allowed text-left w-full"
+                                      >
+                                        <div className="flex-1 min-w-0">
+                                          <p className="font-semibold text-foreground text-sm line-clamp-2">{newsletter.title}</p>
+                                        </div>
+                                        {newsletter.file_url ? (
+                                          <Newspaper className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all ml-2 flex-shrink-0" />
+                                        ) : (
+                                          <span className="text-xs text-muted-foreground ml-2 flex-shrink-0">Soon</span>
+                                        )}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
+                              
+                              {fallNewsletters.length > 0 && (
+                                <div>
+                                  <div className="flex items-center gap-2 mb-3 text-sm font-medium text-primary">
+                                    <Leaf className="w-4 h-4" />
+                                    <span>Fall</span>
+                                  </div>
+                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    {fallNewsletters.map((newsletter) => (
+                                      <button
+                                        key={newsletter.id}
+                                        onClick={() => newsletter.file_url && openPdfViewer(newsletter.file_url, newsletter.title)}
+                                        disabled={!newsletter.file_url}
+                                        className="flex items-center justify-between p-5 rounded-xl border-2 bg-background hover:bg-muted hover:border-primary transition-all group shadow-sm disabled:opacity-50 disabled:cursor-not-allowed text-left w-full"
+                                      >
+                                        <div className="flex-1 min-w-0">
+                                          <p className="font-semibold text-foreground text-sm line-clamp-2">{newsletter.title}</p>
+                                        </div>
+                                        {newsletter.file_url ? (
+                                          <Newspaper className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all ml-2 flex-shrink-0" />
+                                        ) : (
+                                          <span className="text-xs text-muted-foreground ml-2 flex-shrink-0">Soon</span>
+                                        )}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
+                              )}
                             </div>
                           </AccordionContent>
                         </AccordionItem>

@@ -60,9 +60,9 @@ export function AdminSidebar() {
 
   return (
     <Sidebar className={open ? 'w-64' : 'w-16'} collapsible="icon">
-      <SidebarContent className="bg-card">
+      <SidebarContent className="bg-sidebar border-r">
         <SidebarGroup>
-          <SidebarGroupLabel className="px-2 text-foreground font-bold">
+          <SidebarGroupLabel className="px-2 text-sidebar-foreground font-bold text-base">
             {open ? 'WECA Admin' : 'WA'}
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -70,9 +70,9 @@ export function AdminSidebar() {
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild isActive={isActive(item.url, item.end)}>
-                    <NavLink to={item.url} className="text-foreground hover:text-primary">
-                      <item.icon className="h-4 w-4" />
-                      {open && <span>{item.title}</span>}
+                    <NavLink to={item.url} className="text-sidebar-foreground hover:text-sidebar-accent-foreground">
+                      <item.icon className="h-5 w-5" />
+                      {open && <span className="text-sm">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -82,9 +82,9 @@ export function AdminSidebar() {
         </SidebarGroup>
       </SidebarContent>
       
-      <SidebarFooter className="bg-card border-t border-border">
+      <SidebarFooter className="bg-sidebar border-t border-sidebar-border">
         {open && user && (
-          <div className="px-4 py-2 text-sm text-foreground">
+          <div className="px-4 py-2 text-sm text-sidebar-foreground">
             <p className="truncate font-medium">{user.email}</p>
           </div>
         )}
@@ -92,11 +92,11 @@ export function AdminSidebar() {
           <Button
             variant="ghost"
             size={open ? 'default' : 'icon'}
-            className="w-full justify-start text-foreground hover:text-primary hover:bg-muted"
+            className="w-full justify-start text-sidebar-foreground hover:text-sidebar-accent-foreground hover:bg-sidebar-accent"
             onClick={signOut}
           >
-            <LogOut className="h-4 w-4" />
-            {open && <span className="ml-2">Logout</span>}
+            <LogOut className="h-5 w-5" />
+            {open && <span className="ml-2 text-sm">Logout</span>}
           </Button>
         </div>
       </SidebarFooter>

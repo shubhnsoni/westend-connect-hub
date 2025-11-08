@@ -68,7 +68,6 @@ const App = () => (
           <Route path="/media/social" element={<Media />} />
           
           {/* Admin Routes */}
-          <Route path="/admin/setup" element={<SetupAdmin />} />
           <Route path="/admin/login" element={<Login />} />
           <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
             <Route index element={<Dashboard />} />
