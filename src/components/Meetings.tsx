@@ -44,7 +44,7 @@ const Meetings = () => {
           Meetings
         </h3>
         <p className="text-muted-foreground">
-          Join us at our community meetings
+          Monthly meetings held second Thursday, September to May at 7 PM
         </p>
       </div>
 

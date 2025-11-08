@@ -62,8 +62,8 @@ const About = () => {
               <div className="text-sm text-muted-foreground uppercase tracking-wide">Households</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">1970</div>
-              <div className="text-sm text-muted-foreground uppercase tracking-wide">WECA Founded</div>
+              <div className="text-4xl font-bold text-primary mb-2">1784</div>
+              <div className="text-sm text-muted-foreground uppercase tracking-wide">First Settled</div>
             </div>
           </div>
         </div>
