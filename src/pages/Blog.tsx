@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Newspaper, Calendar, FileText, ArrowRight, Search, Tag, Clock } from "lucide-react";
 import NewsletterDialog from "@/components/NewsletterDialog";
+import PDFViewerDialog from "@/components/PDFViewerDialog";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -19,6 +20,13 @@ const Blog = () => {
   const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [pdfViewerOpen, setPdfViewerOpen] = useState(false);
+  const [selectedPdf, setSelectedPdf] = useState<{ url: string; title: string } | null>(null);
+
+  const openPdfViewer = (url: string, title: string) => {
+    setSelectedPdf({ url, title });
+    setPdfViewerOpen(true);
+  };
 
   const { data: blogPosts = [] } = useQuery({
     queryKey: ['blog-posts'],
@@ -243,14 +251,18 @@ const Blog = () => {
                   <CardContent className="space-y-3">
                     {recentMeetings.map((meeting, index) => (
                       <div key={meeting.id}>
-                        <a href={meeting.minutes_url || "/resources"} className="group block" target={meeting.minutes_url ? "_blank" : undefined} rel={meeting.minutes_url ? "noopener noreferrer" : undefined}>
+                        <button 
+                          onClick={() => meeting.minutes_url ? openPdfViewer(meeting.minutes_url, meeting.title) : null}
+                          className="group block text-left w-full disabled:opacity-50"
+                          disabled={!meeting.minutes_url}
+                        >
                           <p className="font-medium text-sm text-foreground group-hover:text-primary transition-colors line-clamp-2">
                             {meeting.title}
                           </p>
                           <p className="text-xs text-muted-foreground mt-1">
                             {new Date(meeting.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                           </p>
-                        </a>
+                        </button>
                         {index < recentMeetings.length - 1 && <Separator className="mt-3" />}
                       </div>
                     ))}
@@ -282,6 +294,12 @@ const Blog = () => {
       </main>
 
         <NewsletterDialog open={isNewsletterOpen} onOpenChange={setIsNewsletterOpen} />
+        <PDFViewerDialog 
+          open={pdfViewerOpen} 
+          onOpenChange={setPdfViewerOpen}
+          pdfUrl={selectedPdf?.url || null}
+          title={selectedPdf?.title}
+        />
         <Footer />
       </div>
     </>

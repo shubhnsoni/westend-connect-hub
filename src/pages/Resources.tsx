@@ -8,11 +8,19 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { FileText, Download, Newspaper, Calendar, FolderOpen, Info, ArrowRight, ExternalLink } from "lucide-react";
 import NewsletterDialog from "@/components/NewsletterDialog";
+import PDFViewerDialog from "@/components/PDFViewerDialog";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
 const Resources = () => {
   const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
+  const [pdfViewerOpen, setPdfViewerOpen] = useState(false);
+  const [selectedPdf, setSelectedPdf] = useState<{ url: string; title: string } | null>(null);
+
+  const openPdfViewer = (url: string, title: string) => {
+    setSelectedPdf({ url, title });
+    setPdfViewerOpen(true);
+  };
 
   const { data: meetings = [] } = useQuery({
     queryKey: ['resources-meetings'],
@@ -148,12 +156,11 @@ const Resources = () => {
                           <AccordionContent>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 pb-4">
                               {yearMeetings.map((meeting) => (
-                                <a
+                                <button
                                   key={meeting.id}
-                                  href={meeting.minutes_url || "#"}
-                                  target={meeting.minutes_url ? "_blank" : undefined}
-                                  rel={meeting.minutes_url ? "noopener noreferrer" : undefined}
-                                  className="flex items-center justify-between p-5 rounded-xl border-2 bg-background hover:bg-muted hover:border-primary transition-all group shadow-sm"
+                                  onClick={() => meeting.minutes_url && openPdfViewer(meeting.minutes_url, meeting.title)}
+                                  disabled={!meeting.minutes_url}
+                                  className="flex items-center justify-between p-5 rounded-xl border-2 bg-background hover:bg-muted hover:border-primary transition-all group shadow-sm disabled:opacity-50 disabled:cursor-not-allowed text-left w-full"
                                 >
                                   <div className="flex-1 min-w-0">
                                     <p className="font-semibold text-foreground text-sm line-clamp-2">{meeting.title}</p>
@@ -162,11 +169,11 @@ const Resources = () => {
                                     </p>
                                   </div>
                                   {meeting.minutes_url ? (
-                                    <Download className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all ml-2 flex-shrink-0" />
+                                    <FileText className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:scale-110 transition-all ml-2 flex-shrink-0" />
                                   ) : (
                                     <span className="text-xs text-muted-foreground ml-2 flex-shrink-0">Soon</span>
                                   )}
-                                </a>
+                                </button>
                               ))}
                             </div>
                           </AccordionContent>
@@ -313,6 +320,12 @@ const Resources = () => {
       </section>
 
       <NewsletterDialog open={isNewsletterOpen} onOpenChange={setIsNewsletterOpen} />
+      <PDFViewerDialog 
+        open={pdfViewerOpen} 
+        onOpenChange={setPdfViewerOpen}
+        pdfUrl={selectedPdf?.url || null}
+        title={selectedPdf?.title}
+      />
       <Footer />
     </div>
   );
