@@ -8,6 +8,12 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -141,25 +147,28 @@ const BlogPost = () => {
               )}
 
               {/* Article Content */}
-              <Card className="p-8 md:p-12 mb-8 bg-gradient-to-br from-background to-muted/20">
+              <div className="space-y-6 mb-8">
                 <div 
-                  className="blog-content prose prose-lg max-w-none dark:prose-invert
-                    prose-headings:font-bold prose-headings:text-foreground
-                    prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-3 prose-h2:border-b prose-h2:border-primary/20
-                    prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4 prose-h3:text-primary
-                    prose-h4:text-xl prose-h4:mt-6 prose-h4:mb-3
+                  className="newsletter-content prose prose-lg max-w-none dark:prose-invert
+                    prose-headings:font-bold
+                    prose-h1:text-3xl prose-h1:mb-4
+                    prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
+                    prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3
                     prose-p:text-foreground/90 prose-p:leading-relaxed prose-p:mb-4
-                    prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-                    prose-strong:text-foreground prose-strong:font-semibold
-                    prose-ul:my-6 prose-ul:space-y-2
-                    prose-ol:my-6 prose-ol:space-y-2
-                    prose-li:text-foreground/90 prose-li:leading-relaxed
-                    prose-li:marker:text-primary
-                    prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:italic
-                    prose-img:rounded-lg prose-img:shadow-lg prose-img:my-8"
+                    prose-a:text-primary prose-a:underline hover:prose-a:text-primary/80
+                    prose-strong:font-semibold
+                    prose-ul:my-4 prose-ul:space-y-2 prose-ul:list-none prose-ul:pl-0
+                    prose-li:text-foreground/80 prose-li:leading-relaxed prose-li:pl-0 prose-li:before:content-['•'] prose-li:before:mr-2 prose-li:before:text-primary
+                    prose-blockquote:not-italic
+                    prose-img:rounded-xl prose-img:shadow-lg prose-img:my-6
+                    [&_h2]:bg-background [&_h2]:p-4 [&_h2]:rounded-xl [&_h2]:border-l-4 [&_h2]:border-primary [&_h2]:shadow-sm
+                    [&_h3]:text-foreground
+                    [&_p:has(strong:first-child)]:bg-primary/10 [&_p:has(strong:first-child)]:p-4 [&_p:has(strong:first-child)]:rounded-lg [&_p:has(strong:first-child)]:border-l-4 [&_p:has(strong:first-child)]:border-primary
+                    [&_blockquote]:bg-accent/30 [&_blockquote]:p-6 [&_blockquote]:rounded-xl [&_blockquote]:border-l-4 [&_blockquote]:border-accent [&_blockquote]:shadow-sm
+                    [&_ul]:bg-card [&_ul]:p-6 [&_ul]:rounded-xl [&_ul]:shadow-sm"
                   dangerouslySetInnerHTML={{ __html: post.content }}
                 />
-              </Card>
+              </div>
 
               {/* Back to Blog */}
               <div className="text-center">
