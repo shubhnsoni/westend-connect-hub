@@ -16,7 +16,7 @@ interface PDFViewerDialogProps {
 }
 
 const PDFViewerDialog = ({ open, onOpenChange, pdfUrl, title }: PDFViewerDialogProps) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleDownload = () => {
     if (pdfUrl) {
@@ -35,15 +35,29 @@ const PDFViewerDialog = ({ open, onOpenChange, pdfUrl, title }: PDFViewerDialogP
         <DialogHeader className="px-6 pt-6 pb-4 border-b">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-xl">{title || 'Document Viewer'}</DialogTitle>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleDownload}
-              className="gap-2"
-            >
-              <Download className="w-4 h-4" />
-              Download
-            </Button>
+            <div className="flex items-center gap-2">
+              {pdfUrl && (
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  asChild
+                  className="gap-2"
+                >
+                  <a href={pdfUrl} target="_blank" rel="noopener noreferrer">
+                    Open
+                  </a>
+                </Button>
+              )}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleDownload}
+                className="gap-2"
+              >
+                <Download className="w-4 h-4" />
+                Download
+              </Button>
+            </div>
           </div>
         </DialogHeader>
         
@@ -54,12 +68,12 @@ const PDFViewerDialog = ({ open, onOpenChange, pdfUrl, title }: PDFViewerDialogP
             </div>
           )}
           {pdfUrl && (
-            <iframe
-              src={`${pdfUrl}#toolbar=1&navpanes=0`}
-              className="w-full h-full"
-              title={title || 'PDF Document'}
-              onLoad={() => setIsLoading(false)}
-            />
+            <object data={pdfUrl} type="application/pdf" className="w-full h-full" aria-label={title || 'PDF Document'}>
+              <embed src={pdfUrl} type="application/pdf" className="w-full h-full" />
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-6 text-center">
+                <p className="text-sm text-muted-foreground">Preview not available on this device. Use the buttons above to open or download.</p>
+              </div>
+            </object>
           )}
         </div>
       </DialogContent>
