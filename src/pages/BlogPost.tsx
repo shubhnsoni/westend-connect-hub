@@ -8,6 +8,12 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -66,6 +72,38 @@ const BlogPost = () => {
 
   const publishDate = new Date(post.published_at || post.created_at);
   const readTime = Math.ceil(post.content.length / 1000);
+
+  // Parse content into sections for accordion
+  const parseContentSections = (html: string) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const sections: { title: string; content: string }[] = [];
+    let currentSection: { title: string; content: string } | null = null;
+
+    doc.body.childNodes.forEach((node) => {
+      if (node.nodeName === 'H2') {
+        if (currentSection) {
+          sections.push(currentSection);
+        }
+        currentSection = {
+          title: node.textContent || '',
+          content: '',
+        };
+      } else if (currentSection) {
+        const div = document.createElement('div');
+        div.appendChild(node.cloneNode(true));
+        currentSection.content += div.innerHTML;
+      }
+    });
+
+    if (currentSection) {
+      sections.push(currentSection);
+    }
+
+    return sections;
+  };
+
+  const sections = parseContentSections(post.content);
 
   return (
     <>
@@ -142,10 +180,28 @@ const BlogPost = () => {
 
               {/* Article Content */}
               <Card className="p-6 md:p-8 mb-8">
-                <div 
-                  className="prose prose-lg max-w-none dark:prose-invert"
-                  dangerouslySetInnerHTML={{ __html: post.content }}
-                />
+                {sections.length > 1 ? (
+                  <Accordion type="multiple" className="w-full" defaultValue={sections.map((_, i) => `section-${i}`)}>
+                    {sections.map((section, index) => (
+                      <AccordionItem key={index} value={`section-${index}`}>
+                        <AccordionTrigger className="text-xl font-semibold hover:no-underline">
+                          {section.title}
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div 
+                            className="prose prose-lg max-w-none dark:prose-invert pt-4"
+                            dangerouslySetInnerHTML={{ __html: section.content }}
+                          />
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                ) : (
+                  <div 
+                    className="prose prose-lg max-w-none dark:prose-invert"
+                    dangerouslySetInnerHTML={{ __html: post.content }}
+                  />
+                )}
               </Card>
 
               {/* Back to Blog */}
