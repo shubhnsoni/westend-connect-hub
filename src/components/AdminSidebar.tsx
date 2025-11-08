@@ -32,6 +32,7 @@ import { Button } from './ui/button';
 
 const menuItems = [
   { title: 'Dashboard', url: '/admin', icon: LayoutDashboard, end: true },
+  { title: 'AI Assistant', url: '/admin/ai-assistant', icon: MessageSquare },
   { title: 'Blog Posts', url: '/admin/blog', icon: FileText },
   { title: 'Events', url: '/admin/events', icon: Calendar },
   { title: 'Meetings', url: '/admin/meetings', icon: Users },

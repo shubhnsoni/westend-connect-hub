@@ -28,6 +28,7 @@ import NewsletterViewer from "./pages/admin/NewsletterViewer";
 import UserManagement from "./pages/admin/UserManagement";
 import Settings from "./pages/admin/Settings";
 import MigrateResources from "./pages/admin/MigrateResources";
+import AIAssistant from "./pages/admin/AIAssistant";
 import SetupAdmin from "./pages/admin/SetupAdmin";
 
 const queryClient = new QueryClient();
@@ -71,6 +72,7 @@ const App = () => (
           <Route path="/admin/login" element={<Login />} />
           <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
             <Route index element={<Dashboard />} />
+            <Route path="ai-assistant" element={<AIAssistant />} />
             <Route path="blog" element={<BlogManager />} />
             <Route path="events" element={<EventsManager />} />
             <Route path="meetings" element={<MeetingsManager />} />
