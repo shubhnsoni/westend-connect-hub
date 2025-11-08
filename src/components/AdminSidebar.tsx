@@ -12,6 +12,7 @@ import {
   FileDown,
   Bell,
   LogOut,
+  Database,
 } from 'lucide-react';
 import {
   Sidebar,
@@ -40,6 +41,7 @@ const menuItems = [
   { title: 'Newsletter', url: '/admin/newsletter', icon: Mail },
   { title: 'Media Library', url: '/admin/media', icon: Image },
   { title: 'User Management', url: '/admin/users', icon: Users },
+  { title: 'Migrate Resources', url: '/admin/migrate', icon: Database },
   { title: 'Settings', url: '/admin/settings', icon: Settings },
 ];
 

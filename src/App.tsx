@@ -27,6 +27,7 @@ import FeedbackViewer from "./pages/admin/FeedbackViewer";
 import NewsletterViewer from "./pages/admin/NewsletterViewer";
 import UserManagement from "./pages/admin/UserManagement";
 import Settings from "./pages/admin/Settings";
+import MigrateResources from "./pages/admin/MigrateResources";
 
 const queryClient = new QueryClient();
 
@@ -77,6 +78,7 @@ const App = () => (
             <Route path="feedback" element={<FeedbackViewer />} />
             <Route path="newsletter" element={<NewsletterViewer />} />
             <Route path="users" element={<UserManagement />} />
+            <Route path="migrate" element={<MigrateResources />} />
             <Route path="settings" element={<Settings />} />
           </Route>
           
