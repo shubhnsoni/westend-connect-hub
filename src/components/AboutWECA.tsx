@@ -10,10 +10,10 @@ const AboutWECA = () => {
             <span className="text-primary">ABOUT US</span>
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-8">
-            Who We Are
+            About WECA
           </h2>
           <p className="text-xl text-muted-foreground leading-relaxed mb-10 max-w-3xl mx-auto">
-            The West End Civic Association (WECA) represents residents of Rockville's historic West End neighborhood — one of the city's most vibrant, diverse, and community-driven areas. Since 1970, WECA has worked to preserve our heritage, advocate for thoughtful development, and foster civic engagement.
+            The West End Civic Association (WECA) is an all-volunteer, resident-led organization dedicated to keeping neighbors informed about issues that affect our area, advocating for the community's welfare, and fostering a welcoming, connected neighborhood spirit.
           </p>
           <Button variant="default" size="lg" className="rounded-full px-8 py-6 text-base shadow-lg hover:shadow-xl" asChild>
             <a href="/about" className="group">

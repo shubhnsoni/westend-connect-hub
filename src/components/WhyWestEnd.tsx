@@ -43,10 +43,10 @@ const WhyWestEnd = () => {
               <span className="text-primary">WHY WEST END</span>
             </div>
             <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
-              Why Live in Rockville's West End?
+              Why West End?
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Historic charm, walkable streets, lush parks, and a welcoming community
+              Our neighborhood blends historic charm with vibrant residential areas, including West End Park, Rose Hill, Rose Hill Falls, Chestnut Lodge, Thirty Oaks, Courthouse Walk, and other enclaves.
             </p>
           </div>
 

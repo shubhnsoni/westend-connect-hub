@@ -29,11 +29,11 @@ const Hero = () => {
           {/* Headline */}
           <div className="text-center text-white mb-10 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
-              Preserving the Heritage.<br />Shaping the Future.
+              West End Civic Association
             </h1>
             <div className="w-24 h-1 bg-secondary mx-auto mb-6"></div>
             <p className="text-base sm:text-lg lg:text-xl text-white/95 max-w-3xl mx-auto leading-relaxed font-light">
-              The West End Civic Association (WECA) is dedicated to celebrating our history, empowering our residents, and building a stronger, more connected neighborhood for all.
+              The West End is one of Rockville's earliest neighborhoods, spanning more than 700 acres and home to roughly 5,000 residents in 1,600 households. An all-volunteer, resident-led organization dedicated to keeping neighbors informed, advocating for the community's welfare, and fostering a welcoming, connected neighborhood spirit.
             </p>
           </div>
 
@@ -41,7 +41,7 @@ const Hero = () => {
           <div className="text-center mb-10 animate-fade-in" style={{ animationDelay: "0.2s" }}>
             <div className="inline-flex flex-col sm:flex-row items-center gap-2.5 bg-secondary/20 backdrop-blur-md px-5 sm:px-6 py-3 sm:py-3.5 rounded-full border border-secondary/40 shadow-xl">
               <Calendar className="w-5 h-5 text-secondary flex-shrink-0" />
-              <span className="text-white font-semibold text-sm sm:text-base text-center">Next Meeting: Thursday, October 9th @ 7 PM</span>
+              <span className="text-white font-semibold text-sm sm:text-base text-center">Next Meeting: Thursday, November 13, 2025 @ 7 PM</span>
             </div>
           </div>
 

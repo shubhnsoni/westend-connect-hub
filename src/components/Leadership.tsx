@@ -3,8 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Mail, User } from "lucide-react";
 
 const leaders = [
-  { name: "Carol Metzger-Spack", role: "President", email: "westendca.president@gmail.com", initial: "CM" },
+  { name: "Ajay Khetarpal", role: "President", email: "westendcapresident@gmail.com", initial: "AK" },
   { name: "Darlene Pierro", role: "Vice President", email: "westendca.vp@gmail.com", initial: "DP" },
+  { name: "Anika Halota", role: "VP of Outreach", email: "westendoutreach@gmail.com", initial: "AH" },
   { name: "Louise Lovell", role: "Treasurer", email: "westendca.treasurer@gmail.com", initial: "LL" },
   { name: "Kelly Kalepe", role: "Recording Secretary", email: "westendca.recordingsecretary@gmail.com", initial: "KK" },
   { name: "Duane Rollins", role: "Corresponding Secretary", email: "", initial: "DR" },
