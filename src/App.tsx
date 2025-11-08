@@ -28,6 +28,7 @@ import NewsletterViewer from "./pages/admin/NewsletterViewer";
 import UserManagement from "./pages/admin/UserManagement";
 import Settings from "./pages/admin/Settings";
 import MigrateResources from "./pages/admin/MigrateResources";
+import SetupAdmin from "./pages/admin/SetupAdmin";
 
 const queryClient = new QueryClient();
 
@@ -66,6 +67,7 @@ const App = () => (
           <Route path="/media/social" element={<Media />} />
           
           {/* Admin Routes */}
+          <Route path="/admin/setup" element={<SetupAdmin />} />
           <Route path="/admin/login" element={<Login />} />
           <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
             <Route index element={<Dashboard />} />

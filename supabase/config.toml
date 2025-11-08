@@ -1,1 +1,7 @@
 project_id = "nczflpabbbkbdkasaqvg"
+
+[functions.setup-admin]
+verify_jwt = false
+
+[functions.migrate-resources]
+verify_jwt = false
