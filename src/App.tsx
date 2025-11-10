@@ -29,7 +29,7 @@ import UserManagement from "./pages/admin/UserManagement";
 import Settings from "./pages/admin/Settings";
 import MigrateResources from "./pages/admin/MigrateResources";
 import AIAssistant from "./pages/admin/AIAssistant";
-import SetupAdmin from "./pages/admin/SetupAdmin";
+import AdsManager from "./pages/admin/AdsManager";
 
 const queryClient = new QueryClient();
 
@@ -77,6 +77,7 @@ const App = () => (
             <Route path="meetings" element={<MeetingsManager />} />
             <Route path="resources" element={<ResourcesManager />} />
             <Route path="announcements" element={<AnnouncementsManager />} />
+            <Route path="ads" element={<AdsManager />} />
             <Route path="media" element={<MediaLibraryManager />} />
             <Route path="feedback" element={<FeedbackViewer />} />
             <Route path="newsletter" element={<NewsletterViewer />} />

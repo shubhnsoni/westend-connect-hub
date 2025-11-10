@@ -15,6 +15,7 @@ import NewsletterDialog from "@/components/NewsletterDialog";
 import PDFViewerDialog from "@/components/PDFViewerDialog";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import BlogSidebarAds from "@/components/BlogSidebarAds";
 
 const Blog = () => {
   const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
@@ -173,6 +174,9 @@ const Blog = () => {
 
             {/* Sidebar */}
             <div className="lg:col-span-1 space-y-6">
+              {/* Ads */}
+              <BlogSidebarAds />
+              
               {/* Search */}
               <Card>
                 <CardHeader>

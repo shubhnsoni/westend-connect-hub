@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TopAdBanner from "@/components/TopAdBanner";
 import SEO from "@/components/SEO";
+import BlogPostAds from "@/components/BlogPostAds";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, Clock, ArrowLeft } from "lucide-react";
@@ -158,6 +159,9 @@ const BlogPost = () => {
                   dangerouslySetInnerHTML={{ __html: post.content }}
                 />
               </div>
+
+              {/* Blog Post Ads */}
+              <BlogPostAds />
 
               {/* Back to Blog */}
               <div className="text-center">

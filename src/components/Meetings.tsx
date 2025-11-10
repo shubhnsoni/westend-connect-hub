@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, MapPin, Clock, FileText } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import zoomLogo from "@/assets/zoom-logo.png";
 
 const Meetings = () => {
   const { data: nextMeeting } = useQuery({
@@ -79,9 +80,19 @@ const Meetings = () => {
                   <p className="text-sm text-muted-foreground">{nextMeeting.description}</p>
                 )}
 
-                <Button className="w-full mt-4" asChild>
-                  <a href="/events">View All Meetings</a>
-                </Button>
+                <div className="flex gap-2 mt-4">
+                  {nextMeeting.location?.includes('zoom.us') && (
+                    <Button variant="default" className="flex-1" asChild>
+                      <a href={nextMeeting.location} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
+                        <img src={zoomLogo} alt="Zoom" className="w-4 h-4" />
+                        Join Zoom
+                      </a>
+                    </Button>
+                  )}
+                  <Button variant={nextMeeting.location?.includes('zoom.us') ? "outline" : "default"} className="flex-1" asChild>
+                    <a href="/events">View All Meetings</a>
+                  </Button>
+                </div>
               </div>
             </CardContent>
           </Card>

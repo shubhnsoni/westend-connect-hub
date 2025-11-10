@@ -13,6 +13,7 @@ import {
   Bell,
   LogOut,
   Database,
+  MonitorPlay,
 } from 'lucide-react';
 import {
   Sidebar,
@@ -38,6 +39,7 @@ const menuItems = [
   { title: 'Meetings', url: '/admin/meetings', icon: Users },
   { title: 'Resources', url: '/admin/resources', icon: FileDown },
   { title: 'Announcements', url: '/admin/announcements', icon: Bell },
+  { title: 'Ads', url: '/admin/ads', icon: MonitorPlay },
   { title: 'Feedback', url: '/admin/feedback', icon: MessageSquare },
   { title: 'Newsletter', url: '/admin/newsletter', icon: Mail },
   { title: 'Media Library', url: '/admin/media', icon: Image },

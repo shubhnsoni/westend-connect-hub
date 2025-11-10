@@ -69,7 +69,7 @@ const UpcomingEvents = () => {
                       )}
                     </div>
                     {event.description && (
-                      <p className="text-sm text-muted-foreground line-clamp-2">
+                      <p className="text-sm text-muted-foreground">
                         {event.description}
                       </p>
                     )}
