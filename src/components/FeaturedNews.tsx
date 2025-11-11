@@ -49,7 +49,7 @@ const FeaturedNews = () => {
                     <img 
                       src={post.featured_image_url} 
                       alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
                 )}

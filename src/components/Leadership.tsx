@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, User } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const leaders = [
   { name: "Ajay Khetarpal", role: "President", email: "westendcapresident@gmail.com", initial: "AK" },
@@ -10,8 +11,28 @@ const leaders = [
 ];
 
 const Leadership = () => {
-  // Duplicate leaders array for better scrolling experience
-  const duplicatedLeaders = [...leaders, ...leaders];
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll functionality
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const autoScroll = setInterval(() => {
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      const currentScroll = container.scrollLeft;
+      
+      if (currentScroll >= maxScroll - 10) {
+        // Reset to beginning
+        container.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        // Scroll to next card (400px per card including gap)
+        container.scrollBy({ left: 400, behavior: 'smooth' });
+      }
+    }, 5000); // Auto-scroll every 5 seconds
+
+    return () => clearInterval(autoScroll);
+  }, []);
 
   return (
     <div id="leadership" className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,13 +49,14 @@ const Leadership = () => {
           </p>
         </div>
 
-        {/* Manually scrollable carousel */}
+        {/* Auto-scrollable carousel */}
         <div className="relative">
           <div 
+            ref={scrollContainerRef}
             className="flex gap-6 overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory"
             style={{ scrollbarWidth: 'thin' }}
           >
-            {duplicatedLeaders.map((leader, index) => (
+            {leaders.map((leader, index) => (
               <Card 
                 key={index} 
                 className="flex-shrink-0 w-[380px] hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/50 group snap-start"
