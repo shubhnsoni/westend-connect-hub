@@ -4,6 +4,14 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Mail } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { z } from "zod";
+
+const newsletterSchema = z.object({
+  firstName: z.string().trim().min(1, "First name is required").max(50, "First name must be less than 50 characters"),
+  lastName: z.string().trim().min(1, "Last name is required").max(50, "Last name must be less than 50 characters"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters")
+});
 
 interface NewsletterDialogProps {
   open: boolean;
@@ -14,38 +22,69 @@ const NewsletterDialog = ({ open, onOpenChange }: NewsletterDialogProps) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!firstName.trim() || !lastName.trim()) {
-      toast({
-        title: "Missing Information",
-        description: "Please enter your first and last name.",
-        variant: "destructive",
-      });
-      return;
-    }
+    // Validate with Zod schema
+    const validation = newsletterSchema.safeParse({ firstName, lastName, email });
     
-    if (!email || !email.includes("@")) {
+    if (!validation.success) {
+      const firstError = validation.error.errors[0];
       toast({
-        title: "Invalid Email",
-        description: "Please enter a valid email address.",
+        title: "Validation Error",
+        description: firstError.message,
         variant: "destructive",
       });
       return;
     }
 
-    toast({
-      title: "Success!",
-      description: "Thank you for subscribing to our newsletter!",
-    });
-    
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    onOpenChange(false);
+    setIsSubmitting(true);
+
+    try {
+      const fullName = `${validation.data.firstName} ${validation.data.lastName}`;
+      
+      const { error } = await supabase
+        .from('newsletter_subscribers')
+        .insert([{
+          email: validation.data.email,
+          name: fullName,
+        }]);
+
+      if (error) {
+        // Handle duplicate email error gracefully
+        if (error.code === '23505') {
+          toast({
+            title: "Already Subscribed",
+            description: "This email is already subscribed to our newsletter.",
+            variant: "destructive",
+          });
+        } else {
+          throw error;
+        }
+        return;
+      }
+
+      toast({
+        title: "Success!",
+        description: "Thank you for subscribing to our newsletter!",
+      });
+      
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      onOpenChange(false);
+    } catch (error) {
+      toast({
+        title: "Subscription Failed",
+        description: "There was an error subscribing. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -70,6 +109,8 @@ const NewsletterDialog = ({ open, onOpenChange }: NewsletterDialogProps) => {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 className="w-full"
+                maxLength={50}
+                disabled={isSubmitting}
                 required
               />
             </div>
@@ -80,6 +121,8 @@ const NewsletterDialog = ({ open, onOpenChange }: NewsletterDialogProps) => {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 className="w-full"
+                maxLength={50}
+                disabled={isSubmitting}
                 required
               />
             </div>
@@ -91,12 +134,14 @@ const NewsletterDialog = ({ open, onOpenChange }: NewsletterDialogProps) => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full"
+              maxLength={255}
+              disabled={isSubmitting}
               required
             />
           </div>
           
-          <Button type="submit" className="w-full">
-            Subscribe
+          <Button type="submit" className="w-full" disabled={isSubmitting}>
+            {isSubmitting ? "Subscribing..." : "Subscribe"}
           </Button>
         </form>
       </DialogContent>
