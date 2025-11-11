@@ -1,10 +1,11 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import TopAdBanner from "@/components/TopAdBanner";
 import SEO from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MapPin, Users, Home, BookOpen, ScrollText, Heart, Shield, Handshake, Building2, ArrowRight, FileText } from "lucide-react";
+import { MapPin, Users, Home, BookOpen, ScrollText, Heart, Shield, Handshake, Building2, ArrowRight, FileText, Mail, UserCircle } from "lucide-react";
 import heroImage from "@/assets/hero-neighborhood.jpg";
 
 const About = () => {
@@ -15,6 +16,7 @@ const About = () => {
         description="Discover the rich history and vibrant community of Rockville's West End neighborhood - one of the city's earliest and most diverse areas."
       />
       <Header />
+      <TopAdBanner />
 
       {/* Hero Section */}
       <section className="bg-muted/30 pt-24 pb-12">
@@ -236,6 +238,161 @@ const About = () => {
                 Since 1970, WECA has been dedicated to promoting, fostering, and protecting the interests of our community. We work to preserve the general welfare, character, and appearance of the West End while promoting cooperative activities and a friendly spirit within our neighborhood.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Meet the Officers Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="text-sm text-primary font-semibold mb-4 uppercase tracking-wide">LEADERSHIP</div>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+              Meet the <span className="text-primary">Officers</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* President */}
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-primary/10 rounded-lg">
+                    <UserCircle className="w-6 h-6 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <CardTitle className="text-xl mb-1">Ajay Khetarpal</CardTitle>
+                    <p className="text-sm text-primary font-semibold">President</p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Leading WECA with a vision for community engagement and thoughtful development. Committed to preserving the West End's heritage while advocating for residents' interests.
+                </p>
+                <a href="mailto:westendcapresident@gmail.com" className="flex items-center gap-2 text-sm text-primary hover:underline">
+                  <Mail className="w-4 h-4" />
+                  Contact
+                </a>
+              </CardContent>
+            </Card>
+
+            {/* Vice President */}
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-primary/10 rounded-lg">
+                    <UserCircle className="w-6 h-6 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <CardTitle className="text-xl mb-1">Darlene Pierro</CardTitle>
+                    <p className="text-sm text-primary font-semibold">Vice President</p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Fostering community connections and organizing events that bring neighbors together. Passionate about maintaining the West End's welcoming spirit.
+                </p>
+                <a href="mailto:westendca.vp@gmail.com" className="flex items-center gap-2 text-sm text-primary hover:underline">
+                  <Mail className="w-4 h-4" />
+                  Contact
+                </a>
+              </CardContent>
+            </Card>
+
+            {/* Treasurer */}
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-primary/10 rounded-lg">
+                    <UserCircle className="w-6 h-6 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <CardTitle className="text-xl mb-1">Louise Lovell</CardTitle>
+                    <p className="text-sm text-primary font-semibold">Treasurer</p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Managing WECA's finances with transparency and care. Ensuring resources are used effectively for community benefit.
+                </p>
+                <a href="mailto:westendca.treasurer@gmail.com" className="flex items-center gap-2 text-sm text-primary hover:underline">
+                  <Mail className="w-4 h-4" />
+                  Contact
+                </a>
+              </CardContent>
+            </Card>
+
+            {/* Corresponding Secretary */}
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-primary/10 rounded-lg">
+                    <UserCircle className="w-6 h-6 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <CardTitle className="text-xl mb-1">Duane Rollins</CardTitle>
+                    <p className="text-sm text-primary font-semibold">Corresponding Secretary</p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Managing external communications and keeping the community informed about important updates and opportunities.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Recording Secretary */}
+            <Card className="hover:shadow-lg transition-shadow">
+              <CardHeader>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-primary/10 rounded-lg">
+                    <UserCircle className="w-6 h-6 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <CardTitle className="text-xl mb-1">Kelly Kalepe</CardTitle>
+                    <p className="text-sm text-primary font-semibold">Recording Secretary</p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Documenting WECA meetings and maintaining accurate records of our community's decisions and discussions.
+                </p>
+                <a href="mailto:westendca.recordingsecretary@gmail.com" className="flex items-center gap-2 text-sm text-primary hover:underline">
+                  <Mail className="w-4 h-4" />
+                  Contact
+                </a>
+              </CardContent>
+            </Card>
+
+            {/* 2nd VP Outreach - Seeking */}
+            <Card className="hover:shadow-lg transition-shadow border-2 border-dashed border-primary/50 bg-primary/5">
+              <CardHeader>
+                <div className="flex items-start gap-4">
+                  <div className="p-3 bg-primary/10 rounded-lg">
+                    <UserCircle className="w-6 h-6 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <CardTitle className="text-xl mb-1">Seeking Applicants</CardTitle>
+                    <p className="text-sm text-primary font-semibold">2nd VP Outreach</p>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground mb-4">
+                  We're looking for a dedicated volunteer to serve as 2nd VP of Outreach. Help us expand community engagement and connection.
+                </p>
+                <Button asChild size="sm" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                  <a href="mailto:wecaoutreach@gmail.com?subject=Interest in 2nd VP Outreach Position">
+                    Express Interest
+                  </a>
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>

@@ -4,15 +4,15 @@ import { Card } from "@/components/ui/card";
 
 const BlogPostAds = () => {
   const { data: ads = [] } = useQuery({
-    queryKey: ['blog-post-ads'],
+    queryKey: ['blog-post-sidebar-ads'],
     queryFn: async () => {
       const { data, error } = await supabase
         .from('ads')
         .select('*')
-        .eq('placement', 'blog-post')
+        .eq('placement', 'blog-post-sidebar')
         .eq('is_active', true)
         .order('display_order', { ascending: true })
-        .limit(2);
+        .limit(3);
       
       if (error) throw error;
       return data || [];
@@ -22,7 +22,7 @@ const BlogPostAds = () => {
   if (ads.length === 0) return null;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8">
+    <div className="space-y-6 sticky top-24">
       {ads.map((ad) => (
         <a
           key={ad.id}
@@ -31,11 +31,11 @@ const BlogPostAds = () => {
           rel={ad.link_url ? "noopener noreferrer" : undefined}
           className="block"
         >
-          <Card className="h-48 overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
+          <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
             <img 
               src={ad.image_url} 
               alt={ad.title} 
-              className="w-full h-full object-cover"
+              className="w-full h-auto object-cover"
             />
           </Card>
         </a>

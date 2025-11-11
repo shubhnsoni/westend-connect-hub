@@ -157,6 +157,7 @@ export type Database = {
           registration_url: string | null
           start_date: string
           status: string
+          submitted_by: string | null
           title: string
           updated_at: string
         }
@@ -173,6 +174,7 @@ export type Database = {
           registration_url?: string | null
           start_date: string
           status?: string
+          submitted_by?: string | null
           title: string
           updated_at?: string
         }
@@ -189,10 +191,19 @@ export type Database = {
           registration_url?: string | null
           start_date?: string
           status?: string
+          submitted_by?: string | null
           title?: string
           updated_at?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "events_submitted_by_fkey"
+            columns: ["submitted_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       feedback: {
         Row: {

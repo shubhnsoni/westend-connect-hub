@@ -221,10 +221,12 @@ const AdsManager = () => {
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="small">Small (128px)</SelectItem>
-                      <SelectItem value="medium">Medium (192px)</SelectItem>
-                      <SelectItem value="large">Large (256px)</SelectItem>
-                      <SelectItem value="banner">Banner (160px)</SelectItem>
+                      <SelectItem value="small">Small (300x250px)</SelectItem>
+                      <SelectItem value="medium">Medium (728x90px)</SelectItem>
+                      <SelectItem value="large">Large (970x250px)</SelectItem>
+                      <SelectItem value="banner">Banner (468x60px)</SelectItem>
+                      <SelectItem value="sidebar">Sidebar (300x600px)</SelectItem>
+                      <SelectItem value="square">Square (250x250px)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -238,7 +240,9 @@ const AdsManager = () => {
                     <SelectContent>
                       <SelectItem value="blog-sidebar">Blog Sidebar</SelectItem>
                       <SelectItem value="blog-post">Blog Post</SelectItem>
+                      <SelectItem value="blog-post-sidebar">Blog Post Sidebar</SelectItem>
                       <SelectItem value="home-sidebar">Home Sidebar</SelectItem>
+                      <SelectItem value="banner">Top Banner</SelectItem>
                       <SelectItem value="general">General</SelectItem>
                     </SelectContent>
                   </Select>

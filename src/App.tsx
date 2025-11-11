@@ -8,6 +8,8 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Events from "./pages/Events";
+import Priorities from "./pages/Priorities";
+import Support from "./pages/Support";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Resources from "./pages/Resources";
@@ -46,6 +48,8 @@ const App = () => (
           <Route path="/about/neighborhood" element={<About />} />
           <Route path="/about/weca" element={<About />} />
           <Route path="/about/board" element={<About />} />
+          <Route path="/priorities" element={<Priorities />} />
+          <Route path="/support" element={<Support />} />
           <Route path="/events" element={<Events />} />
           <Route path="/events/calendar" element={<Events />} />
           <Route path="/events/upcoming" element={<Events />} />
