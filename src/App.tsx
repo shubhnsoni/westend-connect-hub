@@ -16,6 +16,14 @@ import Resources from "./pages/Resources";
 import GetInvolved from "./pages/GetInvolved";
 import Media from "./pages/Media";
 import NotFound from "./pages/NotFound";
+import SupportAdvertise from "./pages/SupportAdvertise";
+import SupportSponsor from "./pages/SupportSponsor";
+import SupportContribute from "./pages/SupportContribute";
+import ResourcesWECA from "./pages/ResourcesWECA";
+import ResourcesArchives from "./pages/ResourcesArchives";
+import ResourcesCityServices from "./pages/ResourcesCityServices";
+import NewsUpdates from "./pages/NewsUpdates";
+import NewsNewsletters from "./pages/NewsNewsletters";
 import Login from "./pages/admin/Login";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
@@ -50,15 +58,22 @@ const App = () => (
           <Route path="/about/board" element={<About />} />
           <Route path="/priorities" element={<Priorities />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/support/advertise" element={<SupportAdvertise />} />
+          <Route path="/support/sponsor" element={<SupportSponsor />} />
+          <Route path="/support/contribute" element={<SupportContribute />} />
           <Route path="/events" element={<Events />} />
           <Route path="/events/calendar" element={<Events />} />
           <Route path="/events/upcoming" element={<Events />} />
           <Route path="/events/minutes" element={<Events />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/news/updates" element={<NewsUpdates />} />
+          <Route path="/news/newsletters" element={<NewsNewsletters />} />
           <Route path="/newsletters" element={<Blog />} />
           <Route path="/resources" element={<Resources />} />
-          <Route path="/resources/city-services" element={<Resources />} />
+          <Route path="/resources/weca" element={<ResourcesWECA />} />
+          <Route path="/resources/archives" element={<ResourcesArchives />} />
+          <Route path="/resources/city-services" element={<ResourcesCityServices />} />
           <Route path="/resources/planning" element={<Resources />} />
           <Route path="/resources/forms" element={<Resources />} />
           <Route path="/get-involved" element={<GetInvolved />} />

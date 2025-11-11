@@ -21,84 +21,84 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo Section */}
-          <a href="/" className="flex items-center gap-3">
+          <a href="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <img 
               src={treeIcon} 
               alt="WECA Logo" 
-              className="h-14 w-14 object-contain"
+              className="h-10 w-10 sm:h-14 sm:w-14 object-contain"
             />
             <div className="flex flex-col">
-              <span className="text-2xl sm:text-3xl font-cormorant font-bold text-primary leading-none font-cantata">
+              <span className="text-lg sm:text-2xl md:text-3xl font-cormorant font-bold text-primary leading-none font-cantata">
                 west end
               </span>
-              <span className="text-xs sm:text-sm font-sans font-semibold text-primary uppercase tracking-widest leading-none mt-0.5">
+              <span className="text-[10px] sm:text-xs md:text-sm font-sans font-semibold text-primary uppercase tracking-wide sm:tracking-widest leading-none mt-0.5">
                 civic association
               </span>
             </div>
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center space-x-1">
             <GlobalSearch />
-            <a href="/about" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
+            <a href="/about" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
               About
             </a>
-            <a href="/priorities" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted font-cantata">
+            <a href="/priorities" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted font-cantata">
               WECA Priorities
             </a>
-            <a href="/events" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
+            <a href="/events" className="px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
               Events
             </a>
             
             {/* News Dropdown */}
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
+              <DropdownMenuTrigger className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
                 News <ChevronDown className="w-4 h-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background border-border">
+              <DropdownMenuContent className="bg-background border-border z-[60]">
                 <DropdownMenuItem asChild>
-                  <a href="/blog?filter=updates" className="cursor-pointer">Updates</a>
+                  <a href="/news/updates" className="cursor-pointer">Updates</a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <a href="/blog?filter=newsletter" className="cursor-pointer">Newsletter</a>
+                  <a href="/news/newsletters" className="cursor-pointer">Newsletters</a>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
             {/* Resources Dropdown */}
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
+              <DropdownMenuTrigger className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
                 Resources <ChevronDown className="w-4 h-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background border-border">
+              <DropdownMenuContent className="bg-background border-border z-[60]">
                 <DropdownMenuItem asChild>
-                  <a href="/resources#weca" className="cursor-pointer"><span className="font-cantata">WECA</span> Resources</a>
+                  <a href="/resources/weca" className="cursor-pointer"><span className="font-cantata">WECA</span> Resources</a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <a href="/resources#archives" className="cursor-pointer">Documents and Archives</a>
+                  <a href="/resources/archives" className="cursor-pointer">Documents and Archives</a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <a href="/resources#city" className="cursor-pointer">City of Rockville Resources</a>
+                  <a href="/resources/city-services" className="cursor-pointer">City of Rockville Resources</a>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
             {/* Support WECA Dropdown */}
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted font-cantata">
+              <DropdownMenuTrigger className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted font-cantata">
                 Support WECA <ChevronDown className="w-4 h-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-background border-border">
+              <DropdownMenuContent className="bg-background border-border z-[60]">
                 <DropdownMenuItem asChild>
-                  <a href="/support#advertise" className="cursor-pointer">Advertise with us</a>
+                  <a href="/support/advertise" className="cursor-pointer">Advertise with us</a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <a href="/support#sponsor" className="cursor-pointer">Sponsor an event</a>
+                  <a href="/support/sponsor" className="cursor-pointer">Sponsor an event</a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <a href="/support#contribute" className="cursor-pointer">Contribute to <span className="font-cantata">WECA</span></a>
+                  <a href="/support/contribute" className="cursor-pointer">Contribute to <span className="font-cantata">WECA</span></a>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -117,7 +117,7 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+            className="lg:hidden p-2 text-foreground hover:text-primary transition-colors flex-shrink-0"
           >
             <Menu className="w-6 h-6" />
           </button>
@@ -125,7 +125,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border animate-fade-in">
+          <div className="lg:hidden py-4 border-t border-border animate-fade-in">
             <nav className="flex flex-col space-y-2">
               <a href="/about" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors">
                 About
@@ -139,24 +139,24 @@ const Header = () => {
               <div className="px-4 py-2">
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">News</p>
                 <div className="pl-4 space-y-2">
-                  <a href="/blog?filter=updates" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
+                  <a href="/news/updates" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
                     Updates
                   </a>
-                  <a href="/blog?filter=newsletter" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
-                    Newsletter
+                  <a href="/news/newsletters" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
+                    Newsletters
                   </a>
                 </div>
               </div>
               <div className="px-4 py-2">
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Resources</p>
                 <div className="pl-4 space-y-2">
-                  <a href="/resources#weca" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
+                  <a href="/resources/weca" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
                     <span className="font-cantata">WECA</span> Resources
                   </a>
-                  <a href="/resources#archives" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
+                  <a href="/resources/archives" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
                     Documents and Archives
                   </a>
-                  <a href="/resources#city" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
+                  <a href="/resources/city-services" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
                     City of Rockville Resources
                   </a>
                 </div>
@@ -164,13 +164,13 @@ const Header = () => {
               <div className="px-4 py-2">
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2 font-cantata">Support WECA</p>
                 <div className="pl-4 space-y-2">
-                  <a href="/support#advertise" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
+                  <a href="/support/advertise" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
                     Advertise with us
                   </a>
-                  <a href="/support#sponsor" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
+                  <a href="/support/sponsor" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
                     Sponsor an event
                   </a>
-                  <a href="/support#contribute" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
+                  <a href="/support/contribute" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
                     Contribute to <span className="font-cantata">WECA</span>
                   </a>
                 </div>
