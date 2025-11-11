@@ -11,6 +11,7 @@ import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import DOMPurify from "dompurify";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -135,18 +136,22 @@ const BlogPost = () => {
 
                   {/* Article Content with Newsletter Styling */}
                   <div className="space-y-4 mb-8">
-                    <div 
-                      className="newsletter-content prose prose-lg max-w-none dark:prose-invert
-                        prose-headings:font-bold
-                        prose-h1:text-2xl prose-h1:md:text-3xl prose-h1:mb-3 prose-h1:bg-card prose-h1:p-4 prose-h1:md:p-6 prose-h1:rounded-xl prose-h1:border-l-4 prose-h1:border-primary prose-h1:shadow-sm
-                        prose-h2:text-xl prose-h2:md:text-2xl prose-h2:mt-6 prose-h2:mb-3 prose-h2:bg-primary/5 prose-h2:dark:bg-primary/10 prose-h2:p-3 prose-h2:md:p-4 prose-h2:rounded-lg prose-h2:border-l-4 prose-h2:border-primary
-                        prose-h3:text-lg prose-h3:md:text-xl prose-h3:mt-4 prose-h3:mb-2 prose-h3:text-primary prose-h3:font-semibold
-                        prose-p:text-sm prose-p:md:text-base prose-p:text-foreground/90 prose-p:leading-relaxed prose-p:mb-3
-                        prose-a:text-primary prose-a:underline prose-a:break-words hover:prose-a:text-primary/80
-                        prose-strong:font-semibold prose-strong:text-foreground
-                        prose-ul:my-3 prose-ul:space-y-1.5 prose-ul:list-none prose-ul:pl-0 prose-ul:bg-card prose-ul:p-4 prose-ul:md:p-6 prose-ul:rounded-xl prose-ul:shadow-sm
-                        prose-ol:my-3 prose-ol:space-y-1.5 prose-ol:bg-card prose-ol:p-4 prose-ol:md:p-6 prose-ol:rounded-xl prose-ol:shadow-sm
-                        prose-li:text-sm prose-li:md:text-base prose-li:text-foreground/80 prose-li:leading-relaxed prose-li:pl-0 prose-li:before:content-['•'] prose-li:before:mr-2 prose-li:before:text-primary prose-li:before:font-bold
+                    <div
+                      className="prose prose-sm sm:prose-base md:prose-lg max-w-none
+                        text-foreground
+                        prose-headings:text-foreground prose-headings:font-semibold prose-headings:mb-4
+                        prose-h1:text-3xl prose-h1:md:text-4xl prose-h1:mb-6 prose-h1:bg-gradient-to-r prose-h1:from-primary prose-h1:to-primary/70 prose-h1:bg-clip-text prose-h1:text-transparent
+                        prose-h2:text-2xl prose-h2:md:text-3xl prose-h2:mt-6 prose-h2:mb-4 prose-h2:pb-2 prose-h2:border-b-2 prose-h2:border-primary/20
+                        prose-h3:text-xl prose-h3:md:text-2xl prose-h3:mt-4 prose-h3:mb-3
+                        prose-p:text-base prose-p:md:text-lg prose-p:leading-relaxed prose-p:mb-4 prose-p:text-muted-foreground
+                        prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+                        prose-strong:text-foreground prose-strong:font-semibold
+                        prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-4 prose-ul:text-muted-foreground prose-ul:space-y-2
+                        prose-ol:list-decimal prose-ol:pl-6 prose-ol:mb-4 prose-ol:text-muted-foreground prose-ol:space-y-2
+                        prose-li:text-base prose-li:md:text-lg
+                        prose-code:bg-accent prose-code:px-2 prose-code:py-1 prose-code:rounded prose-code:text-sm prose-code:text-foreground
+                        prose-pre:bg-accent prose-pre:p-4 prose-pre:md:p-6 prose-pre:rounded-lg prose-pre:md:rounded-xl prose-pre:overflow-x-auto prose-pre:shadow-lg prose-pre:my-4
+                        prose-blockquote:text-muted-foreground prose-blockquote:italic
                         prose-blockquote:not-italic prose-blockquote:border-l-4 prose-blockquote:pl-4 prose-blockquote:md:pl-6
                         prose-img:rounded-lg prose-img:md:rounded-xl prose-img:shadow-lg prose-img:my-4 prose-img:w-full prose-img:h-auto prose-img:max-w-full prose-img:object-contain
                         [&_h2]:shadow-sm [&_h2]:text-foreground
@@ -157,7 +162,13 @@ const BlogPost = () => {
                         [&_.event-box]:bg-accent/20 [&_.event-box]:dark:bg-accent/30 [&_.event-box]:p-4 [&_.event-box]:md:p-6 [&_.event-box]:rounded-xl [&_.event-box]:border-l-4 [&_.event-box]:border-accent [&_.event-box]:shadow-md [&_.event-box]:my-4
                         [&_.warning-box]:bg-orange-100 [&_.warning-box]:dark:bg-orange-900/20 [&_.warning-box]:p-4 [&_.warning-box]:md:p-6 [&_.warning-box]:rounded-xl [&_.warning-box]:border-l-4 [&_.warning-box]:border-orange-500 [&_.warning-box]:shadow-md [&_.warning-box]:my-4
                         [&_table]:overflow-x-auto [&_table]:block [&_table]:w-full"
-                      dangerouslySetInnerHTML={{ __html: post.content }}
+                      dangerouslySetInnerHTML={{ 
+                        __html: DOMPurify.sanitize(post.content, {
+                          ALLOWED_TAGS: ['p', 'br', 'strong', 'em', 'u', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'ul', 'ol', 'li', 'a', 'img', 'blockquote', 'code', 'pre', 'table', 'thead', 'tbody', 'tr', 'td', 'th', 'div', 'span'],
+                          ALLOWED_ATTR: ['href', 'src', 'alt', 'title', 'class', 'id', 'target', 'rel'],
+                          ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|sms|cid|xmpp):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+                        })
+                      }}
                     />
                   </div>
 
