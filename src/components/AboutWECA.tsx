@@ -10,7 +10,7 @@ const AboutWECA = () => {
             <span className="text-primary">ABOUT US</span>
           </div>
           <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-8">
-            <span className="font-monomakh">About WECA</span>
+            <span className="font-cantata">About WECA</span>
           </h2>
           <p className="text-xl text-muted-foreground leading-relaxed mb-10 max-w-3xl mx-auto">
             The West End Civic Association (WECA) is an all-volunteer, resident-led organization dedicated to keeping neighbors informed about issues that affect our area, advocating for the community's welfare, and fostering a welcoming, connected neighborhood spirit.

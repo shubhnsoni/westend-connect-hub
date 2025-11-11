@@ -30,7 +30,7 @@ const Header = () => {
               className="h-14 w-14 object-contain"
             />
             <div className="flex flex-col">
-              <span className="text-2xl sm:text-3xl font-cormorant font-bold text-primary leading-none font-monomakh">
+              <span className="text-2xl sm:text-3xl font-cormorant font-bold text-primary leading-none font-cantata">
                 west end
               </span>
               <span className="text-xs sm:text-sm font-sans font-semibold text-primary uppercase tracking-widest leading-none mt-0.5">
@@ -45,7 +45,7 @@ const Header = () => {
             <a href="/about" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
               About
             </a>
-            <a href="/priorities" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted font-monomakh">
+            <a href="/priorities" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted font-cantata">
               WECA Priorities
             </a>
             <a href="/events" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted">
@@ -74,7 +74,7 @@ const Header = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-background border-border">
                 <DropdownMenuItem asChild>
-                  <a href="/resources#weca" className="cursor-pointer"><span className="font-monomakh">WECA</span> Resources</a>
+                  <a href="/resources#weca" className="cursor-pointer"><span className="font-cantata">WECA</span> Resources</a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <a href="/resources#archives" className="cursor-pointer">Documents and Archives</a>
@@ -87,7 +87,7 @@ const Header = () => {
 
             {/* Support WECA Dropdown */}
             <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted font-monomakh">
+              <DropdownMenuTrigger className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors rounded-md hover:bg-muted font-cantata">
                 Support WECA <ChevronDown className="w-4 h-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-background border-border">
@@ -98,7 +98,7 @@ const Header = () => {
                   <a href="/support#sponsor" className="cursor-pointer">Sponsor an event</a>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <a href="/support#contribute" className="cursor-pointer">Contribute to <span className="font-monomakh">WECA</span></a>
+                  <a href="/support#contribute" className="cursor-pointer">Contribute to <span className="font-cantata">WECA</span></a>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -130,7 +130,7 @@ const Header = () => {
               <a href="/about" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors">
                 About
               </a>
-              <a href="/priorities" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors font-monomakh">
+              <a href="/priorities" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors font-cantata">
                 WECA Priorities
               </a>
               <a href="/events" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors">
@@ -151,7 +151,7 @@ const Header = () => {
                 <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Resources</p>
                 <div className="pl-4 space-y-2">
                   <a href="/resources#weca" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
-                    <span className="font-monomakh">WECA</span> Resources
+                    <span className="font-cantata">WECA</span> Resources
                   </a>
                   <a href="/resources#archives" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
                     Documents and Archives
@@ -162,7 +162,7 @@ const Header = () => {
                 </div>
               </div>
               <div className="px-4 py-2">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2 font-monomakh">Support WECA</p>
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2 font-cantata">Support WECA</p>
                 <div className="pl-4 space-y-2">
                   <a href="/support#advertise" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
                     Advertise with us
@@ -171,7 +171,7 @@ const Header = () => {
                     Sponsor an event
                   </a>
                   <a href="/support#contribute" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
-                    Contribute to <span className="font-monomakh">WECA</span>
+                    Contribute to <span className="font-cantata">WECA</span>
                   </a>
                 </div>
               </div>

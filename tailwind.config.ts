@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         'cormorant': ['Cormorant Garamond', 'serif'],
-        'monomakh': ['Monomakh Sans', 'sans-serif'],
+        'cantata': ['Cantata One', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
