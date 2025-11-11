@@ -15,9 +15,9 @@ const Newsletter = () => {
             <div className="w-16 h-16 bg-secondary/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6">
               <Mail className="w-8 h-8 text-secondary" />
             </div>
-            <h2 className="text-4xl font-bold mb-4">Stay Connected with WECA</h2>
+            <h2 className="text-4xl font-bold mb-4">Stay Connected with <span className="font-monomakh">WECA</span></h2>
             <p className="text-xl text-primary-foreground/90 max-w-2xl mx-auto">
-              Get news and information about the neighborhood and notice of WECA meetings delivered to your inbox
+              Get news and information about the neighborhood and notice of <span className="font-monomakh">WECA</span> meetings delivered to your inbox
             </p>
           </div>
 
@@ -41,10 +41,10 @@ const Newsletter = () => {
 
           <div className="mt-12 text-center animate-fade-in">
             <p className="text-primary-foreground/90 mb-4">
-              WECA is a volunteer organization. We greatly appreciate and rely on contributions to facilitate the work we do.
+              <span className="font-monomakh">WECA</span> is a volunteer organization. We greatly appreciate and rely on contributions to facilitate the work we do.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button variant="secondary" size="lg">
+              <Button variant="secondary" size="lg" className="font-monomakh">
                 Support WECA
               </Button>
               <span className="text-sm text-primary-foreground/80">

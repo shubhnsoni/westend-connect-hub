@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         'cormorant': ['Cormorant Garamond', 'serif'],
+        'monomakh': ['Monomakh Sans', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

@@ -49,7 +49,7 @@ const Contact = () => {
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                West End Civic Association<br />
+                <span className="font-monomakh">West End</span> Civic Association<br />
                 P.O. Box 1052<br />
                 Rockville, MD 20849
               </p>
@@ -85,7 +85,7 @@ const Contact = () => {
                 Want to Get Involved?
               </h3>
               <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                WECA is a volunteer organization. We greatly appreciate and rely on contributions to facilitate the work we do. To support WECA, contribute via Zelle: WECAoutreach@gmail.com. We welcome neighbors who want to contribute their time, ideas, and energy to make our community even better.
+                <span className="font-monomakh">WECA</span> is a volunteer organization. We greatly appreciate and rely on contributions to facilitate the work we do. To support <span className="font-monomakh">WECA</span>, contribute via Zelle: WECAoutreach@gmail.com. We welcome neighbors who want to contribute their time, ideas, and energy to make our community even better.
               </p>
               <a 
                 href="mailto:WECAoutreach@gmail.com?subject=I want to volunteer"

@@ -26,7 +26,7 @@ const Footer = () => {
             <CardContent className="p-8 text-center">
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Heart className="w-8 h-8 text-primary-foreground" />
-                <h2 className="text-3xl font-cormorant font-bold text-primary-foreground">
+                <h2 className="text-3xl font-cormorant font-bold text-primary-foreground font-monomakh">
                   Support WECA
                 </h2>
               </div>
@@ -59,7 +59,7 @@ const Footer = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
               {/* About Column */}
               <div>
-                <h3 className="text-xl font-bold mb-4">West End Civic Association</h3>
+                <h3 className="text-xl font-bold mb-4 font-monomakh">West End Civic Association</h3>
                 <p className="text-background/80 text-sm leading-relaxed">
                   An all-volunteer, resident-led organization dedicated to keeping neighbors informed 
                   and fostering a welcoming, connected neighborhood spirit.
@@ -73,7 +73,7 @@ const Footer = () => {
                   <div className="flex items-start gap-2">
                     <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
                     <span className="text-background/80">
-                      West End Civic Association<br />
+                      <span className="font-monomakh">West End</span> Civic Association<br />
                       P.O. Box 1052<br />
                       Rockville, MD 20849
                     </span>
@@ -143,7 +143,7 @@ const Footer = () => {
             <div className="border-t border-background/20 pt-8">
               <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                 <p className="text-background/60 text-sm">
-                  © {new Date().getFullYear()} West End Civic Association. All rights reserved.
+                  © {new Date().getFullYear()} <span className="font-monomakh">West End</span> Civic Association. All rights reserved.
                 </p>
                 <div className="flex items-center gap-4">
                   <a 
