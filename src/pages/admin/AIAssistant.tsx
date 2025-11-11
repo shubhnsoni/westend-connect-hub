@@ -7,6 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Send, Sparkles, Copy, Loader2, Image as ImageIcon, FileText } from "lucide-react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 type Message = {
   role: "user" | "assistant";
@@ -43,6 +44,12 @@ const AIAssistant = () => {
   const streamChat = async (userMessage: Message) => {
     const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/admin-ai-assistant`;
     
+    // Get user session for authentication
+    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+    if (sessionError || !session) {
+      throw new Error("You must be logged in to use the AI assistant");
+    }
+    
     let messageContext = userMessage.content;
     if (uploadedImage) {
       messageContext = `[User uploaded an image] ${messageContext}\n\nPlease generate content that could be related to or inspired by the uploaded image.`;
@@ -52,7 +59,7 @@ const AIAssistant = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+        Authorization: `Bearer ${session.access_token}`,
       },
       body: JSON.stringify({
         messages: [...messages, { ...userMessage, content: messageContext }],
