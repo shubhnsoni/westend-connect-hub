@@ -24,7 +24,7 @@ const UpcomingEvents = () => {
     <div className="animate-fade-in h-full flex flex-col">
       <div className="mb-8">
         <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-3">
-          What's Happening Next
+          Events & Meetings
         </h2>
         <p className="text-lg text-muted-foreground">
           Mark your calendar for upcoming events

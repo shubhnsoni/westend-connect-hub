@@ -6,13 +6,12 @@ import AboutWECA from "@/components/AboutWECA";
 import QuickLinks from "@/components/QuickLinks";
 import FeaturedNews from "@/components/FeaturedNews";
 import UpcomingEvents from "@/components/UpcomingEvents";
-import WhyWestEnd from "@/components/WhyWestEnd";
-import SocialFeed from "@/components/SocialFeed";
 import Meetings from "@/components/Meetings";
 import Announcements from "@/components/Announcements";
 import Leadership from "@/components/Leadership";
-import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import FooterAdBanner from "@/components/FooterAdBanner";
+import SectionDivider from "@/components/SectionDivider";
 import SEO from "@/components/SEO";
 
 const Index = () => {
@@ -23,7 +22,6 @@ const Index = () => {
         <Header />
         <div className="pt-20">
           <AnnouncementBar />
-          <TopAdBanner />
         </div>
       
       <main className="relative">
@@ -33,11 +31,18 @@ const Index = () => {
         {/* Primary Actions - Immediate navigation */}
         <QuickLinks />
         
+        <SectionDivider />
+        
         {/* About Section - Who we are */}
         <AboutWECA />
         
+        {/* Master Ad below About WECA */}
+        <TopAdBanner />
+        
+        <SectionDivider />
+        
         {/* Announcements Section */}
-        <section className="py-24 bg-background">
+        <section className="py-16 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
               <Announcements />
@@ -45,8 +50,10 @@ const Index = () => {
           </div>
         </section>
         
-        {/* Timely Information - What's happening */}
-        <section className="bg-muted/20 py-24">
+        <SectionDivider />
+        
+        {/* Events & Meetings - What's happening */}
+        <section className="bg-muted/20 py-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
               <UpcomingEvents />
@@ -55,25 +62,21 @@ const Index = () => {
           </div>
         </section>
         
+        <SectionDivider />
+        
         {/* Featured Content - Latest news and stories */}
         <FeaturedNews />
         
-        {/* Why West End - Community showcase */}
-        <WhyWestEnd />
+        <SectionDivider />
         
         {/* Leadership - Meet the team */}
-        <section className="py-24 bg-gradient-to-b from-background to-muted/30">
+        <section className="py-16 bg-gradient-to-b from-background to-muted/30">
           <Leadership />
         </section>
-        
-        {/* Social Engagement */}
-        <SocialFeed />
-        
-        {/* Contact - Get in touch */}
-        <section className="py-24 bg-primary/5">
-          <Contact />
-        </section>
       </main>
+      
+      {/* Advertiser Ad above Footer */}
+      <FooterAdBanner />
       
       <Footer />
       </div>
