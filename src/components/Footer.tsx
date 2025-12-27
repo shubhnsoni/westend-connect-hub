@@ -111,6 +111,11 @@ const Footer = () => {
                       Resources
                     </a>
                   </li>
+                  <li>
+                    <a href="/support/contribute" className="text-background/80 hover:text-background transition-colors">
+                      Contribute
+                    </a>
+                  </li>
                 </ul>
               </div>
 
