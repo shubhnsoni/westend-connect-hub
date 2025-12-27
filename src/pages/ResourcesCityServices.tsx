@@ -1,10 +1,12 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TopAdBanner from "@/components/TopAdBanner";
+import FooterAdBanner from "@/components/FooterAdBanner";
+import EventsTicker from "@/components/EventsTicker";
 import SEO from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Building2, ExternalLink, Phone, Mail, MapPin, FileText, Trash2, Droplets } from "lucide-react";
+import { Building2, ExternalLink, Phone, MapPin, Trash2, Droplets } from "lucide-react";
 
 const ResourcesCityServices = () => {
   return (
@@ -22,13 +24,15 @@ const ResourcesCityServices = () => {
           <TopAdBanner />
         </div>
         
-        <main className="flex-grow pt-8">
+        <EventsTicker />
+        
+        <main className="flex-grow pt-4">
           {/* Hero Section */}
           <section className="relative py-12 sm:py-16 bg-gradient-to-b from-primary/5 to-background">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-4xl mx-auto text-center">
                 <Building2 className="w-16 h-16 mx-auto mb-6 text-primary" />
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-cormorant font-bold text-foreground mb-6 animate-fade-in">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-cormorant font-bold text-foreground mb-4 animate-fade-in">
                   City of Rockville Resources
                 </h1>
                 <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in">
@@ -39,14 +43,14 @@ const ResourcesCityServices = () => {
           </section>
 
           {/* Main Content */}
-          <section className="py-12 sm:py-16">
+          <section className="py-8 sm:py-12">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-6xl mx-auto space-y-12">
+              <div className="max-w-5xl mx-auto space-y-8">
                 
                 {/* Quick Contacts */}
                 <div>
-                  <h2 className="text-3xl font-cormorant font-bold mb-6">City Contact Information</h2>
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <h2 className="text-2xl font-cormorant font-bold mb-4">City Contact Information</h2>
+                  <div className="grid md:grid-cols-2 gap-4">
                     <Card className="hover:shadow-lg transition-shadow">
                       <CardHeader>
                         <CardTitle className="flex items-center gap-2">
@@ -82,12 +86,12 @@ const ResourcesCityServices = () => {
                   </div>
                 </div>
 
-                {/* City Services */}
+                {/* Essential Services */}
                 <div>
-                  <h2 className="text-3xl font-cormorant font-bold mb-6">City Services</h2>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <h2 className="text-2xl font-cormorant font-bold mb-4">Essential Services</h2>
+                  <div className="grid md:grid-cols-2 gap-4">
                     
-                    <Card className="hover:shadow-lg transition-shadow">
+                    <Card className="hover:shadow-lg transition-shadow border-l-4 border-l-primary">
                       <CardHeader>
                         <CardTitle className="flex items-center gap-2">
                           <Trash2 className="w-5 h-5 text-primary" />
@@ -98,8 +102,8 @@ const ResourcesCityServices = () => {
                         </CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-sm mb-3">
-                          West End collection day: <strong>Thursday</strong>
+                        <p className="text-lg font-semibold text-primary mb-3">
+                          Collection Day: Tuesday
                         </p>
                         <Button variant="outline" size="sm" className="gap-2" asChild>
                           <a href="https://www.rockvillemd.gov/1207/Trash-Recycling" target="_blank" rel="noopener noreferrer">
@@ -110,19 +114,25 @@ const ResourcesCityServices = () => {
                       </CardContent>
                     </Card>
 
-                    <Card className="hover:shadow-lg transition-shadow">
+                    <Card className="hover:shadow-lg transition-shadow border-l-4 border-l-blue-500">
                       <CardHeader>
                         <CardTitle className="flex items-center gap-2">
-                          <Droplets className="w-5 h-5 text-primary" />
+                          <Droplets className="w-5 h-5 text-blue-500" />
                           Water & Sewer
                         </CardTitle>
                         <CardDescription>
-                          WSSC Water information
+                          Service providers for West End
                         </CardDescription>
                       </CardHeader>
-                      <CardContent>
-                        <p className="text-sm mb-1"><strong>Emergency:</strong> (301) 206-4002</p>
-                        <p className="text-sm mb-3"><strong>Service:</strong> (301) 206-4001</p>
+                      <CardContent className="space-y-3">
+                        <div>
+                          <p className="font-semibold">City of Rockville</p>
+                          <p className="text-sm text-muted-foreground">Serves most of Rockville with water from the Potomac.</p>
+                        </div>
+                        <div>
+                          <p className="font-semibold">WSSC Water</p>
+                          <p className="text-sm text-muted-foreground">Serves some neighborhoods; check the Water Service Provider Map on the city's website to verify your provider.</p>
+                        </div>
                         <Button variant="outline" size="sm" className="gap-2" asChild>
                           <a href="https://www.wsscwater.com" target="_blank" rel="noopener noreferrer">
                             <ExternalLink className="w-4 h-4" />
@@ -132,12 +142,17 @@ const ResourcesCityServices = () => {
                       </CardContent>
                     </Card>
 
+                  </div>
+                </div>
+
+                {/* Other City Services */}
+                <div>
+                  <h2 className="text-2xl font-cormorant font-bold mb-4">Other City Services</h2>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    
                     <Card className="hover:shadow-lg transition-shadow">
                       <CardHeader>
-                        <CardTitle className="flex items-center gap-2">
-                          <FileText className="w-5 h-5 text-primary" />
-                          Permits & Licenses
-                        </CardTitle>
+                        <CardTitle className="text-lg">Permits & Licenses</CardTitle>
                         <CardDescription>
                           Building permits and applications
                         </CardDescription>
@@ -154,7 +169,7 @@ const ResourcesCityServices = () => {
 
                     <Card className="hover:shadow-lg transition-shadow">
                       <CardHeader>
-                        <CardTitle>Police (Non-Emergency)</CardTitle>
+                        <CardTitle className="text-lg">Police (Non-Emergency)</CardTitle>
                         <CardDescription>
                           Rockville City Police
                         </CardDescription>
@@ -172,7 +187,7 @@ const ResourcesCityServices = () => {
 
                     <Card className="hover:shadow-lg transition-shadow">
                       <CardHeader>
-                        <CardTitle>Code Enforcement</CardTitle>
+                        <CardTitle className="text-lg">Code Enforcement</CardTitle>
                         <CardDescription>
                           Report violations and concerns
                         </CardDescription>
@@ -190,7 +205,7 @@ const ResourcesCityServices = () => {
 
                     <Card className="hover:shadow-lg transition-shadow">
                       <CardHeader>
-                        <CardTitle>Planning & Zoning</CardTitle>
+                        <CardTitle className="text-lg">Planning & Zoning</CardTitle>
                         <CardDescription>
                           Development and zoning information
                         </CardDescription>
@@ -206,68 +221,59 @@ const ResourcesCityServices = () => {
                       </CardContent>
                     </Card>
 
+                    <Card className="hover:shadow-lg transition-shadow">
+                      <CardHeader>
+                        <CardTitle className="text-lg">Parks & Recreation</CardTitle>
+                        <CardDescription>
+                          Community programs and facilities
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <Button variant="outline" size="sm" className="gap-2" asChild>
+                          <a href="https://www.rockvillemd.gov/1121/Recreation" target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="w-4 h-4" />
+                            Explore
+                          </a>
+                        </Button>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="hover:shadow-lg transition-shadow">
+                      <CardHeader>
+                        <CardTitle className="text-lg">Online Forms</CardTitle>
+                        <CardDescription>
+                          City applications and forms
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <Button variant="outline" size="sm" className="gap-2" asChild>
+                          <a href="https://www.rockvillemd.gov/FormCenter" target="_blank" rel="noopener noreferrer">
+                            <ExternalLink className="w-4 h-4" />
+                            View Forms
+                          </a>
+                        </Button>
+                      </CardContent>
+                    </Card>
+
                   </div>
                 </div>
 
-                {/* Important Links */}
-                <div>
-                  <h2 className="text-3xl font-cormorant font-bold mb-6">Important City Links</h2>
-                  <Card>
-                    <CardContent className="pt-6">
-                      <div className="grid md:grid-cols-2 gap-4">
-                        <Button variant="outline" className="justify-between" asChild>
-                          <a href="https://www.rockvillemd.gov/AgendaCenter" target="_blank" rel="noopener noreferrer">
-                            City Council Meetings
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        </Button>
-                        <Button variant="outline" className="justify-between" asChild>
-                          <a href="https://www.rockvillemd.gov/211/Planning-Commission" target="_blank" rel="noopener noreferrer">
-                            Planning Commission
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        </Button>
-                        <Button variant="outline" className="justify-between" asChild>
-                          <a href="https://www.rockvillemd.gov/FormCenter" target="_blank" rel="noopener noreferrer">
-                            Online Forms & Applications
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        </Button>
-                        <Button variant="outline" className="justify-between" asChild>
-                          <a href="https://www.rockvillemd.gov/PayBills" target="_blank" rel="noopener noreferrer">
-                            Pay Bills Online
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        </Button>
-                        <Button variant="outline" className="justify-between" asChild>
-                          <a href="https://www.rockvillemd.gov/1121/Recreation" target="_blank" rel="noopener noreferrer">
-                            Parks & Recreation
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        </Button>
-                        <Button variant="outline" className="justify-between" asChild>
-                          <a href="https://www.rockvillemd.gov/163/Building-Permits" target="_blank" rel="noopener noreferrer">
-                            Building & Permits
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        </Button>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-
                 {/* Emergency Information */}
-                <Card className="bg-primary/5 border-primary/20">
+                <Card className="bg-destructive/5 border-destructive/20">
                   <CardHeader>
                     <CardTitle className="text-2xl">Emergency Information</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-3">
-                      <p className="text-lg"><strong>Emergency (Police/Fire/EMS):</strong> <span className="text-primary">911</span></p>
-                      <p><strong>Non-Emergency Police:</strong> (240) 314-8900</p>
-                      <p><strong>Montgomery County Fire:</strong> (240) 777-2400</p>
-                      <p><strong>WSSC Water Emergency:</strong> (301) 206-4002</p>
-                      <p><strong>Pepco Power Outage:</strong> 1-877-737-2662</p>
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <p className="text-lg"><strong>Emergency (Police/Fire/EMS):</strong> <span className="text-destructive font-bold">911</span></p>
+                        <p><strong>Non-Emergency Police:</strong> (240) 314-8900</p>
+                        <p><strong>Montgomery County Fire:</strong> (240) 777-2400</p>
+                      </div>
+                      <div>
+                        <p><strong>WSSC Water Emergency:</strong> (301) 206-4002</p>
+                        <p><strong>Pepco Power Outage:</strong> 1-877-737-2662</p>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -277,6 +283,7 @@ const ResourcesCityServices = () => {
           </section>
         </main>
         
+        <FooterAdBanner />
         <Footer />
       </div>
     </>

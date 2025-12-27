@@ -23,7 +23,7 @@ import ResourcesWECA from "./pages/ResourcesWECA";
 import ResourcesArchives from "./pages/ResourcesArchives";
 import ResourcesCityServices from "./pages/ResourcesCityServices";
 import NewsUpdates from "./pages/NewsUpdates";
-import NewsNewsletters from "./pages/NewsNewsletters";
+import CharterBylaws from "./pages/CharterBylaws";
 import Login from "./pages/admin/Login";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
@@ -68,7 +68,8 @@ const App = () => (
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/news/updates" element={<NewsUpdates />} />
-          <Route path="/news/newsletters" element={<NewsNewsletters />} />
+          <Route path="/news/newsletters" element={<NewsUpdates />} />
+          <Route path="/resources/charter-bylaws" element={<CharterBylaws />} />
           <Route path="/newsletters" element={<Blog />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/resources/weca" element={<ResourcesWECA />} />
