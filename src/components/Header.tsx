@@ -125,62 +125,78 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-border animate-fade-in">
-            <nav className="flex flex-col space-y-2">
-              <a href="/about" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors">
+          <div className="lg:hidden py-4 border-t border-border animate-fade-in max-h-[calc(100vh-5rem)] overflow-y-auto">
+            <nav className="flex flex-col space-y-3 px-2">
+              {/* Simple Links */}
+              <a href="/about" className="px-4 py-3 text-sm font-medium text-foreground hover:text-primary bg-muted/50 rounded-lg border border-border/50 transition-colors">
                 About
               </a>
-              <a href="/priorities" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors font-cantata">
+              <a href="/priorities" className="px-4 py-3 text-sm font-medium text-foreground hover:text-primary bg-muted/50 rounded-lg border border-border/50 transition-colors font-cantata">
                 WECA Priorities
               </a>
-              <a href="/events" className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary hover:bg-muted rounded-md transition-colors">
+              <a href="/events" className="px-4 py-3 text-sm font-medium text-foreground hover:text-primary bg-muted/50 rounded-lg border border-border/50 transition-colors">
                 Events
               </a>
-              <div className="px-4 py-2">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">News</p>
-                <div className="pl-4 space-y-2">
-                  <a href="/news/updates" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
-                    Updates
-                  </a>
-                  <a href="/news/newsletters" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
-                    Newsletters
-                  </a>
+              
+              {/* News Section */}
+              <div className="bg-muted/50 rounded-lg border border-border/50 overflow-hidden">
+                <div className="flex items-center">
+                  <p className="px-4 py-3 text-sm font-semibold text-foreground flex-shrink-0">News</p>
+                  <div className="h-6 w-px bg-border"></div>
+                  <div className="flex-1 flex">
+                    <a href="/news/updates" className="flex-1 px-4 py-3 text-sm text-foreground hover:text-primary hover:bg-muted/80 transition-colors text-center">
+                      Updates
+                    </a>
+                    <div className="w-px bg-border/50"></div>
+                    <a href="/news/newsletters" className="flex-1 px-4 py-3 text-sm text-foreground hover:text-primary hover:bg-muted/80 transition-colors text-center">
+                      Newsletters
+                    </a>
+                  </div>
                 </div>
               </div>
-              <div className="px-4 py-2">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2">Resources</p>
-                <div className="pl-4 space-y-2">
-                  <a href="/resources/weca" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
-                    <span className="font-cantata">WECA</span> Resources
-                  </a>
-                  <a href="/resources/archives" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
-                    Documents and Archives
-                  </a>
-                  <a href="/resources/city-services" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
-                    City of Rockville Resources
-                  </a>
+
+              {/* Resources Section */}
+              <div className="bg-muted/50 rounded-lg border border-border/50 overflow-hidden">
+                <div className="flex items-start">
+                  <p className="px-4 py-3 text-sm font-semibold text-foreground flex-shrink-0 border-r border-border">Resources</p>
+                  <div className="flex-1 flex flex-col divide-y divide-border/50">
+                    <a href="/resources/weca" className="px-4 py-2.5 text-sm text-foreground hover:text-primary hover:bg-muted/80 transition-colors">
+                      <span className="font-cantata">WECA</span> Resources
+                    </a>
+                    <a href="/resources/archives" className="px-4 py-2.5 text-sm text-foreground hover:text-primary hover:bg-muted/80 transition-colors">
+                      Documents & Archives
+                    </a>
+                    <a href="/resources/city-services" className="px-4 py-2.5 text-sm text-foreground hover:text-primary hover:bg-muted/80 transition-colors">
+                      City Resources
+                    </a>
+                  </div>
                 </div>
               </div>
-              <div className="px-4 py-2">
-                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-2 font-cantata">Support WECA</p>
-                <div className="pl-4 space-y-2">
-                  <a href="/support/advertise" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
-                    Advertise with us
-                  </a>
-                  <a href="/support/sponsor" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
-                    Sponsor an event
-                  </a>
-                  <a href="/support/contribute" className="block py-1.5 text-sm text-foreground hover:text-primary transition-colors">
-                    Contribute to <span className="font-cantata">WECA</span>
-                  </a>
+
+              {/* Support WECA Section */}
+              <div className="bg-primary/5 rounded-lg border border-primary/20 overflow-hidden">
+                <div className="flex items-start">
+                  <p className="px-4 py-3 text-sm font-semibold text-primary flex-shrink-0 border-r border-primary/20 font-cantata">Support WECA</p>
+                  <div className="flex-1 flex flex-col divide-y divide-primary/10">
+                    <a href="/support/advertise" className="px-4 py-2.5 text-sm text-foreground hover:text-primary hover:bg-primary/10 transition-colors">
+                      Advertise
+                    </a>
+                    <a href="/support/sponsor" className="px-4 py-2.5 text-sm text-foreground hover:text-primary hover:bg-primary/10 transition-colors">
+                      Sponsor
+                    </a>
+                    <a href="/support/contribute" className="px-4 py-2.5 text-sm text-foreground hover:text-primary hover:bg-primary/10 transition-colors">
+                      Contribute
+                    </a>
+                  </div>
                 </div>
               </div>
+
               {isHomePage ? (
-                <Button variant="hero" size="sm" asChild className="mx-4">
+                <Button variant="hero" size="sm" asChild className="mx-2">
                   <a href="#newsletter">Stay Connected</a>
                 </Button>
               ) : (
-                <Button variant="hero" size="sm" onClick={() => setIsNewsletterOpen(true)} className="mx-4">
+                <Button variant="hero" size="sm" onClick={() => setIsNewsletterOpen(true)} className="mx-2">
                   Stay Connected
                 </Button>
               )}

@@ -190,7 +190,12 @@ const SupportContribute = () => {
                     <p className="text-muted-foreground mb-3">
                       Have questions about making a contribution or want to discuss other ways to support WECA?
                     </p>
-                    <p><strong>Email:</strong> <a href="mailto:WECAoutreach@gmail.com" className="text-primary hover:underline">WECAoutreach@gmail.com</a></p>
+                    <p className="break-all sm:break-normal">
+                      <strong>Email:</strong>{" "}
+                      <a href="mailto:WECAoutreach@gmail.com" className="text-primary hover:underline">
+                        WECAoutreach@gmail.com
+                      </a>
+                    </p>
                   </CardContent>
                 </Card>
 

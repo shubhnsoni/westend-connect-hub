@@ -180,7 +180,12 @@ const SupportAdvertise = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
-                      <p><strong>Email:</strong> <a href="mailto:WECAoutreach@gmail.com" className="text-primary hover:underline">WECAoutreach@gmail.com</a></p>
+                      <p className="break-all sm:break-normal">
+                        <strong>Email:</strong>{" "}
+                        <a href="mailto:WECAoutreach@gmail.com" className="text-primary hover:underline">
+                          WECAoutreach@gmail.com
+                        </a>
+                      </p>
                       <p><strong>Response Time:</strong> We typically respond within 2 business days</p>
                     </div>
                   </CardContent>
