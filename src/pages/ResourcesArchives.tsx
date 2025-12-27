@@ -2,10 +2,12 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TopAdBanner from "@/components/TopAdBanner";
+import FooterAdBanner from "@/components/FooterAdBanner";
+import EventsTicker from "@/components/EventsTicker";
 import SEO from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FolderOpen, FileText, Download, Calendar } from "lucide-react";
+import { FolderOpen, FileText, Calendar } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import PDFViewerDialog from "@/components/PDFViewerDialog";
@@ -64,13 +66,15 @@ const ResourcesArchives = () => {
           <TopAdBanner />
         </div>
         
-        <main className="flex-grow pt-8">
+        <EventsTicker />
+        
+        <main className="flex-grow pt-4">
           {/* Hero Section */}
           <section className="relative py-12 sm:py-16 bg-gradient-to-b from-primary/5 to-background">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-4xl mx-auto text-center">
                 <FolderOpen className="w-16 h-16 mx-auto mb-6 text-primary" />
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-cormorant font-bold text-foreground mb-6 animate-fade-in">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-cormorant font-bold text-foreground mb-4 animate-fade-in">
                   Documents & Archives
                 </h1>
                 <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in">
@@ -81,19 +85,19 @@ const ResourcesArchives = () => {
           </section>
 
           {/* Main Content */}
-          <section className="py-12 sm:py-16">
+          <section className="py-8 sm:py-12">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-6xl mx-auto">
+              <div className="max-w-5xl mx-auto">
                 
-                <Tabs defaultValue="meetings" className="space-y-8">
+                <Tabs defaultValue="meetings" className="space-y-6">
                   <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
                     <TabsTrigger value="meetings">Meeting Minutes</TabsTrigger>
                     <TabsTrigger value="documents">Documents</TabsTrigger>
                   </TabsList>
 
                   {/* Meeting Minutes Tab */}
-                  <TabsContent value="meetings" className="space-y-6">
-                    <div className="text-center mb-8">
+                  <TabsContent value="meetings" className="space-y-4">
+                    <div className="text-center mb-6">
                       <h2 className="text-2xl font-cormorant font-bold mb-2">Meeting Minutes Archive</h2>
                       <p className="text-muted-foreground">
                         Access past meeting minutes and agendas
@@ -101,7 +105,7 @@ const ResourcesArchives = () => {
                     </div>
 
                     {meetings.length > 0 ? (
-                      <div className="grid md:grid-cols-2 gap-6">
+                      <div className="grid md:grid-cols-2 gap-4">
                         {meetings.map((meeting) => (
                           <Card key={meeting.id} className="hover:shadow-lg transition-shadow">
                             <CardHeader>
@@ -156,8 +160,8 @@ const ResourcesArchives = () => {
                   </TabsContent>
 
                   {/* Documents Tab */}
-                  <TabsContent value="documents" className="space-y-6">
-                    <div className="text-center mb-8">
+                  <TabsContent value="documents" className="space-y-4">
+                    <div className="text-center mb-6">
                       <h2 className="text-2xl font-cormorant font-bold mb-2">Document Archive</h2>
                       <p className="text-muted-foreground">
                         Historical documents and archived materials
@@ -165,7 +169,7 @@ const ResourcesArchives = () => {
                     </div>
 
                     {documents.length > 0 ? (
-                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {documents.map((doc) => (
                           <Card key={doc.id} className="hover:shadow-lg transition-shadow">
                             <CardHeader>
@@ -182,26 +186,14 @@ const ResourcesArchives = () => {
                             <CardContent>
                               <div className="flex gap-2">
                                 {doc.file_url && (
-                                  <>
-                                    <Button 
-                                      variant="default" 
-                                      size="sm"
-                                      onClick={() => openPdfViewer(doc.file_url!, doc.title)}
-                                      className="gap-2"
-                                    >
-                                      View
-                                    </Button>
-                                    <Button 
-                                      variant="outline" 
-                                      size="sm"
-                                      asChild
-                                      className="gap-2"
-                                    >
-                                      <a href={doc.file_url} download>
-                                        <Download className="w-4 h-4" />
-                                      </a>
-                                    </Button>
-                                  </>
+                                  <Button 
+                                    variant="default" 
+                                    size="sm"
+                                    onClick={() => openPdfViewer(doc.file_url!, doc.title)}
+                                    className="gap-2"
+                                  >
+                                    View
+                                  </Button>
                                 )}
                               </div>
                             </CardContent>
@@ -219,25 +211,6 @@ const ResourcesArchives = () => {
                   </TabsContent>
                 </Tabs>
 
-                {/* Help Section */}
-                <Card className="mt-12 bg-primary/5">
-                  <CardHeader>
-                    <CardTitle>Looking for Specific Documents?</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground mb-4">
-                      If you need access to older archived materials or have questions about our historical records, 
-                      please contact the WECA office.
-                    </p>
-                    <p>
-                      <strong>Email:</strong>{" "}
-                      <a href="mailto:archives@weca.org" className="text-primary hover:underline">
-                        archives@weca.org
-                      </a>
-                    </p>
-                  </CardContent>
-                </Card>
-
               </div>
             </div>
           </section>
@@ -249,6 +222,7 @@ const ResourcesArchives = () => {
           pdfUrl={selectedPdf?.url || null}
           title={selectedPdf?.title}
         />
+        <FooterAdBanner />
         <Footer />
       </div>
     </>
