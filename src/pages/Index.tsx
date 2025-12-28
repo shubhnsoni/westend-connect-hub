@@ -13,6 +13,7 @@ import Footer from "@/components/Footer";
 import FooterAdBanner from "@/components/FooterAdBanner";
 import SectionDivider from "@/components/SectionDivider";
 import SEO from "@/components/SEO";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const Index = () => {
   return (
@@ -29,26 +30,34 @@ const Index = () => {
         <Hero />
         
         {/* Primary Actions - Immediate navigation */}
-        <QuickLinks />
+        <AnimatedSection animation="fade-up">
+          <QuickLinks />
+        </AnimatedSection>
         
         <SectionDivider />
         
         {/* About Section - Who we are */}
-        <AboutWECA />
+        <AnimatedSection animation="fade-up" delay={100}>
+          <AboutWECA />
+        </AnimatedSection>
         
         {/* Master Ad below About WECA */}
-        <TopAdBanner />
+        <AnimatedSection animation="fade-in" delay={150}>
+          <TopAdBanner />
+        </AnimatedSection>
         
         <SectionDivider />
         
         {/* Announcements Section */}
-        <section className="py-16 bg-background">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-7xl mx-auto">
-              <Announcements />
+        <AnimatedSection animation="fade-up">
+          <section className="py-16 bg-background">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="max-w-7xl mx-auto">
+                <Announcements />
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </AnimatedSection>
         
         <SectionDivider />
         
@@ -56,8 +65,12 @@ const Index = () => {
         <section className="bg-muted/20 py-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
-              <UpcomingEvents />
-              <Meetings />
+              <AnimatedSection animation="slide-right">
+                <UpcomingEvents />
+              </AnimatedSection>
+              <AnimatedSection animation="slide-left" delay={150}>
+                <Meetings />
+              </AnimatedSection>
             </div>
           </div>
         </section>
@@ -65,14 +78,18 @@ const Index = () => {
         <SectionDivider />
         
         {/* Featured Content - Latest news and stories */}
-        <FeaturedNews />
+        <AnimatedSection animation="fade-up">
+          <FeaturedNews />
+        </AnimatedSection>
         
         <SectionDivider />
         
         {/* Leadership - Meet the team */}
-        <section className="py-16 bg-gradient-to-b from-background to-muted/30">
-          <Leadership />
-        </section>
+        <AnimatedSection animation="scale-in">
+          <section className="py-16 bg-gradient-to-b from-background to-muted/30">
+            <Leadership />
+          </section>
+        </AnimatedSection>
       </main>
       
       {/* Advertiser Ad above Footer */}
