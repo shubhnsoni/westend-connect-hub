@@ -35,7 +35,7 @@ const Footer = () => {
               </p>
               <div className="bg-background/10 backdrop-blur-sm rounded-lg p-6 mb-6 max-w-md mx-auto">
                 <p className="text-sm text-primary-foreground/80 mb-2">Contribute via Zelle:</p>
-                <p className="text-2xl font-bold text-primary-foreground">wecaoutreach@gmail.com</p>
+                <p className="text-xl sm:text-2xl font-bold text-primary-foreground break-all sm:break-normal">wecaoutreach@gmail.com</p>
               </div>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button asChild size="lg" variant="secondary">
