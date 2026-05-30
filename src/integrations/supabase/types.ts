@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.1"
+    PostgrestVersion: "13.0.5"
   }
   public: {
     Tables: {
@@ -56,60 +56,6 @@ export type Database = {
         }
         Relationships: []
       }
-      advertising_tiers: {
-        Row: {
-          accent: string
-          badge_text: string | null
-          benefits: Json
-          created_at: string
-          cta_label: string
-          cta_url: string
-          display_order: number
-          icon_key: string
-          id: string
-          is_active: boolean
-          name: string
-          price_amount: string
-          price_period: string
-          tier_key: string
-          updated_at: string
-        }
-        Insert: {
-          accent?: string
-          badge_text?: string | null
-          benefits?: Json
-          created_at?: string
-          cta_label?: string
-          cta_url?: string
-          display_order?: number
-          icon_key?: string
-          id?: string
-          is_active?: boolean
-          name: string
-          price_amount?: string
-          price_period?: string
-          tier_key: string
-          updated_at?: string
-        }
-        Update: {
-          accent?: string
-          badge_text?: string | null
-          benefits?: Json
-          created_at?: string
-          cta_label?: string
-          cta_url?: string
-          display_order?: number
-          icon_key?: string
-          id?: string
-          is_active?: boolean
-          name?: string
-          price_amount?: string
-          price_period?: string
-          tier_key?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
       announcements: {
         Row: {
           content: string
@@ -118,7 +64,6 @@ export type Database = {
           expires_at: string | null
           id: string
           is_active: boolean | null
-          link_url: string | null
           priority: string
           title: string
           updated_at: string
@@ -130,7 +75,6 @@ export type Database = {
           expires_at?: string | null
           id?: string
           is_active?: boolean | null
-          link_url?: string | null
           priority?: string
           title: string
           updated_at?: string
@@ -142,7 +86,6 @@ export type Database = {
           expires_at?: string | null
           id?: string
           is_active?: boolean | null
-          link_url?: string | null
           priority?: string
           title?: string
           updated_at?: string
@@ -155,14 +98,10 @@ export type Database = {
           content: string
           created_at: string
           excerpt: string | null
-          featured_image_alt: string | null
           featured_image_url: string | null
           id: string
           published_at: string | null
           scheduled_for: string | null
-          seo_description: string | null
-          seo_keywords: string | null
-          seo_title: string | null
           slug: string
           status: string
           tags: string[] | null
@@ -175,14 +114,10 @@ export type Database = {
           content: string
           created_at?: string
           excerpt?: string | null
-          featured_image_alt?: string | null
           featured_image_url?: string | null
           id?: string
           published_at?: string | null
           scheduled_for?: string | null
-          seo_description?: string | null
-          seo_keywords?: string | null
-          seo_title?: string | null
           slug: string
           status?: string
           tags?: string[] | null
@@ -195,53 +130,16 @@ export type Database = {
           content?: string
           created_at?: string
           excerpt?: string | null
-          featured_image_alt?: string | null
           featured_image_url?: string | null
           id?: string
           published_at?: string | null
           scheduled_for?: string | null
-          seo_description?: string | null
-          seo_keywords?: string | null
-          seo_title?: string | null
           slug?: string
           status?: string
           tags?: string[] | null
           title?: string
           updated_at?: string
           view_count?: number | null
-        }
-        Relationships: []
-      }
-      community_polls: {
-        Row: {
-          created_at: string
-          created_by: string
-          expires_at: string | null
-          id: string
-          is_active: boolean | null
-          options: Json
-          question: string
-          votes: Json
-        }
-        Insert: {
-          created_at?: string
-          created_by: string
-          expires_at?: string | null
-          id?: string
-          is_active?: boolean | null
-          options?: Json
-          question: string
-          votes?: Json
-        }
-        Update: {
-          created_at?: string
-          created_by?: string
-          expires_at?: string | null
-          id?: string
-          is_active?: boolean | null
-          options?: Json
-          question?: string
-          votes?: Json
         }
         Relationships: []
       }
@@ -257,15 +155,11 @@ export type Database = {
           location: string | null
           max_attendees: number | null
           registration_url: string | null
-          seo_description: string | null
-          seo_title: string | null
           start_date: string
           status: string
-          submission_status: string
           submitted_by: string | null
           title: string
           updated_at: string
-          zoom_link: string | null
         }
         Insert: {
           created_at?: string
@@ -278,15 +172,11 @@ export type Database = {
           location?: string | null
           max_attendees?: number | null
           registration_url?: string | null
-          seo_description?: string | null
-          seo_title?: string | null
           start_date: string
           status?: string
-          submission_status?: string
           submitted_by?: string | null
           title: string
           updated_at?: string
-          zoom_link?: string | null
         }
         Update: {
           created_at?: string
@@ -299,15 +189,11 @@ export type Database = {
           location?: string | null
           max_attendees?: number | null
           registration_url?: string | null
-          seo_description?: string | null
-          seo_title?: string | null
           start_date?: string
           status?: string
-          submission_status?: string
           submitted_by?: string | null
           title?: string
           updated_at?: string
-          zoom_link?: string | null
         }
         Relationships: [
           {
@@ -411,13 +297,10 @@ export type Database = {
           description: string | null
           id: string
           location: string | null
-          meeting_id: string | null
           minutes_url: string | null
-          passcode: string | null
           status: string
           title: string
           updated_at: string
-          zoom_link: string | null
         }
         Insert: {
           agenda_url?: string | null
@@ -427,13 +310,10 @@ export type Database = {
           description?: string | null
           id?: string
           location?: string | null
-          meeting_id?: string | null
           minutes_url?: string | null
-          passcode?: string | null
           status?: string
           title: string
           updated_at?: string
-          zoom_link?: string | null
         }
         Update: {
           agenda_url?: string | null
@@ -443,46 +323,10 @@ export type Database = {
           description?: string | null
           id?: string
           location?: string | null
-          meeting_id?: string | null
           minutes_url?: string | null
-          passcode?: string | null
           status?: string
           title?: string
           updated_at?: string
-          zoom_link?: string | null
-        }
-        Relationships: []
-      }
-      members: {
-        Row: {
-          address: string | null
-          created_at: string
-          email: string
-          id: string
-          interests: string[] | null
-          name: string
-          phone: string | null
-          status: string
-        }
-        Insert: {
-          address?: string | null
-          created_at?: string
-          email: string
-          id?: string
-          interests?: string[] | null
-          name: string
-          phone?: string | null
-          status?: string
-        }
-        Update: {
-          address?: string | null
-          created_at?: string
-          email?: string
-          id?: string
-          interests?: string[] | null
-          name?: string
-          phone?: string | null
-          status?: string
         }
         Relationships: []
       }
@@ -512,98 +356,6 @@ export type Database = {
           unsubscribed_at?: string | null
         }
         Relationships: []
-      }
-      newsletters: {
-        Row: {
-          author_id: string
-          content: string
-          created_at: string
-          excerpt: string | null
-          featured_image_url: string | null
-          id: string
-          layout_style: string
-          published_at: string | null
-          slug: string
-          status: string
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          author_id: string
-          content?: string
-          created_at?: string
-          excerpt?: string | null
-          featured_image_url?: string | null
-          id?: string
-          layout_style?: string
-          published_at?: string | null
-          slug: string
-          status?: string
-          title: string
-          updated_at?: string
-        }
-        Update: {
-          author_id?: string
-          content?: string
-          created_at?: string
-          excerpt?: string | null
-          featured_image_url?: string | null
-          id?: string
-          layout_style?: string
-          published_at?: string | null
-          slug?: string
-          status?: string
-          title?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      page_content: {
-        Row: {
-          content: string
-          content_type: string
-          created_at: string
-          display_order: number
-          id: string
-          label: string
-          page_slug: string
-          section_key: string
-          updated_at: string
-          updated_by: string | null
-        }
-        Insert: {
-          content?: string
-          content_type?: string
-          created_at?: string
-          display_order?: number
-          id?: string
-          label?: string
-          page_slug: string
-          section_key: string
-          updated_at?: string
-          updated_by?: string | null
-        }
-        Update: {
-          content?: string
-          content_type?: string
-          created_at?: string
-          display_order?: number
-          id?: string
-          label?: string
-          page_slug?: string
-          section_key?: string
-          updated_at?: string
-          updated_by?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "page_content_updated_by_fkey"
-            columns: ["updated_by"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
       }
       profiles: {
         Row: {
@@ -737,89 +489,6 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      volunteer_opportunities: {
-        Row: {
-          created_at: string
-          created_by: string
-          custom_fields: Json | null
-          description: string | null
-          event_date: string | null
-          id: string
-          is_active: boolean
-          max_volunteers: number | null
-          slug: string
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          created_by: string
-          custom_fields?: Json | null
-          description?: string | null
-          event_date?: string | null
-          id?: string
-          is_active?: boolean
-          max_volunteers?: number | null
-          slug: string
-          title: string
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          created_by?: string
-          custom_fields?: Json | null
-          description?: string | null
-          event_date?: string | null
-          id?: string
-          is_active?: boolean
-          max_volunteers?: number | null
-          slug?: string
-          title?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      volunteer_signups: {
-        Row: {
-          created_at: string
-          custom_responses: Json | null
-          email: string
-          id: string
-          message: string | null
-          name: string
-          opportunity_id: string
-          phone: string | null
-        }
-        Insert: {
-          created_at?: string
-          custom_responses?: Json | null
-          email: string
-          id?: string
-          message?: string | null
-          name: string
-          opportunity_id: string
-          phone?: string | null
-        }
-        Update: {
-          created_at?: string
-          custom_responses?: Json | null
-          email?: string
-          id?: string
-          message?: string | null
-          name?: string
-          opportunity_id?: string
-          phone?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "volunteer_signups_opportunity_id_fkey"
-            columns: ["opportunity_id"]
-            isOneToOne: false
-            referencedRelation: "volunteer_opportunities"
             referencedColumns: ["id"]
           },
         ]
