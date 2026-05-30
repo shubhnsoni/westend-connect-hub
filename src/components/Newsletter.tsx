@@ -3,8 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 import { useState } from "react";
 import NewsletterDialog from "@/components/NewsletterDialog";
+import { useTranslation } from "@/hooks/useTranslation";
+import { usePageContent } from "@/hooks/usePageContent";
 
 const Newsletter = () => {
+  const { t } = useTranslation();
+  const { getContent } = usePageContent("homepage");
   const [isNewsletterOpen, setIsNewsletterOpen] = useState(false);
 
   return (
@@ -15,9 +19,9 @@ const Newsletter = () => {
             <div className="w-16 h-16 bg-secondary/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6">
               <Mail className="w-8 h-8 text-secondary" />
             </div>
-            <h2 className="text-4xl font-bold mb-4">Stay Connected with <span className="font-cantata">WECA</span></h2>
+            <h2 className="text-4xl font-bold mb-4">{t(getContent("newsletter_heading", "Stay Connected"))}</h2>
             <p className="text-xl text-primary-foreground/90 max-w-2xl mx-auto">
-              Get news and information about the neighborhood and notice of <span className="font-cantata">WECA</span> meetings delivered to your inbox
+              {t(getContent("newsletter_intro", "Get news and information about the neighborhood and notice of WECA meetings delivered to your inbox"))}
             </p>
           </div>
 
@@ -38,20 +42,6 @@ const Newsletter = () => {
           </Card>
           
           <NewsletterDialog open={isNewsletterOpen} onOpenChange={setIsNewsletterOpen} />
-
-          <div className="mt-12 text-center animate-fade-in">
-            <p className="text-primary-foreground/90 mb-4">
-              <span className="font-cantata">WECA</span> is a volunteer organization. We greatly appreciate and rely on contributions to facilitate the work we do.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button variant="secondary" size="lg" className="font-cantata">
-                Support WECA
-              </Button>
-              <span className="text-sm text-primary-foreground/80">
-                Donate via Zelle: WECAoutreach@gmail.com
-              </span>
-            </div>
-          </div>
         </div>
       </div>
     </section>

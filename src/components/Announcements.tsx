@@ -1,10 +1,13 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Megaphone } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Calendar, Megaphone, ExternalLink } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Announcements = () => {
+  const { t } = useTranslation();
   const { data: announcements = [] } = useQuery({
     queryKey: ['active-announcements'],
     queryFn: async () => {
@@ -26,10 +29,10 @@ const Announcements = () => {
       <div className="mb-6">
         <h3 className="text-2xl font-bold text-foreground mb-2 flex items-center gap-2">
           <Megaphone className="w-6 h-6 text-primary" />
-          Announcements
+          {t("Announcements")}
         </h3>
         <p className="text-muted-foreground">
-          Important community updates
+          {t("Important community updates")}
         </p>
       </div>
 
@@ -40,7 +43,7 @@ const Announcements = () => {
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
-                    <CardTitle className="text-lg mb-1">{announcement.title}</CardTitle>
+                    <CardTitle className="text-lg mb-1">{t(announcement.title)}</CardTitle>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Calendar className="w-4 h-4" />
                       <span>{new Date(announcement.created_at).toLocaleDateString()}</span>
@@ -55,14 +58,22 @@ const Announcements = () => {
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <p className="text-muted-foreground text-sm">{announcement.content}</p>
+                <p className="text-muted-foreground text-sm">{t(announcement.content)}</p>
+                {(announcement as any).link_url && (
+                  <Button variant="outline" size="sm" className="mt-3" asChild>
+                    <a href={(announcement as any).link_url} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="h-3.5 w-3.5 mr-1.5" />
+                      {t("Open Link")}
+                    </a>
+                  </Button>
+                )}
               </CardContent>
             </Card>
           ))
         ) : (
           <Card className="border-2">
             <CardContent className="p-6">
-              <p className="text-muted-foreground text-center">No active announcements</p>
+              <p className="text-muted-foreground text-center">{t("No active announcements")}</p>
             </CardContent>
           </Card>
         )}

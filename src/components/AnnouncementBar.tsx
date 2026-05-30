@@ -1,70 +1,81 @@
-import { Calendar, Home, Leaf } from "lucide-react";
 import { useState, useEffect } from "react";
-import { X } from "lucide-react";
-
-const announcements = [
-  {
-    icon: Calendar,
-    text: "Next WECA Meeting: November 15th, 7 PM – Rockville City Hall",
-    link: "#meetings"
-  },
-  {
-    icon: Home,
-    text: "Zoning Update: New Parkwood Avenue proposal open for feedback",
-    link: "#feedback"
-  },
-  {
-    icon: Leaf,
-    text: "Volunteer Day: Join us this Saturday at Welsh Park for cleanup!",
-    link: "#events"
-  }
-];
+import { X, Megaphone, ExternalLink } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const AnnouncementBar = () => {
+  const { t } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
-  // Auto-scroll through announcements every 5 seconds
+  const { data: announcements = [] } = useQuery({
+    queryKey: ['announcement-bar'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('announcements')
+        .select('*')
+        .eq('is_active', true)
+        .or(`expires_at.is.null,expires_at.gte.${new Date().toISOString()}`)
+        .order('priority', { ascending: false })
+        .limit(5);
+      
+      if (error) throw error;
+      return data || [];
+    },
+  });
+
   useEffect(() => {
+    if (announcements.length <= 1) return;
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % announcements.length);
+      setCurrentIndex((prev) => (prev + 1) % announcements.length);
     }, 5000);
-
     return () => clearInterval(interval);
-  }, []);
+  }, [announcements.length]);
 
-  if (!isVisible) return null;
+  if (!isVisible || announcements.length === 0) return null;
 
   const current = announcements[currentIndex];
-  const Icon = current.icon;
 
   return (
-    <div className="bg-secondary text-secondary-foreground py-3 px-4 sticky top-20 z-40 shadow-sm">
+    <div className="bg-secondary text-secondary-foreground py-3 px-4 sticky top-16 z-40 shadow-sm">
       <div className="container mx-auto flex items-center justify-between gap-4">
         <div className="flex items-center gap-3 flex-1 min-w-0">
-          <Icon className="w-5 h-5 flex-shrink-0" />
-          <a 
-            href={current.link}
-            className="text-sm font-medium hover:underline truncate animate-fade-in"
+          <Megaphone className="w-5 h-5 flex-shrink-0" />
+          <span
+            className="text-sm font-medium truncate animate-fade-in"
             key={currentIndex}
           >
-            {current.text}
-          </a>
+            <strong>{t(current.title)}</strong> — {t(current.content)}
+          </span>
+          {(current as any).link_url && (
+            <a
+              href={(current as any).link_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-shrink-0 inline-flex items-center gap-1 text-xs font-semibold bg-secondary-foreground/10 hover:bg-secondary-foreground/20 px-2 py-1 rounded transition-colors"
+            >
+              <ExternalLink className="w-3 h-3" />
+              Link
+            </a>
+          )}
         </div>
         
         <div className="flex items-center gap-2">
-          <div className="flex gap-1">
-            {announcements.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentIndex(idx)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  idx === currentIndex ? 'bg-secondary-foreground w-4' : 'bg-secondary-foreground/40'
-                }`}
-                aria-label={`View announcement ${idx + 1}`}
-              />
-            ))}
-          </div>
+          {announcements.length > 1 && (
+            <div className="flex gap-1">
+              {announcements.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    idx === currentIndex ? 'bg-secondary-foreground w-4' : 'bg-secondary-foreground/40'
+                  }`}
+                  aria-label={`View announcement ${idx + 1}`}
+                />
+              ))}
+            </div>
+          )}
           
           <button
             onClick={() => setIsVisible(false)}

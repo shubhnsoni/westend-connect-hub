@@ -12,8 +12,10 @@ import {
   FileDown,
   Bell,
   LogOut,
-  Database,
+  
   MonitorPlay,
+  HandHeart,
+  Search,
 } from 'lucide-react';
 import {
   Sidebar,
@@ -33,19 +35,23 @@ import { Button } from './ui/button';
 
 const menuItems = [
   { title: 'Dashboard', url: '/admin', icon: LayoutDashboard, end: true },
+  { title: 'Ads', url: '/admin/ads', icon: MonitorPlay },
   { title: 'AI Assistant', url: '/admin/ai-assistant', icon: MessageSquare },
+  { title: 'Announcements', url: '/admin/announcements', icon: Bell },
   { title: 'Blog Posts', url: '/admin/blog', icon: FileText },
   { title: 'Events', url: '/admin/events', icon: Calendar },
-  { title: 'Meetings', url: '/admin/meetings', icon: Users },
-  { title: 'Resources', url: '/admin/resources', icon: FileDown },
-  { title: 'Announcements', url: '/admin/announcements', icon: Bell },
-  { title: 'Ads', url: '/admin/ads', icon: MonitorPlay },
   { title: 'Feedback', url: '/admin/feedback', icon: MessageSquare },
-  { title: 'Newsletter', url: '/admin/newsletter', icon: Mail },
+  { title: 'Leadership', url: '/admin/leadership', icon: Users },
   { title: 'Media Library', url: '/admin/media', icon: Image },
-  { title: 'User Management', url: '/admin/users', icon: Users },
-  { title: 'Migrate Resources', url: '/admin/migrate', icon: Database },
+  { title: 'Meetings', url: '/admin/meetings', icon: Users },
+  { title: 'Newsletter', url: '/admin/newsletter', icon: Mail },
+  { title: 'Notifications', url: '/admin/notifications', icon: Bell },
+  { title: 'Pages', url: '/admin/pages', icon: FileText },
+  { title: 'Resources', url: '/admin/resources', icon: FileDown },
+  { title: 'SEO Analyzer', url: '/admin/seo-analyzer', icon: Search },
   { title: 'Settings', url: '/admin/settings', icon: Settings },
+  { title: 'User Management', url: '/admin/users', icon: Users },
+  { title: 'Volunteer Forms', url: '/admin/volunteers', icon: HandHeart },
 ];
 
 export function AdminSidebar() {
@@ -62,7 +68,7 @@ export function AdminSidebar() {
 
   return (
     <Sidebar className={open ? 'w-64' : 'w-16'} collapsible="icon">
-      <SidebarContent className="bg-sidebar border-r">
+      <SidebarContent className="bg-white/80 backdrop-blur-md border-r">
         <SidebarGroup>
           <SidebarGroupLabel className="px-2 text-sidebar-foreground font-bold text-base">
             {open ? 'WECA Admin' : 'WA'}
@@ -84,7 +90,7 @@ export function AdminSidebar() {
         </SidebarGroup>
       </SidebarContent>
       
-      <SidebarFooter className="bg-sidebar border-t border-sidebar-border">
+      <SidebarFooter className="bg-white/80 backdrop-blur-md border-t border-sidebar-border">
         {open && user && (
           <div className="px-4 py-2 text-sm text-sidebar-foreground">
             <p className="truncate font-medium">{user.email}</p>

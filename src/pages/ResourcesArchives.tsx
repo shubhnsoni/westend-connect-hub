@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import TopAdBanner from "@/components/TopAdBanner";
@@ -13,8 +13,13 @@ import { supabase } from "@/integrations/supabase/client";
 import PDFViewerDialog from "@/components/PDFViewerDialog";
 import { format } from "date-fns";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { useTranslation } from "@/hooks/useTranslation";
+import { usePageContent } from "@/hooks/usePageContent";
 
 const ResourcesArchives = () => {
+  const { t } = useTranslation();
+  const { getContent } = usePageContent("resources-archives");
   const [pdfViewerOpen, setPdfViewerOpen] = useState(false);
   const [selectedPdf, setSelectedPdf] = useState<{ url: string; title: string } | null>(null);
 
@@ -46,6 +51,21 @@ const ResourcesArchives = () => {
     },
   });
 
+
+  // Group meetings by year
+  const meetingsByYear = useMemo(() => {
+    const grouped: Record<string, typeof meetings> = {};
+    meetings.forEach((meeting) => {
+      const year = meeting.date.split('T')[0].split('-')[0];
+      if (!grouped[year]) {
+        grouped[year] = [];
+      }
+      grouped[year].push(meeting);
+    });
+    // Sort years in descending order
+    return Object.entries(grouped).sort((a, b) => parseInt(b[0]) - parseInt(a[0]));
+  }, [meetings]);
+
   const openPdfViewer = (url: string, title: string) => {
     setSelectedPdf({ url, title });
     setPdfViewerOpen(true);
@@ -56,6 +76,7 @@ const ResourcesArchives = () => {
       <SEO 
         title="Documents & Archives | West End Civic Association"
         description="Browse historical documents, meeting minutes, and archived materials from WECA."
+        canonicalUrl="https://westendrockvillemd.org/resources/archives"
         keywords="WECA archives, historical documents, meeting archives, neighborhood history"
       />
       
@@ -75,10 +96,10 @@ const ResourcesArchives = () => {
               <div className="max-w-4xl mx-auto text-center">
                 <FolderOpen className="w-16 h-16 mx-auto mb-6 text-primary" />
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-cormorant font-bold text-foreground mb-4 animate-fade-in">
-                  Documents & Archives
+                  {t(getContent("hero_title", "Documents & Archives"))}
                 </h1>
                 <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in">
-                  Historical records and archived materials from the West End Civic Association
+                  {t(getContent("hero_subtitle", "Historical records and archived materials from the West End Civic Association"))}
                 </p>
               </div>
             </div>
@@ -91,80 +112,92 @@ const ResourcesArchives = () => {
                 
                 <Tabs defaultValue="meetings" className="space-y-6">
                   <TabsList className="grid w-full max-w-md mx-auto grid-cols-2">
-                    <TabsTrigger value="meetings">Meeting Minutes</TabsTrigger>
-                    <TabsTrigger value="documents">Documents</TabsTrigger>
+                    <TabsTrigger value="meetings">{t(getContent("tab_meetings_label", "Meeting Minutes"))}</TabsTrigger>
+                    <TabsTrigger value="documents">{t(getContent("tab_documents_label", "Documents"))}</TabsTrigger>
                   </TabsList>
 
                   {/* Meeting Minutes Tab */}
                   <TabsContent value="meetings" className="space-y-4">
                     <div className="text-center mb-6">
-                      <h2 className="text-2xl font-cormorant font-bold mb-2">Meeting Minutes Archive</h2>
+                      <h2 className="text-2xl font-cormorant font-bold mb-2">{t(getContent("meetings_heading", "Meeting Minutes Archive"))}</h2>
                       <p className="text-muted-foreground">
-                        Access past meeting minutes and agendas
+                        {t(getContent("meetings_intro", "Access past meeting minutes and agendas organized by year"))}
                       </p>
                     </div>
 
-                    {meetings.length > 0 ? (
-                      <div className="grid md:grid-cols-2 gap-4">
-                        {meetings.map((meeting) => (
-                          <Card key={meeting.id} className="hover:shadow-lg transition-shadow">
-                            <CardHeader>
-                              <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                                <Calendar className="w-4 h-4" />
-                                <span>{format(new Date(meeting.date), 'MMMM d, yyyy')}</span>
+                    {meetingsByYear.length > 0 ? (
+                      <Accordion type="multiple" defaultValue={[meetingsByYear[0]?.[0]]} className="space-y-4">
+                        {meetingsByYear.map(([year, yearMeetings]) => (
+                          <AccordionItem key={year} value={year} className="border rounded-lg px-4 bg-card">
+                            <AccordionTrigger className="text-xl font-bold hover:no-underline">
+                              <div className="flex items-center gap-3">
+                                <Calendar className="w-5 h-5 text-primary" />
+                                <span>{year}</span>
+                                <span className="text-sm font-normal text-muted-foreground">
+                                  ({yearMeetings.length} meetings)
+                                </span>
                               </div>
-                              <CardTitle className="text-lg">{meeting.title}</CardTitle>
-                              {meeting.description && (
-                                <CardDescription className="line-clamp-2">
-                                  {meeting.description}
-                                </CardDescription>
-                              )}
-                            </CardHeader>
-                            <CardContent>
-                              <div className="flex flex-wrap gap-2">
-                                {meeting.agenda_url && (
-                                  <Button 
-                                    variant="outline" 
-                                    size="sm"
-                                    onClick={() => openPdfViewer(meeting.agenda_url!, `${meeting.title} - Agenda`)}
-                                    className="gap-2"
-                                  >
-                                    <FileText className="w-4 h-4" />
-                                    Agenda
-                                  </Button>
-                                )}
-                                {meeting.minutes_url && (
-                                  <Button 
-                                    variant="default" 
-                                    size="sm"
-                                    onClick={() => openPdfViewer(meeting.minutes_url!, `${meeting.title} - Minutes`)}
-                                    className="gap-2"
-                                  >
-                                    <FileText className="w-4 h-4" />
-                                    Minutes
-                                  </Button>
-                                )}
+                            </AccordionTrigger>
+                            <AccordionContent>
+                              <div className="grid md:grid-cols-2 gap-4 pt-4">
+                                {yearMeetings.map((meeting) => (
+                                  <Card key={meeting.id} className="hover:shadow-lg transition-shadow">
+                                    <CardHeader className="pb-3">
+                                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
+                                        <span>{format((() => { const [dp, tp] = meeting.date.split('T'); const [y,m,d] = dp.split('-').map(Number); const [h=0,mi=0] = (tp||'').split(':').map(Number); return new Date(y,m-1,d,h,mi); })(), 'MMMM d, yyyy')}</span>
+                                      </div>
+                                      <CardTitle className="text-base">{meeting.title}</CardTitle>
+                                    </CardHeader>
+                                    <CardContent className="pt-0">
+                                      <div className="flex flex-wrap gap-2">
+                                        {meeting.agenda_url && (
+                                          <Button 
+                                            variant="outline" 
+                                            size="sm"
+                                            onClick={() => openPdfViewer(meeting.agenda_url!, `${meeting.title} - Agenda`)}
+                                            className="gap-2"
+                                          >
+                                            <FileText className="w-4 h-4" />
+                                            Agenda
+                                          </Button>
+                                        )}
+                                        {meeting.minutes_url && (
+                                          <Button 
+                                            variant="default" 
+                                            size="sm"
+                                            onClick={() => openPdfViewer(meeting.minutes_url!, `${meeting.title} - Minutes`)}
+                                            className="gap-2"
+                                          >
+                                            <FileText className="w-4 h-4" />
+                                            Minutes
+                                          </Button>
+                                        )}
+                                      </div>
+                                    </CardContent>
+                                  </Card>
+                                ))}
                               </div>
-                            </CardContent>
-                          </Card>
+                            </AccordionContent>
+                          </AccordionItem>
                         ))}
-                      </div>
+                      </Accordion>
                     ) : (
                       <Card>
                         <CardContent className="text-center py-12">
                           <FolderOpen className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-                          <p className="text-muted-foreground">No archived meeting minutes available yet.</p>
+                          <p className="text-muted-foreground">{t(getContent("empty_meetings", "No archived meeting minutes available yet."))}</p>
                         </CardContent>
                       </Card>
                     )}
                   </TabsContent>
 
+
                   {/* Documents Tab */}
                   <TabsContent value="documents" className="space-y-4">
                     <div className="text-center mb-6">
-                      <h2 className="text-2xl font-cormorant font-bold mb-2">Document Archive</h2>
+                      <h2 className="text-2xl font-cormorant font-bold mb-2">{t(getContent("documents_heading", "Document Archive"))}</h2>
                       <p className="text-muted-foreground">
-                        Historical documents and archived materials
+                        {t(getContent("documents_intro", "Historical documents and archived materials"))}
                       </p>
                     </div>
 
@@ -204,7 +237,7 @@ const ResourcesArchives = () => {
                       <Card>
                         <CardContent className="text-center py-12">
                           <FolderOpen className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-                          <p className="text-muted-foreground">No archived documents available yet.</p>
+                          <p className="text-muted-foreground">{t(getContent("empty_documents", "No archived documents available yet."))}</p>
                         </CardContent>
                       </Card>
                     )}

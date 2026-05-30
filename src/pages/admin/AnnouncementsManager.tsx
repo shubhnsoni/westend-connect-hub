@@ -34,6 +34,7 @@ export default function AnnouncementsManager() {
     priority: 'normal',
     is_active: true,
     expires_at: '',
+    link_url: '',
   });
 
   useEffect(() => {
@@ -63,6 +64,7 @@ export default function AnnouncementsManager() {
     const announcementData = {
       ...formData,
       expires_at: formData.expires_at || null,
+      link_url: formData.link_url || null,
       created_by: user.id,
     };
 
@@ -103,6 +105,7 @@ export default function AnnouncementsManager() {
       priority: announcement.priority,
       is_active: announcement.is_active,
       expires_at: announcement.expires_at ? announcement.expires_at.split('T')[0] : '',
+      link_url: (announcement as any).link_url || '',
     });
     setCurrentAnnouncementId(announcement.id);
     setIsEditing(true);
@@ -146,6 +149,7 @@ export default function AnnouncementsManager() {
       priority: 'normal',
       is_active: true,
       expires_at: '',
+      link_url: '',
     });
     setCurrentAnnouncementId(null);
     setIsEditing(false);
@@ -218,6 +222,15 @@ export default function AnnouncementsManager() {
                   onCheckedChange={(checked) => setFormData({ ...formData, is_active: checked })}
                 />
                 <label className="text-sm font-medium">Active</label>
+              </div>
+              <div>
+                <label className="text-sm font-medium">Link URL (Optional)</label>
+                <Input
+                  type="url"
+                  placeholder="https://example.com"
+                  value={formData.link_url}
+                  onChange={(e) => setFormData({ ...formData, link_url: e.target.value })}
+                />
               </div>
               <div>
                 <label className="text-sm font-medium">Expires At (Optional)</label>

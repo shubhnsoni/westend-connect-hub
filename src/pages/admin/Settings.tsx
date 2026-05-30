@@ -8,10 +8,15 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from 'sonner';
-import { Settings as SettingsIcon, Globe, Mail, Palette } from 'lucide-react';
+import { Globe, Mail, Palette, KeyRound } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function Settings() {
   const queryClient = useQueryClient();
+  const { user } = useAuth();
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [isResetting, setIsResetting] = useState(false);
 
   const { data: settings = {}, isLoading } = useQuery({
     queryKey: ['site-settings'],
@@ -72,6 +77,10 @@ export default function Settings() {
           <TabsTrigger value="general" className="gap-2">
             <Globe className="h-4 w-4" />
             General
+          </TabsTrigger>
+          <TabsTrigger value="security" className="gap-2">
+            <KeyRound className="h-4 w-4" />
+            Security
           </TabsTrigger>
           <TabsTrigger value="contact" className="gap-2">
             <Mail className="h-4 w-4" />
@@ -199,6 +208,67 @@ export default function Settings() {
                   onBlur={(e) => handleSave('social_linkedin', e.target.value, 'LinkedIn page URL')}
                 />
               </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="security" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Reset Password</CardTitle>
+              <CardDescription>Change the password for your admin account</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label htmlFor="new-password">New Password</Label>
+                <Input
+                  id="new-password"
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="Minimum 8 characters"
+                />
+              </div>
+              <div>
+                <Label htmlFor="confirm-password">Confirm Password</Label>
+                <Input
+                  id="confirm-password"
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Re-enter new password"
+                />
+              </div>
+              <Button
+                disabled={isResetting || !newPassword || !confirmPassword}
+                onClick={async () => {
+                  if (newPassword !== confirmPassword) {
+                    toast.error('Passwords do not match');
+                    return;
+                  }
+                  if (newPassword.length < 8) {
+                    toast.error('Password must be at least 8 characters');
+                    return;
+                  }
+                  setIsResetting(true);
+                  try {
+                    const { data, error } = await supabase.functions.invoke('reset-admin-password', {
+                      body: { email: user?.email, password: newPassword },
+                    });
+                    if (error) throw error;
+                    if (data?.error) throw new Error(data.error);
+                    toast.success('Password updated successfully');
+                    setNewPassword('');
+                    setConfirmPassword('');
+                  } catch (err: any) {
+                    toast.error(err.message || 'Failed to reset password');
+                  } finally {
+                    setIsResetting(false);
+                  }
+                }}
+              >
+                {isResetting ? 'Updating...' : 'Update Password'}
+              </Button>
             </CardContent>
           </Card>
         </TabsContent>

@@ -1,3 +1,4 @@
+import { useState, useCallback } from "react";
 import Header from "@/components/Header";
 import TopAdBanner from "@/components/TopAdBanner";
 import Hero from "@/components/Hero";
@@ -9,23 +10,36 @@ import UpcomingEvents from "@/components/UpcomingEvents";
 import Meetings from "@/components/Meetings";
 import Announcements from "@/components/Announcements";
 import Leadership from "@/components/Leadership";
+import CommunityPoll from "@/components/CommunityPoll";
 import Footer from "@/components/Footer";
 import FooterAdBanner from "@/components/FooterAdBanner";
 import SectionDivider from "@/components/SectionDivider";
 import SEO from "@/components/SEO";
 import AnimatedSection from "@/components/AnimatedSection";
+import HomePreloader from "@/components/HomePreloader";
 
 const Index = () => {
+  const [showPreloader, setShowPreloader] = useState(() => {
+    if (sessionStorage.getItem('weca-preloader-shown')) return false;
+    return true;
+  });
+
+  const handlePreloaderComplete = useCallback(() => {
+    sessionStorage.setItem('weca-preloader-shown', '1');
+    setShowPreloader(false);
+  }, []);
+
   return (
     <>
-      <SEO />
+      <SEO canonicalUrl="https://westendrockvillemd.org/" />
+      {showPreloader && <HomePreloader onComplete={handlePreloaderComplete} />}
       <div className="min-h-screen bg-background">
         <Header />
-        <div className="pt-20">
+        <div className="pt-16">
           <AnnouncementBar />
         </div>
       
-      <main className="relative">
+      <main className="relative" id="main-content">
         {/* Hero - Full impact introduction */}
         <Hero />
         
@@ -50,7 +64,7 @@ const Index = () => {
         
         {/* Announcements Section */}
         <AnimatedSection animation="fade-up">
-          <section className="py-16 bg-background">
+          <section className="py-8 bg-background">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-7xl mx-auto">
                 <Announcements />
@@ -62,14 +76,14 @@ const Index = () => {
         <SectionDivider />
         
         {/* Events & Meetings - What's happening */}
-        <section className="bg-muted/20 py-16">
+        <section className="bg-muted/20 py-8">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
               <AnimatedSection animation="slide-right">
-                <UpcomingEvents />
+                <Meetings />
               </AnimatedSection>
               <AnimatedSection animation="slide-left" delay={150}>
-                <Meetings />
+                <UpcomingEvents />
               </AnimatedSection>
             </div>
           </div>
@@ -83,10 +97,17 @@ const Index = () => {
         </AnimatedSection>
         
         <SectionDivider />
+
+        {/* Community Poll */}
+        <AnimatedSection animation="fade-up">
+          <CommunityPoll />
+        </AnimatedSection>
+        
+        <SectionDivider />
         
         {/* Leadership - Meet the team */}
         <AnimatedSection animation="scale-in">
-          <section className="py-16 bg-gradient-to-b from-background to-muted/30">
+          <section className="py-8 bg-gradient-to-b from-background to-muted/30">
             <Leadership />
           </section>
         </AnimatedSection>

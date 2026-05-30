@@ -1,11 +1,46 @@
 import AdPlacement from "@/components/AdPlacement";
+import { useRotatingAds } from "@/hooks/useRotatingAds";
 
 const TopAdBanner = () => {
+  const { allAds, currentIndex } = useRotatingAds('top-banner');
+
+  if (allAds.length === 0) {
+    return (
+      <div className="w-full bg-muted/30 border-b border-border relative z-10">
+        <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <AdPlacement size="banner" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full bg-muted/30 border-b border-border relative z-10">
       <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="w-full">
-          <AdPlacement size="banner" />
+        <div className="relative w-full h-32 sm:h-40 overflow-hidden rounded-lg">
+          {allAds.map((ad, index) => (
+            <a
+              key={ad.id}
+              href={ad.link_url || '#'}
+              target={ad.link_url ? "_blank" : undefined}
+              rel={ad.link_url ? "noopener noreferrer" : undefined}
+              className="absolute inset-0 transition-all duration-700 ease-in-out"
+              style={{
+                opacity: index === currentIndex ? 1 : 0,
+                transform: index === currentIndex ? 'scale(1)' : 'scale(1.04)',
+                pointerEvents: index === currentIndex ? 'auto' : 'none',
+              }}
+            >
+              <img src={ad.image_url} alt={ad.title} className="w-full h-full object-cover rounded-lg" />
+            </a>
+          ))}
+          {allAds.length > 1 && (
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+              {allAds.map((_, i) => (
+                <span key={i} className={`w-2 h-2 rounded-full transition-colors duration-300 ${i === currentIndex ? 'bg-primary' : 'bg-white/50'}`} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

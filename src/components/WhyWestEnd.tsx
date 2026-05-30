@@ -5,6 +5,7 @@ import historicHomesImage from "@/assets/historic-homes.jpg";
 import heroImage from "@/assets/hero-neighborhood.jpg";
 import springfestImage from "@/assets/springfest.jpg";
 import halloweenParadeImage from "@/assets/halloween-doggie-parade.jpg";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const features = [
   {
@@ -34,13 +35,14 @@ const features = [
 ];
 
 const WhyWestEnd = () => {
+  const { t } = useTranslation();
   return (
     <section className="py-24 bg-gradient-to-b from-muted/20 to-background relative overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 animate-fade-in">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-sm font-medium mb-4">
-              <span className="text-primary">WHY WEST END</span>
+              <span className="text-primary">{t("WHY WEST END")}</span>
             </div>
             <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6">
               Why West End?
@@ -63,8 +65,9 @@ const WhyWestEnd = () => {
                   <div className="absolute inset-0">
                     <img 
                       src={feature.image} 
-                      alt={feature.title}
+                      alt={t(feature.title)}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-foreground/95 via-foreground/60 to-foreground/30" />
                   </div>
@@ -75,10 +78,10 @@ const WhyWestEnd = () => {
                       <Icon className="w-8 h-8 text-primary-foreground" />
                     </div>
                     <h3 className="text-2xl font-bold mb-3">
-                      {feature.title}
+                      {t(feature.title)}
                     </h3>
                     <p className="text-primary-foreground/90 leading-relaxed">
-                      {feature.description}
+                      {t(feature.description)}
                     </p>
                   </div>
                 </Card>

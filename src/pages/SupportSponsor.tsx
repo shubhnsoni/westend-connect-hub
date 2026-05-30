@@ -7,6 +7,8 @@ import SEO from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Gift, Calendar, Star, Award } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
+import { usePageContent } from "@/hooks/usePageContent";
 
 const events = [
   { name: "Spring Fest", date: "May 2026" },
@@ -17,12 +19,15 @@ const events = [
 ];
 
 const SupportSponsor = () => {
+  const { t } = useTranslation();
+  const { getContent } = usePageContent("support-sponsor");
   return (
     <>
       <SEO 
         title="Sponsor an Event | West End Civic Association"
         description="Sponsor a WECA community event and show your support for West End neighborhood activities and celebrations."
         keywords="event sponsorship, community events, WECA sponsor, Rockville events"
+        canonicalUrl="https://westendrockvillemd.org/support/sponsor"
       />
       
       <div className="min-h-screen flex flex-col bg-background">
@@ -41,10 +46,10 @@ const SupportSponsor = () => {
               <div className="max-w-4xl mx-auto text-center">
                 <Gift className="w-16 h-16 mx-auto mb-6 text-primary" />
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-cormorant font-bold text-foreground mb-4 animate-fade-in">
-                  Sponsor an Event
+                  {t(getContent("hero_title", "Sponsor an Event"))}
                 </h1>
                 <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in">
-                  Support our community events and connect with West End residents
+                  {t(getContent("hero_subtitle", "Support our community events and connect with West End residents"))}
                 </p>
               </div>
             </div>
@@ -58,9 +63,9 @@ const SupportSponsor = () => {
                 {/* Sponsorship Benefits Card */}
                 <Card className="border-2 border-primary/20 bg-gradient-to-b from-primary/5 to-background">
                   <CardHeader className="text-center">
-                    <CardTitle className="text-2xl">Sponsorship Benefits</CardTitle>
-                    <CardDescription className="text-lg">Up to 3 sponsors per event</CardDescription>
-                    <div className="text-4xl font-bold text-primary mt-4">$350</div>
+                    <CardTitle className="text-2xl">{t(getContent("benefits_heading", "Sponsorship Benefits"))}</CardTitle>
+                    <CardDescription className="text-lg">{t(getContent("benefits_subheading", "Up to 3 sponsors per event"))}</CardDescription>
+                    <div className="text-4xl font-bold text-primary mt-4">{getContent("benefits_price", "$350")}</div>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-4">
@@ -89,21 +94,20 @@ const SupportSponsor = () => {
 
                 <Card className="hover:shadow-lg transition-shadow duration-300">
                   <CardHeader>
-                    <CardTitle className="text-2xl">Why Sponsor a WECA Event?</CardTitle>
+                    <CardTitle className="text-2xl">{t(getContent("why_heading", "Why Sponsor a WECA Event?"))}</CardTitle>
                     <CardDescription className="text-base">
                       Make a meaningful impact in your community
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <p className="text-muted-foreground">
-                      Event sponsorship is a fantastic way for businesses and community members to support 
-                      WECA's mission while gaining visibility among our engaged residents.
+                      {t(getContent("why_body", "Event sponsorship is a fantastic way for businesses and community members to support WECA's mission while gaining visibility among our engaged residents."))}
                     </p>
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="flex gap-4 p-4 bg-muted/30 rounded-lg">
                         <Star className="w-8 h-8 text-primary flex-shrink-0 mt-1" />
                         <div>
-                          <h3 className="font-semibold mb-2">Brand Visibility</h3>
+                          <h3 className="font-semibold mb-2">{t("Brand Visibility")}</h3>
                           <p className="text-sm text-muted-foreground">
                             Your logo featured on event materials, signage, and digital promotions
                           </p>
@@ -112,7 +116,7 @@ const SupportSponsor = () => {
                       <div className="flex gap-4 p-4 bg-muted/30 rounded-lg">
                         <Award className="w-8 h-8 text-primary flex-shrink-0 mt-1" />
                         <div>
-                          <h3 className="font-semibold mb-2">Community Recognition</h3>
+                          <h3 className="font-semibold mb-2">{t("Community Recognition")}</h3>
                           <p className="text-sm text-muted-foreground">
                             Recognition in our newsletter and social media channels
                           </p>
@@ -124,7 +128,7 @@ const SupportSponsor = () => {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-2xl">Popular Events to Sponsor</CardTitle>
+                    <CardTitle className="text-2xl">{t(getContent("events_heading", "Popular Events to Sponsor"))}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="grid gap-3">
@@ -132,7 +136,7 @@ const SupportSponsor = () => {
                         <div key={index} className="flex items-center gap-4 p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors">
                           <Calendar className="w-5 h-5 text-primary flex-shrink-0" />
                           <div className="flex-1">
-                            <h3 className="font-semibold">{event.name}</h3>
+                            <h3 className="font-semibold">{t(event.name)}</h3>
                             <p className="text-sm text-muted-foreground">
                               {event.description || event.date}
                             </p>
@@ -145,9 +149,9 @@ const SupportSponsor = () => {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Get Started</CardTitle>
+                    <CardTitle>{t(getContent("cta_heading", "Get Started"))}</CardTitle>
                     <CardDescription>
-                      Interested in sponsoring an event? Contact us to discuss opportunities
+                      {t(getContent("cta_body", "Interested in sponsoring an event? Contact us to discuss opportunities"))}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>

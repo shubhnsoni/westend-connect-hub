@@ -4,9 +4,11 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
+  const { t } = useTranslation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,25 +29,25 @@ const Footer = () => {
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Heart className="w-8 h-8 text-primary-foreground" />
                 <h2 className="text-3xl font-cormorant font-bold text-primary-foreground font-cantata">
-                  Support WECA
+                  {t("Support WECA")}
                 </h2>
               </div>
               <p className="text-lg text-primary-foreground/90 mb-6 max-w-2xl mx-auto">
-                Help us continue serving the West End community through events, advocacy, and preservation efforts.
+                {t("Help us continue serving the West End community through events, advocacy, and preservation efforts.")}
               </p>
               <div className="bg-background/10 backdrop-blur-sm rounded-lg p-6 mb-6 max-w-md mx-auto">
-                <p className="text-sm text-primary-foreground/80 mb-2">Contribute via Zelle:</p>
+                <p className="text-sm text-primary-foreground/80 mb-2">{t("Contribute via Zelle:")}</p>
                 <p className="text-xl sm:text-2xl font-bold text-primary-foreground break-all sm:break-normal">wecaoutreach@gmail.com</p>
               </div>
               <div className="flex flex-wrap gap-4 justify-center">
                 <Button asChild size="lg" variant="secondary">
-                  <a href="/support#advertise">Advertise with Us</a>
+                  <a href="/support#advertise">{t("Advertise with Us")}</a>
                 </Button>
                 <Button asChild size="lg" variant="secondary">
-                  <a href="/support#sponsor">Sponsor an Event</a>
+                  <a href="/support#sponsor">{t("Sponsor an Event")}</a>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-background/10">
-                  <a href="/support">Learn More</a>
+                  <a href="/support">{t("Learn More")}</a>
                 </Button>
               </div>
             </CardContent>
@@ -59,16 +61,15 @@ const Footer = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
               {/* About Column */}
               <div>
-                <h3 className="text-xl font-bold mb-4 font-cantata">West End Civic Association</h3>
+                <h3 className="text-xl font-bold mb-4 font-cantata">{t("West End Civic Association")}</h3>
                 <p className="text-background/80 text-sm leading-relaxed">
-                  An all-volunteer, resident-led organization dedicated to keeping neighbors informed 
-                  and fostering a welcoming, connected neighborhood spirit.
+                  {t("An all-volunteer, resident-led organization dedicated to keeping neighbors informed and fostering a welcoming, connected neighborhood spirit.")}
                 </p>
               </div>
 
               {/* Contact Column */}
               <div>
-                <h3 className="text-xl font-bold mb-4">Contact</h3>
+                <h3 className="text-xl font-bold mb-4">{t("Contact")}</h3>
                 <div className="space-y-3 text-sm">
                   <div className="flex items-start gap-2">
                     <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
@@ -89,31 +90,31 @@ const Footer = () => {
 
               {/* Quick Links Column */}
               <div>
-                <h3 className="text-xl font-bold mb-4">Quick Links</h3>
+                <h3 className="text-xl font-bold mb-4">{t("Quick Links")}</h3>
                 <ul className="space-y-2 text-sm">
                   <li>
                     <a href="/events" className="text-background/80 hover:text-background transition-colors">
-                      Events
+                      {t("Events")}
                     </a>
                   </li>
                   <li>
-                    <a href="/blog" className="text-background/80 hover:text-background transition-colors">
-                      News
+                    <a href="/news/updates" className="text-background/80 hover:text-background transition-colors">
+                      {t("News")}
                     </a>
                   </li>
                   <li>
-                    <a href="/about" className="text-background/80 hover:text-background transition-colors">
-                      Get Involved
+                    <a href="/get-involved" className="text-background/80 hover:text-background transition-colors">
+                      {t("Get Involved")}
                     </a>
                   </li>
                   <li>
                     <a href="/resources" className="text-background/80 hover:text-background transition-colors">
-                      Resources
+                      {t("Resources")}
                     </a>
                   </li>
                   <li>
                     <a href="/support/contribute" className="text-background/80 hover:text-background transition-colors">
-                      Contribute
+                      {t("Contribute")}
                     </a>
                   </li>
                 </ul>
@@ -121,9 +122,9 @@ const Footer = () => {
 
               {/* Stay Updated Column */}
               <div>
-                <h3 className="text-xl font-bold mb-4">Stay Updated</h3>
+                <h3 className="text-xl font-bold mb-4">{t("Stay Updated")}</h3>
                 <p className="text-background/80 text-sm mb-4">
-                  Join our mailing list to receive updates on events, city planning, and community initiatives.
+                  {t("Join our mailing list to receive updates on events, city planning, and community initiatives.")}
                 </p>
                 <form onSubmit={handleSubmit} className="space-y-2">
                   <Input
@@ -135,11 +136,11 @@ const Footer = () => {
                     className="bg-background/10 border-background/30 text-background placeholder:text-background/50"
                   />
                   <Button type="submit" variant="secondary" className="w-full">
-                    Subscribe
+                    {t("Subscribe")}
                   </Button>
                 </form>
                 <a href="/resources#newsletters" className="text-xs text-background/60 hover:text-background/80 transition-colors mt-2 inline-block">
-                  View past newsletters →
+                  {t("View past newsletters")} →
                 </a>
               </div>
             </div>

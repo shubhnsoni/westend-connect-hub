@@ -16,6 +16,8 @@ export default {
       fontFamily: {
         'cormorant': ['Cormorant Garamond', 'serif'],
         'cantata': ['Cantata One', 'serif'],
+        'lora': ['Lora', 'Georgia', 'serif'],
+        'source': ['Source Sans 3', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

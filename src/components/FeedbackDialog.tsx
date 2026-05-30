@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const feedbackSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
@@ -25,6 +26,7 @@ interface FeedbackDialogProps {
 }
 
 const FeedbackDialog = ({ open, onOpenChange }: FeedbackDialogProps) => {
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -61,6 +63,24 @@ const FeedbackDialog = ({ open, onOpenChange }: FeedbackDialogProps) => {
 
       if (error) throw error;
 
+      // Sync to Mailchimp (non-blocking)
+      supabase.functions.invoke('mailchimp-sync', {
+        body: { type: 'feedback', data: { email: validation.data.email, name: validation.data.name } }
+      }).catch((err) => console.log('Mailchimp sync skipped:', err));
+
+      // Send notification emails (non-blocking)
+      supabase.functions.invoke('send-notification-email', {
+        body: {
+          type: 'feedback',
+          data: {
+            name: validation.data.name,
+            email: validation.data.email,
+            message: validation.data.message,
+            subject: 'Website Feedback',
+          }
+        }
+      }).catch((err) => console.log('Notification email skipped:', err));
+
       toast({
         title: "Feedback Submitted!",
         description: "Thank you for your feedback. We'll be in touch soon.",
@@ -86,7 +106,7 @@ const FeedbackDialog = ({ open, onOpenChange }: FeedbackDialogProps) => {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
-          <DialogTitle>Submit Feedback</DialogTitle>
+          <DialogTitle>{t("Submit Feedback")}</DialogTitle>
           <DialogDescription>
             Share your ideas and concerns with us. We value your input!
           </DialogDescription>

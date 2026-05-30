@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const newsletterSchema = z.object({
   firstName: z.string().trim().min(1, "First name is required").max(50, "First name must be less than 50 characters"),
@@ -19,6 +20,7 @@ interface NewsletterDialogProps {
 }
 
 const NewsletterDialog = ({ open, onOpenChange }: NewsletterDialogProps) => {
+  const { t } = useTranslation();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -66,6 +68,24 @@ const NewsletterDialog = ({ open, onOpenChange }: NewsletterDialogProps) => {
         }
         return;
       }
+
+      // Sync to Mailchimp (non-blocking)
+      supabase.functions.invoke('mailchimp-sync', {
+        body: { type: 'newsletter', data: { email: validation.data.email, firstName: validation.data.firstName, lastName: validation.data.lastName } }
+      }).catch((err) => console.log('Mailchimp sync skipped:', err));
+
+      // Send notification emails (non-blocking)
+      supabase.functions.invoke('send-notification-email', {
+        body: {
+          type: 'newsletter',
+          data: {
+            name: `${validation.data.firstName} ${validation.data.lastName}`,
+            email: validation.data.email,
+            firstName: validation.data.firstName,
+            lastName: validation.data.lastName,
+          }
+        }
+      }).catch((err) => console.log('Notification email skipped:', err));
 
       toast({
         title: "Success!",

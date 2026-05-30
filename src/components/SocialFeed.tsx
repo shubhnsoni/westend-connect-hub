@@ -1,7 +1,9 @@
 import { Facebook, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const SocialFeed = () => {
+  const { t } = useTranslation();
   return (
     <section className="py-20 bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto px-4">
@@ -45,11 +47,20 @@ const SocialFeed = () => {
               Stay connected with your neighbors, share photos, and get instant updates on community events and important announcements.
             </p>
 
-            {/* Facebook Page Plugin Placeholder */}
-            <div className="bg-muted/50 rounded-lg p-8 border-2 border-dashed">
-              <p className="text-sm text-muted-foreground italic">
-                Facebook feed integration can be added here with the official Facebook Page Plugin
-              </p>
+            {/* Facebook Page Plugin Embed */}
+            <div className="flex justify-center">
+              <iframe
+                src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fwestendcivicassociation&tabs=timeline&width=500&height=400&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+                width="500"
+                height="400"
+                style={{ border: 'none', overflow: 'hidden', maxWidth: '100%' }}
+                scrolling="no"
+                frameBorder="0"
+                allowFullScreen
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                title="WECA Facebook Feed"
+                loading="lazy"
+              />
             </div>
           </div>
         </div>

@@ -2,8 +2,17 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Calendar, ChevronRight } from "lucide-react";
 import { format } from "date-fns";
+import { useTranslation } from "@/hooks/useTranslation";
+
+const parseLocalDate = (dateStr: string) => {
+  const [datePart, timePart] = dateStr.split('T');
+  const [year, month, day] = datePart.split('-').map(Number);
+  const [hours = 0, minutes = 0] = (timePart || '').split(':').map(Number);
+  return new Date(year, month - 1, day, hours, minutes);
+};
 
 const EventsTicker = () => {
+  const { t } = useTranslation();
   const { data: upcomingItems = [] } = useQuery({
     queryKey: ['ticker-items'],
     queryFn: async () => {
@@ -13,6 +22,7 @@ const EventsTicker = () => {
       const { data: events } = await supabase
         .from('events')
         .select('id, title, start_date')
+        .eq('submission_status', 'approved')
         .gte('start_date', now)
         .order('start_date', { ascending: true })
         .limit(3);
@@ -40,7 +50,7 @@ const EventsTicker = () => {
         }))
       ];
       
-      return items.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()).slice(0, 4);
+      return items.sort((a, b) => parseLocalDate(a.date).getTime() - parseLocalDate(b.date).getTime()).slice(0, 4);
     },
   });
 
@@ -52,7 +62,7 @@ const EventsTicker = () => {
         <div className="flex items-center gap-4 py-2 overflow-x-auto scrollbar-hide">
           <div className="flex items-center gap-2 text-primary font-semibold text-sm whitespace-nowrap">
             <Calendar className="w-4 h-4" />
-            <span>Upcoming:</span>
+            <span>{t("Upcoming")}:</span>
           </div>
           <div className="flex items-center gap-4">
             {upcomingItems.map((item, index) => (
@@ -61,7 +71,7 @@ const EventsTicker = () => {
                 href="/events"
                 className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors whitespace-nowrap"
               >
-                <span className="font-medium">{format(new Date(item.date), 'MMM d')}</span>
+                <span className="font-medium">{format(parseLocalDate(item.date), 'MMM d')}</span>
                 <span>-</span>
                 <span className="truncate max-w-[200px]">{item.title}</span>
                 {index < upcomingItems.length - 1 && (

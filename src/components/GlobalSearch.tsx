@@ -5,6 +5,7 @@ import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 import { Search, FileText, Calendar, Users, File } from 'lucide-react';
+import { useTranslation } from "@/hooks/useTranslation";
 import {
   Dialog,
   DialogContent,
@@ -27,6 +28,7 @@ export function GlobalSearch() {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const searchContent = async () => {
@@ -151,7 +153,7 @@ export function GlobalSearch() {
       </DialogTrigger>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
-          <DialogTitle>Search</DialogTitle>
+          <DialogTitle>{t("Search")}</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <Input
@@ -162,11 +164,11 @@ export function GlobalSearch() {
           />
           
           {isSearching && (
-            <p className="text-sm text-muted-foreground">Searching...</p>
+            <p className="text-sm text-muted-foreground">{t("Searching...")}</p>
           )}
           
           {!isSearching && query.length >= 2 && results.length === 0 && (
-            <p className="text-sm text-muted-foreground">No results found</p>
+            <p className="text-sm text-muted-foreground">{t("No results found")}</p>
           )}
           
           {results.length > 0 && (
@@ -194,7 +196,7 @@ export function GlobalSearch() {
                         )}
                         {result.date && (
                           <p className="text-xs text-muted-foreground mt-1">
-                            {new Date(result.date).toLocaleDateString()}
+                            {(() => { const [dp, tp] = result.date.split('T'); const [y,m,d] = dp.split('-').map(Number); const [h=0,mi=0] = (tp||'').split(':').map(Number); return new Date(y,m-1,d,h,mi).toLocaleDateString(); })()}
                           </p>
                         )}
                       </div>

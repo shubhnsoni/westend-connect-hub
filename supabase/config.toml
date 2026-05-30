@@ -1,7 +1,25 @@
-project_id = "nczflpabbbkbdkasaqvg"
+project_id = "ovisewjpivifncliqrwf"
 
 [functions.setup-admin]
 verify_jwt = false
 
-[functions.migrate-resources]
+[functions.reset-admin-password]
+verify_jwt = false
+
+[functions.send-notification-email]
+verify_jwt = false
+
+[functions.mailchimp-sync]
+verify_jwt = false
+
+[functions.parse-event-datetime]
+verify_jwt = false
+
+[functions.admin-ai-assistant]
+verify_jwt = false
+
+[functions.generate-sitemap]
+verify_jwt = false
+
+[functions.translate]
 verify_jwt = false

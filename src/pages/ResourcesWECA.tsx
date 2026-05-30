@@ -11,8 +11,12 @@ import { FileText, ExternalLink } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import PDFViewerDialog from "@/components/PDFViewerDialog";
+import { useTranslation } from "@/hooks/useTranslation";
+import { usePageContent } from "@/hooks/usePageContent";
 
 const ResourcesWECA = () => {
+  const { t } = useTranslation();
+  const { getContent } = usePageContent("resources-weca");
   const [pdfViewerOpen, setPdfViewerOpen] = useState(false);
   const [selectedPdf, setSelectedPdf] = useState<{ url: string; title: string } | null>(null);
 
@@ -41,6 +45,7 @@ const ResourcesWECA = () => {
         title="WECA Resources | West End Civic Association"
         description="Access WECA documents, bylaws, meeting minutes, and official association resources."
         keywords="WECA resources, bylaws, meeting minutes, association documents, Rockville civic"
+        canonicalUrl="https://westendrockvillemd.org/resources/weca"
       />
       
       <div className="min-h-screen flex flex-col bg-background">
@@ -59,10 +64,10 @@ const ResourcesWECA = () => {
               <div className="max-w-4xl mx-auto text-center">
                 <FileText className="w-16 h-16 mx-auto mb-6 text-primary" />
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-cormorant font-bold text-foreground mb-4 animate-fade-in">
-                  WECA Resources
+                  {t(getContent("hero_title", "WECA Resources"))}
                 </h1>
                 <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in">
-                  Official documents and resources from the West End Civic Association
+                  {t(getContent("hero_subtitle", "Official documents and resources from the West End Civic Association"))}
                 </p>
               </div>
             </div>
@@ -74,7 +79,7 @@ const ResourcesWECA = () => {
               <div className="max-w-4xl mx-auto space-y-6">
                 
                 {/* Official Documents */}
-                <h2 className="text-2xl font-cormorant font-bold">Official Documents</h2>
+                <h2 className="text-2xl font-cormorant font-bold">{t(getContent("official_docs_heading", "Official Documents"))}</h2>
                 <div className="grid md:grid-cols-2 gap-4">
                   <Card className="hover:shadow-lg transition-shadow">
                     <CardHeader>
@@ -120,7 +125,7 @@ const ResourcesWECA = () => {
                 {/* Resource Library */}
                 {resources.length > 0 && (
                   <>
-                    <h2 className="text-2xl font-cormorant font-bold pt-4">Resource Library</h2>
+                    <h2 className="text-2xl font-cormorant font-bold pt-4">{t(getContent("library_heading", "Resource Library"))}</h2>
                     <div className="grid md:grid-cols-2 gap-4">
                       {resources.map((resource) => (
                         <Card key={resource.id} className="hover:shadow-lg transition-shadow">

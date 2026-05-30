@@ -7,14 +7,19 @@ import SEO from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Building2, ExternalLink, Phone, MapPin, Trash2, Droplets } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
+import { usePageContent } from "@/hooks/usePageContent";
 
 const ResourcesCityServices = () => {
+  const { t } = useTranslation();
+  const { getContent } = usePageContent("resources-city-services");
   return (
     <>
       <SEO 
         title="City of Rockville Resources | West End Civic Association"
         description="Access important City of Rockville services, contacts, and resources for West End residents."
         keywords="Rockville city services, city resources, Rockville government, city contacts, municipal services"
+        canonicalUrl="https://westendrockvillemd.org/resources/city-services"
       />
       
       <div className="min-h-screen flex flex-col bg-background">
@@ -33,10 +38,10 @@ const ResourcesCityServices = () => {
               <div className="max-w-4xl mx-auto text-center">
                 <Building2 className="w-16 h-16 mx-auto mb-6 text-primary" />
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-cormorant font-bold text-foreground mb-4 animate-fade-in">
-                  City of Rockville Resources
+                  {t(getContent("hero_title", "City of Rockville Resources"))}
                 </h1>
                 <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto animate-fade-in">
-                  Important city services, contacts, and resources for West End residents
+                  {t(getContent("hero_subtitle", "Important city services, contacts, and resources for West End residents"))}
                 </p>
               </div>
             </div>
@@ -49,7 +54,7 @@ const ResourcesCityServices = () => {
                 
                 {/* Quick Contacts */}
                 <div>
-                  <h2 className="text-2xl font-cormorant font-bold mb-4">City Contact Information</h2>
+                  <h2 className="text-2xl font-cormorant font-bold mb-4">{t(getContent("contacts_heading", "City Contact Information"))}</h2>
                   <div className="grid md:grid-cols-2 gap-4">
                     <Card className="hover:shadow-lg transition-shadow">
                       <CardHeader>
@@ -88,7 +93,7 @@ const ResourcesCityServices = () => {
 
                 {/* Essential Services */}
                 <div>
-                  <h2 className="text-2xl font-cormorant font-bold mb-4">Essential Services</h2>
+                  <h2 className="text-2xl font-cormorant font-bold mb-4">{t(getContent("essential_services_heading", "Essential Services"))}</h2>
                   <div className="grid md:grid-cols-2 gap-4">
                     
                     <Card className="hover:shadow-lg transition-shadow border-l-4 border-l-primary">
@@ -147,7 +152,7 @@ const ResourcesCityServices = () => {
 
                 {/* Other City Services */}
                 <div>
-                  <h2 className="text-2xl font-cormorant font-bold mb-4">Other City Services</h2>
+                  <h2 className="text-2xl font-cormorant font-bold mb-4">{t(getContent("other_services_heading", "Other City Services"))}</h2>
                   <div className="grid md:grid-cols-3 gap-4">
                     
                     <Card className="hover:shadow-lg transition-shadow">
@@ -261,7 +266,7 @@ const ResourcesCityServices = () => {
                 {/* Emergency Information */}
                 <Card className="bg-destructive/5 border-destructive/20">
                   <CardHeader>
-                    <CardTitle className="text-2xl">Emergency Information</CardTitle>
+                    <CardTitle className="text-2xl">{t(getContent("emergency_heading", "Emergency Information"))}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="grid sm:grid-cols-2 gap-4">

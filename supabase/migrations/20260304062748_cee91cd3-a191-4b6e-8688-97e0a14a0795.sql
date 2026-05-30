@@ -1,0 +1,5 @@
+UPDATE meetings SET minutes_url = 'https://ovisewjpivifncliqrwf.supabase.co/storage/v1/object/public/meeting-documents/2025/jan-2025-minutes.pdf' WHERE id = 'cdad3217-f782-4d0d-bc23-3f906057844e';
+UPDATE meetings SET minutes_url = 'https://ovisewjpivifncliqrwf.supabase.co/storage/v1/object/public/meeting-documents/2025/feb-2025-minutes.pdf' WHERE id = 'f92104eb-c566-4d3f-95de-62b8f2304df6';
+UPDATE meetings SET minutes_url = 'https://ovisewjpivifncliqrwf.supabase.co/storage/v1/object/public/meeting-documents/2025/mar-2025-minutes.pdf' WHERE id = '906702e8-1e97-4e0b-a2c2-3e10abce677e';
+UPDATE meetings SET minutes_url = 'https://ovisewjpivifncliqrwf.supabase.co/storage/v1/object/public/meeting-documents/2025/apr-2025-minutes.pdf' WHERE id = 'db1a250a-894d-4dda-b1a9-48aeadc6d40f';
+UPDATE meetings SET minutes_url = 'https://ovisewjpivifncliqrwf.supabase.co/storage/v1/object/public/meeting-documents/2025/may-2025-minutes.pdf' WHERE id = '0c86308a-2a5d-46ee-b778-6ae8e2c51fd4';

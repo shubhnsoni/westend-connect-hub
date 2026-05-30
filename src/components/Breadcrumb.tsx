@@ -1,11 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import { ChevronRight, Home } from "lucide-react";
+import { Helmet } from "react-helmet";
 
 const Breadcrumb = () => {
   const location = useLocation();
   const pathnames = location.pathname.split("/").filter((x) => x);
 
-  // Don't show breadcrumb on homepage
   if (pathnames.length === 0) return null;
 
   const breadcrumbNameMap: Record<string, string> = {
@@ -37,45 +37,77 @@ const Breadcrumb = () => {
     search: "Search",
   };
 
-  return (
-    <nav aria-label="Breadcrumb" className="bg-muted/30 border-b">
-      <div className="container mx-auto px-4 py-3">
-        <ol className="flex items-center space-x-2 text-sm">
-          <li>
-            <Link
-              to="/"
-              className="flex items-center text-muted-foreground hover:text-primary transition-colors"
-              aria-label="Home"
-            >
-              <Home className="w-4 h-4" />
-            </Link>
-          </li>
-          {pathnames.map((name, index) => {
-            const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
-            const isLast = index === pathnames.length - 1;
-            const displayName = breadcrumbNameMap[name] || name.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+  const baseUrl = "https://westendrockvillemd.org";
 
-            return (
-              <li key={routeTo} className="flex items-center">
-                <ChevronRight className="w-4 h-4 text-muted-foreground mx-2" />
-                {isLast ? (
-                  <span className="text-foreground font-medium" aria-current="page">
-                    {displayName}
-                  </span>
-                ) : (
-                  <Link
-                    to={routeTo}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {displayName}
-                  </Link>
-                )}
-              </li>
-            );
-          })}
-        </ol>
-      </div>
-    </nav>
+  const breadcrumbListSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: baseUrl,
+      },
+      ...pathnames.map((name, index) => {
+        const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
+        const displayName = breadcrumbNameMap[name] || name.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+        return {
+          "@type": "ListItem",
+          position: index + 2,
+          name: displayName,
+          item: `${baseUrl}${routeTo}`,
+        };
+      }),
+    ],
+  };
+
+  return (
+    <>
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(breadcrumbListSchema)}
+        </script>
+      </Helmet>
+      <nav aria-label="Breadcrumb" className="bg-muted/30 border-b">
+        <div className="container mx-auto px-4 py-3">
+          <ol className="flex items-center space-x-2 text-sm">
+            <li>
+              <Link
+                to="/"
+                className="flex items-center text-muted-foreground hover:text-primary transition-colors"
+                aria-label="Home"
+              >
+                <Home className="w-4 h-4" />
+              </Link>
+            </li>
+            {pathnames.map((name, index) => {
+              const routeTo = `/${pathnames.slice(0, index + 1).join("/")}`;
+              const isLast = index === pathnames.length - 1;
+              const displayName = breadcrumbNameMap[name] || name.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+
+              return (
+                <li key={routeTo} className="flex items-center">
+                  <ChevronRight className="w-4 h-4 text-muted-foreground mx-2" />
+                  {isLast ? (
+                    <span className="text-foreground font-medium" aria-current="page">
+                      {displayName}
+                    </span>
+                  ) : (
+                    <Link
+                      to={routeTo}
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {displayName}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </nav>
+    </>
   );
 };
 
