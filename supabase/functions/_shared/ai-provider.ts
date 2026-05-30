@@ -1,10 +1,8 @@
 // Shared AI provider resolver.
-// Picks the first configured provider in order: OpenAI → Gemini → Lovable AI Gateway.
-// This lets the project migrate off Lovable AI by just adding OPENAI_API_KEY or
-// GEMINI_API_KEY as a secret — no code changes required at cutover.
+// Picks the first configured provider in order: OpenAI -> Gemini.
 
 export type AIProvider = {
-  name: "openai" | "gemini" | "lovable";
+  name: "openai" | "gemini";
   endpoint: string;
   authHeader: string;
   defaultModel: string;
@@ -13,7 +11,6 @@ export type AIProvider = {
 export function getAIProvider(): AIProvider {
   const openaiKey = Deno.env.get("OPENAI_API_KEY");
   const geminiKey = Deno.env.get("GEMINI_API_KEY");
-  const lovableKey = Deno.env.get("LOVABLE_API_KEY");
 
   if (openaiKey) {
     return {
@@ -35,16 +32,5 @@ export function getAIProvider(): AIProvider {
     };
   }
 
-  if (lovableKey) {
-    return {
-      name: "lovable",
-      endpoint: "https://ai.gateway.lovable.dev/v1/chat/completions",
-      authHeader: `Bearer ${lovableKey}`,
-      defaultModel: "google/gemini-3-flash-preview",
-    };
-  }
-
-  throw new Error(
-    "No AI provider configured. Set OPENAI_API_KEY, GEMINI_API_KEY, or LOVABLE_API_KEY."
-  );
+  throw new Error("No AI provider configured. Set OPENAI_API_KEY or GEMINI_API_KEY.");
 }
